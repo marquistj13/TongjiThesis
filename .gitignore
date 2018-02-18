@@ -10,9 +10,12 @@
 *.fot
 *.cb
 *.cb2
-*.xdv
+
+## my other change
+thesis.pdf
 
 ## Intermediate documents:
+*.xdv
 *.dvi
 *-converted-to.*
 # these rules might exclude image files for figures etc.
