@@ -366,10 +366,10 @@
 % 定义的样式在第一次被调用时会修改 \cs{chaptermark}，这会导致页眉信息错误（多余
 % 章号并且英文大写）
 % thuthesis对此专门进行了解决：
-% \AtBeginDocument{%
-%   \pagestyle{thu@empty}
-%   \renewcommand{\chaptermark}[1]{\@mkboth{\CTEXthechapter\hskip\ccwd#1}{}}}
-% 但由于以上bug是基于book.cls的老版本时的bug，新版基于ctexbook的应该没有这个bug了吧？
+\AtBeginDocument{%
+  \pagestyle{tongji@empty}
+  \renewcommand{\chaptermark}[1]{\@mkboth{\CTEXthechapter\hskip\ccwd#1}{}}}
+% 由于以上bug是基于book.cls的老版本时的bug，新版基于ctexbook的应该没有这个bug了吧？
 
 
 % 各级标题格式设置。
@@ -768,35 +768,41 @@
   \end{center}
 } % end of english cover
 
-
-
-\newcommand\tongji@underline[2][6em]{\hskip1pt\underline{\hb@xt@ #1{\hss#2\hss}}\hskip3pt}
+% \newcommand\tongji@underline[2][6em]{\hskip1pt\underline{\hb@xt@ #1{\hss#2\hss}}\hskip3pt}
 
 % 原创性声明
-\newcommand{\tongji@declareshortname@mk}{%
- \vspace*{-0.1cm} % shit code!
-  \begin{center}\erhao\heiti\tongji@declarename\end{center}
+\newcommand{\tongji@declareshortname@mk}
+{%
+  \vspace*{-0.1cm} % shit code!
+  \begin{center}
+    \erhao\heiti\tongji@declarename
+  \end{center}
   \vskip18pt\sihao[2.03]\par
   \tongji@declaretext\par
- \vskip8.9cm
-    \begingroup
-      \parindent0pt\xiaosi
-      \hspace*{5.5cm}\tongji@authorsig\relax\hspace*{1cm}\\[3pt]
-      \hspace*{9.5cm}\tongji@date\relax\hspace*{1cm}
-    \endgroup}
+  \vskip8.9cm
+  \begingroup
+    \parindent0pt\xiaosi
+    \hspace*{5.5cm}\tongji@authorsig\relax\hspace*{1cm}\\[3pt]
+    \hspace*{9.5cm}\tongji@date\relax\hspace*{1cm}
+  \endgroup
+}
 
 % 授权页面
-\newcommand{\tongji@authorization@mk}{%
- \vspace*{-0.1cm} % shit code!
-  \begin{center}\erhao\heiti\tongji@authtitle\end{center}
+\newcommand{\tongji@authorization@mk}
+{%
+  \vspace*{-0.1cm} % shit code!
+  \begin{center}
+    \erhao\heiti\tongji@authtitle
+  \end{center}
   \vskip18pt\sihao[2.03]\par
   \tongji@authorization\par
- \vskip7.9cm
-    \begingroup
-      \parindent0pt\xiaosi
-      \hspace*{5.5cm}\tongji@authorsig\relax\hspace*{1cm}\\[3pt]
-      \hspace*{9.5cm}\tongji@date\relax\hspace*{1cm}
-    \endgroup}
+  \vskip7.9cm
+  \begingroup
+    \parindent0pt\xiaosi
+    \hspace*{5.5cm}\tongji@authorsig\relax\hspace*{1cm}\\[3pt]
+    \hspace*{9.5cm}\tongji@date\relax\hspace*{1cm}
+  \endgroup
+}
 
 % 生成封面总命令。
 \newcommand{\makecover}{
@@ -805,9 +811,12 @@
   \normalsize%
   \begin{titlepage}
     \tongji@first@titlepage
-    \cleardoublepage\engcover
-    \cleardoublepage\tongji@authorization@mk
-    \cleardoublepage\tongji@declareshortname@mk
+    \cleardoublepage
+    \engcover
+    \cleardoublepage
+    \tongji@authorization@mk
+    \cleardoublepage
+    \tongji@declareshortname@mk
   \end{titlepage}
   \normalsize
   \tongji@makeabstract

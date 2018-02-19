@@ -9,7 +9,7 @@
 主要参考资料：
 * [ThuThesis 2017/12/24 5.4.3](https://github.com/xueruini/thuthesis)
 * [最新版本的TongjiThesis, 即Tongji LUG 2014年的RC2版](https://sourceforge.net/projects/tongjithesis/)
-* [linxdcn](https://github.com/linxdcn/TongjiThesis)同学汇总的wildwolf(据zhouyuan说，wildwolf是同济汽车学院的老师)、[svandex](https://github.com/svandex/masthesis)、[zhao-chen](https://github.com/zhao-chen/TongjiThesis)的版本。[zhouyuan有本硕博版](https://github.com/zhouyuan/tongjithesis)。主要参考了这几位校友改的封面部分
+* [linxdcn](https://github.com/linxdcn/TongjiThesis)同学汇总的wildwolf(据zhouyuan说，wildwolf是同济汽车学院的老师)、[svandex](https://github.com/svandex/masthesis)、[zhao-chen](https://github.com/zhao-chen/TongjiThesis)的版本。[zhouyuan有本硕博版](https://github.com/zhouyuan/tongjithesis)。主要参考了这几位校友改的封面部分。
 
 ## 主要改动
 相较于老版tongjithesis，我这个版本融合了thuthesis （ThuThesis 2017/12/24 5.4.3）的很多新改动，个人认为比较大的改动如下:
@@ -27,7 +27,7 @@
 本人使用Texlive2017发行版，xelatex 可以编译通过。
 
 注：
-1. 我照抄了清华版的Makefile，因此可以直接在命令行使用`make thesis`进行全自动编译（默认使用 latexmk 的方式生成 pdf，latexmk仍然调用xelatex）。在类Unix系统上很容易安装make命令。在windows系统上可以安装MinGW（装好之后，打开并安装最简明核心的`msys-base`，然后将其bin目录加到path中，如我的bin目录是 `C:\tools\mingw\msys\1.0\bin`，这样就能在 `cmd` 中使用 `make` 了
+1. 我照抄了清华版的Makefile，因此可以直接在命令行使用`make thesis`进行全自动编译（默认使用 latexmk 的方式生成 pdf，latexmk仍然调用xelatex）。在类Unix系统上很容易安装make命令。在windows系统上可以安装MinGW（装好之后，打开并安装最简明核心的`msys-base`，然后将其bin目录加到path中，如我的bin目录是 `C:\tools\mingw\msys\1.0\bin`，这样就能在 `cmd` 中使用 `make` 了。另外，用latexmk貌似比较慢啊。
 1. 如果提示缺少某字体，请自行下载安装到系统中（如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书）。
 1. 原则上pdflatex,lualatex都可以编译，但目测由于字体问题无法编译通过。暂时不管这个问题了，反正xelatex用着很爽。
 
