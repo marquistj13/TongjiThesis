@@ -547,15 +547,13 @@
 % 论文中英文题目
 \tongji@def@term{ctitle}
 \tongji@def@term{etitle}
-% 作者、导师、副导师、联合指导老师。
+% 作者、导师、副导师（校外）老师。
 \tongji@def@term{cauthor}
 \tongji@def@term{csupervisor}
 \tongji@def@term{cassosupervisor}
-\tongji@def@term{ccosupervisor}
 \tongji@def@term{eauthor}
 \tongji@def@term{esupervisor}
 \tongji@def@term{eassosupervisor}
-\tongji@def@term{ecosupervisor}
 % 学位中英文
 \tongji@def@term{cdegree}
 \tongji@def@term{edegree}
@@ -568,7 +566,8 @@
 % 论文成文日期。
 \tongji@def@term{cdate}
 \tongji@def@term{edate}
-% 为了兼容老版本同济模板的封面定义一级学科和二级学科
+% 为了兼容老版本同济模板的封面定义,仍然使用majorfirst，majorsecond
+% 这里majorfirst表示学科门类如工学、理学，majorsecond表示一级学科或二级学科。
 \tongji@def@term{cmajorfirst}
 \tongji@def@term{cmajorsecond}
 \tongji@def@term{emajorfirst}
@@ -693,10 +692,10 @@
                 \tongji@put@title{\tongji@cassosupertitle}   & \tongji@title@sep 
                 & \tongji@cassosupervisor\\
               \fi
-              \ifx\tongji@ccosupervisor\@empty\else
-                \tongji@put@title{\tongji@ccosupertitle}     & \tongji@title@sep 
-                & \tongji@ccosupervisor\\
-              \fi
+              % \ifx\tongji@ccosupervisor\@empty\else
+              %   \tongji@put@title{\tongji@ccosupertitle}     & \tongji@title@sep 
+              %   & \tongji@ccosupervisor\\
+              % \fi
             \end{tabular}
         \end{center}}
     }
@@ -756,9 +755,9 @@
             \ifx\tongji@eassosupervisor\@empty\else
               Associate Supervisor : & \tongji@eassosupervisor \\
             \fi
-            \ifx\tongji@ecosupervisor\@empty\else
-              Cooperate Supervisor : & \tongji@ecosupervisor\\
-            \fi            
+            % \ifx\tongji@ecosupervisor\@empty\else
+            %   Cooperate Supervisor : & \tongji@ecosupervisor\\
+            % \fi            
           \end{tabular}
         \end{center}
       }
