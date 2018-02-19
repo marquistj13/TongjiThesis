@@ -248,16 +248,33 @@
   \renewcommand{\footrulewidth}{0pt}}
 \fancypagestyle{tongji@plain}{%
   \fancyhead{}
-  \fancyfoot[C]{\xiaowu\thepage}
+  \fancyfoot[C]{\songti\wuhao\thepage}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}}
 \fancypagestyle{tongji@headings}{%
   \fancyhead{}
-  \fancyhead[C]{\wuhao\normalfont\leftmark}
+  \fancyhead[RO]{\wuhao\normalfont\leftmark}
+  \fancyhead[LE]{\wuhao\normalfont\tongji@cheadingtitle}
   \fancyfoot{}
-  \fancyfoot[C]{\wuhao\thepage}
+  \fancyfoot[C]{\songti\wuhao\thepage}
   \renewcommand{\headrulewidth}{0.4pt}
   \renewcommand{\footrulewidth}{0pt}}
+
+
+\renewcommand\frontmatter{%
+  \clearpage
+  \@mainmatterfalse
+  \pagenumbering{Roman}
+  \pagestyle{tongji@empty}}
+\renewcommand\mainmatter{%
+  \clearpage
+  \@mainmattertrue
+  \pagenumbering{arabic}
+  \pagestyle{tongji@headings}}
+\renewcommand\backmatter{%
+  \clearpage
+  \@mainmattertrue}
+
 
 % 全文首行缩进 2 字符，标点符号用全角
 \ctexset{%
@@ -804,35 +821,17 @@
   \endgroup
 }
 
-% 生成封面总命令。
-\newcommand{\makecover}{
-  \phantomsection
-  \pdfbookmark[-1]{\tongji@ctitle}{ctitle}
-  \normalsize%
-  \begin{titlepage}
-    \tongji@first@titlepage
-    \cleardoublepage
-    \engcover
-    \cleardoublepage
-    \tongji@authorization@mk
-    \cleardoublepage
-    \tongji@declareshortname@mk
-  \end{titlepage}
-  \normalsize
-  \tongji@makeabstract
-  \let\@tabular\tongji@tabular}
-
 
  % 摘要
 
  \def\ps@tongji@cabstractheadings{
   \def\@oddhead{\vbox to\headheight{%
       \hb@xt@\textwidth{\hfill\wuhao\songti%
-      \tongji@schoolename\hskip 2mm \tongji@capply\hskip 2mm \leftmark}%
+      \tongji@schoolname\hskip 2mm \tongji@capply\hskip 2mm \leftmark}%
       \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
   \def\@evenhead{\vbox to\headheight{%
       \hb@xt@\textwidth{\wuhao\songti%
-      \tongji@schoolename\hskip 2mm \tongji@capply\hskip 2mm \leftmark\hfill}%  edited by wildwolf 20090110 even page abstract
+      \tongji@schoolname\hskip 2mm \tongji@capply\hskip 2mm \leftmark\hfill}%  edited by wildwolf 20090110 even page abstract
       \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
   \def\@oddfoot{\hfil\wuhao\thepage\hfil}
   \let\@evenfoot=\@oddfoot}
@@ -852,23 +851,44 @@
 \newcommand{\tongji@makeabstract}{%
   \cleardoublepage % always openright for Abstract
   \tongji@chapter*[]{\cabstractname} % no tocline
-  \thispagestyle{tongji@cabstractheadings} 
-  \pagestyle{tongji@cabstractheadings}  
+  % \thispagestyle{tongji@cabstractheadings} 
+  % \pagestyle{tongji@cabstractheadings}  
   \pagenumbering{Roman}
   \tongji@cabstract
   \vskip12bp
   \setbox0=\hbox{{\heiti\tongji@ckeywords@title}}
   \noindent\hangindent\wd0\hangafter1
     \box0\tongji@ckeywords
-  \cleardoublepage % always openright for Abstract
+  \clearpage
+  \thispagestyle{tongji@plain}
+  \cleardoublepage % always openright for Abstract  
   \tongji@chapter*[]{\eabstractname} % no tocline
-  \thispagestyle{tongji@eabstractheadings} 
-  \pagestyle{tongji@eabstractheadings}  
+  % \thispagestyle{tongji@eabstractheadings} 
+  % \pagestyle{tongji@eabstractheadings}  
   \tongji@eabstract
   \vskip12bp
   \setbox0=\hbox{\textbf{Key words:\enskip}}
   \noindent\hangindent\wd0\hangafter1
     \box0\tongji@ekeywords}
+
+
+% 生成封面总命令。
+\newcommand{\makecover}{
+  \phantomsection
+  \pdfbookmark[-1]{\tongji@ctitle}{ctitle}
+  \normalsize%
+  \begin{titlepage}
+    \tongji@first@titlepage
+    \cleardoublepage
+    \engcover
+    \cleardoublepage
+    \tongji@authorization@mk
+    \cleardoublepage
+    \tongji@declareshortname@mk
+  \end{titlepage}
+  \normalsize
+  \tongji@makeabstract
+  \let\@tabular\tongji@tabular}
 
 % 主要符号对照表  
 % 根据清华v5.2.1的改动进行重设，即利用 \pkg{enumitem} 改造环境定义，更直观。
