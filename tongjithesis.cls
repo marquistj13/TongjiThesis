@@ -577,7 +577,6 @@
 \tongji@def@term{cfunds}
 \tongji@def@term{efunds}
 % 学号
-\tongji@def@term{cstudentnumber}
 \tongji@def@term{studentnumber}
 % 校名
 \tongji@def@term{eschoolname}
@@ -621,99 +620,154 @@
 % 封面第一页
 \newlength{\tongji@title@width}
 \def\tongji@put@title#1{\makebox{\hb@xt@ \tongji@title@width{#1}}}
-\newcommand{\tongji@first@titlepage}{
+% 这个\hb@xt@是啥玩意儿？
+\newcommand{\tongji@first@titlepage}
+{
   \begin{center}
     \vspace*{0cm}
-    \parbox[b][1.8cm][t]{\textwidth}{%
-      \hspace*{11.2cm}\iftongji@secret{\sanhao\tongji@secret@title}\else\rule{1cm}{0cm}\fi\\[0.1cm]
+    % \parbox[position][height][inner-pos]{width}{text}
+    \parbox[t][1.8cm][t]{\textwidth}
+    {%
+      \hspace*{11.2cm}
+      \iftongji@secret{\sanhao\tongji@secret@title}
+        \else\rule{1cm}{0cm}
+      \fi
+      \\[0.1cm]
 %        \parbox[t][9cm][t]{\paperwidth-10cm}{
     %\hspace*{.4cm} 
-      \iftongji@electronic{{\kaiti\xiaosi\tongji@thesistype （打印时删除）}}\else\rule{1cm}{0cm}\fi}\\[-.9cm] %TODO:需要伪斜体？
-    \parbox[t][1.8cm][t]{\textwidth}{%
-    \centering\hspace*{.3cm}
-    \includegraphics[width=10cm]{tongji-whole-logo.eps}}\\[-.6cm] % logo
-    \parbox[t][9cm][t]{\paperwidth-7cm}{ 
-      \renewcommand{\baselinestretch}{1}
+      \iftongji@electronic{{\kaiti\xiaosi\tongji@thesistype （打印时删除）}}
+        \else\rule{1cm}{0cm}
+      \fi
+    }
+    \\[-.9cm] %TODO:需要伪斜体？
+    \parbox[t][1.8cm][t]{\textwidth}
+    {%
+      \centering\hspace*{.3cm}
+      \includegraphics[width=10cm]{tongji-whole-logo.eps}
+    }
+    \\[-.6cm] % logo
+    \parbox[t][9cm][t]{\paperwidth-7cm}
+    { 
+      % \renewcommand{\baselinestretch}{1} %单倍行距
       \begin{center}
-            \erhao[1]{{\erhao\lishu\tongji@capply}}\par\vskip 1.8cm  % no bold for LiShu
-            \linespread{0.7}\selectfont\erhao[2]\textbf{\heiti\tongji@ctitle}\par\vskip 17pt
-     \ifx\cfunds\@empty\else
-            \xiaosi{\tongji@cfunds}
-             \par\vskip 20bp\fi
-      \end{center}}
-       \vskip -0.4cm 
-      \hspace*{1.2cm}\parbox[t][8.5cm][t]{\textwidth}{{\sanhao[1.5]
-        \begin{center}\fangsong
+            \erhao[1]{{\bfseries\erhao\lishu\tongji@capply}}
+            \par\vskip 1.8cm  
+            % \linespread{0.7}
+            % \linespread{0.7}相当于\renewcommand{\baselinestretch}{0.7}
+            % 需要执行\selectfont才能生效。
+            \erhao[2]{\bfseries\heiti\tongji@ctitle}
+            \par\vskip 17pt
+            \ifx\cfunds\@empty\else
+              {\xiaosi\tongji@cfunds}
+              \par\vskip 20bp
+            \fi
+      \end{center}
+    }
+    \vskip -0.4cm 
+    \hspace*{1.2cm}
+    \parbox[t][8.5cm][t]{\textwidth}
+    {
+      {
+        \fangsong\sanhao[1.5]        
+        \begin{center}
           \setlength{\tongji@title@width}{5em}
           \setlength{\extrarowheight}{4pt}
           \ifxetex % todo: ugly codes
-      \begin{tabular}{p{\tongji@title@width}@{}c@{\extracolsep{8pt}}p{7cm}l}
+            \begin{tabular}{p{\tongji@title@width}@{}c@{\extracolsep{8pt}}p{7cm}l}
           \else
-      \begin{tabular}{p{\tongji@title@width}c@{\extracolsep{8pt}}p{7cm}l}
+            \begin{tabular}{p{\tongji@title@width}c@{\extracolsep{8pt}}p{7cm}l}
           \fi
-              \tongji@put@title{\tongji@cauthortitle}      & \tongji@title@sep & {\ziju{3bp}\tongji@cauthor}\\
-              \tongji@put@title{\tongji@cstudentnumber}      & \tongji@title@sep & {\ziju{3bp}\tongji@studentnumber}\\
-              \tongji@put@title{\tongji@cdepartmenttitle}  & \tongji@title@sep & {\ziju{3bp}\tongji@cdepartment}\\
-              \tongji@put@title{\tongji@cmajortitlefirst}       & \tongji@title@sep & {\ziju{3bp}\tongji@cmajorfirst}\\
-              \tongji@put@title{\tongji@cmajortitlesecond} & \tongji@title@sep & {\ziju{3bp}\tongji@cmajorsecond}\\
-%              \tongji@put@title{\tongji@cauthortitle}      & \tongji@title@sep & {\ziju{3bp}\tongji@cauthor}\\ 
-              \tongji@put@title{\tongji@csupervisortitle}  & \tongji@title@sep & {\ziju{3bp}\tongji@csupervisor}\\
+              \tongji@put@title{\tongji@cauthortitle}        & \tongji@title@sep 
+              & \tongji@cauthor\\
+              \tongji@put@title{\tongji@cstudentnumbertitle} & \tongji@title@sep 
+              & \ziju{1bp}\tongji@studentnumber\\
+              \tongji@put@title{\tongji@cdepartmenttitle}    & \tongji@title@sep 
+              & \tongji@cdepartment\\
+              \tongji@put@title{\tongji@cmajorfirsttitle}    & \tongji@title@sep
+              & \tongji@cmajorfirst\\
+              \tongji@put@title{\tongji@cmajorsecondtitle}   & \tongji@title@sep
+              & \tongji@cmajorsecond\\             
+              \tongji@put@title{\tongji@csupervisortitle}    & \tongji@title@sep 
+              & \tongji@csupervisor\\
               \ifx\tongji@cassosupervisor\@empty\else
-          \tongji@put@title{\tongji@cassosupertitle} & \tongji@title@sep & {\ziju{3bp}\tongji@cassosupervisor}\\
+                \tongji@put@title{\tongji@cassosupertitle}   & \tongji@title@sep 
+                & \tongji@cassosupervisor\\
               \fi
               \ifx\tongji@ccosupervisor\@empty\else
-                \tongji@put@title{\tongji@ccosupertitle}   & \tongji@title@sep & {\ziju{3bp}\tongji@ccosupervisor}\\
+                \tongji@put@title{\tongji@ccosupertitle}     & \tongji@title@sep 
+                & \tongji@ccosupervisor\\
               \fi
             \end{tabular}
-        \end{center}}}\\[1.3cm] 
-     \begin{center}
-       {\sanhao \songti \tongji@cdate}
-     \end{center}
-    \end{center}} % end of titlepage
+        \end{center}}
+    }
+    \\[1.3cm]
+    % \vskip2cm
+    \begin{center}
+     {\sanhao\songti\tongji@cdate}
+    \end{center}
+  \end{center}
+} % end of titlepage
 
 % 英文封面
-\newcommand{\engcover}{%
-\begin{center}
-    \vspace*{0.5cm} 
-%    \parbox[b][1.8cm][t]{\textwidth}{
-      %\hspace*{11.2cm}\iftongji@secret{\sanhao\tongji@secret@title}\else\rule{1cm}{0cm}\fi\\[-0.1cm]
-%      \hspace*{-0.1cm}\includegraphics[scale=0.16]{tongjilogo.png}}
-%      \vskip -0.9cm
-    \vspace*{0.5cm} 
-    \parbox[t][1.8cm][t]{\textwidth}{%
-    \centering\hspace*{.3cm}
-    \includegraphics[width=10cm]{tongji-whole-logo.eps}}\\[-.6cm] % logo
-    \vspace*{0.3cm}
-    \parbox[t][9cm][t]{\paperwidth-6cm}{
-      \renewcommand{\baselinestretch}{1}
-      \begin{center}
-            \sihao[1.3]{\tongji@eapply}\par\vskip 1.4cm 
-            \xiaoer[1.5]\textbf{\bfseries\sffamily\tongji@etitle}\par\vskip 14pt
-            \ifx\efunds\@empty\else\xiaosi[1.3]{\tongji@efunds}
-             \par\vskip 20bp\fi
-      \end{center}}
-       %\vskip 0.5cm 
-      \hspace*{1.2cm}\parbox[t][8.7cm][t]{\textwidth}{\sanhao[1.5] 
+\newcommand{\engcover}
+{%
+  \begin{center}
+      \vspace*{0.5cm} 
+  %    \parbox[b][1.8cm][t]{\textwidth}{
+        %\hspace*{11.2cm}\iftongji@secret{\sanhao\tongji@secret@title}\else\rule{1cm}{0cm}\fi\\[-0.1cm]
+  %      \hspace*{-0.1cm}\includegraphics[scale=0.16]{tongjilogo.png}}
+  %      \vskip -0.9cm
+      \vspace*{0.5cm} 
+      % \parbox[position][height][inner-pos]{width}{text}
+      \parbox[t][1.8cm][t]{\textwidth}
+      {%
+        \centering\hspace*{.3cm}
+        \includegraphics[width=10cm]{tongji-whole-logo.eps}
+      }
+      \\[-.6cm] % logo
+      \vspace*{0.3cm}
+      \parbox[t][9cm][t]{\paperwidth-6cm}
+      {
+        % \renewcommand{\baselinestretch}{1}
         \begin{center}
-        \begin{tabular}{lp{6cm}} 
-          Candidate :& \tongji@eauthor  \\
-          Student Number : & \tongji@studentnumber\\
-          School/Department :& \tongji@edepartment\\
-          Discipline : & \tongji@emajorfirst\\
-          Major : & \tongji@emajorsecond\\
-          %Candidate :& \tongji@eauthor\\ 
-          Supervisor : & \tongji@esupervisor\\
-        \ifx\tongji@eassosupervisor\@empty
-          \else Associate Supervisor : & \tongji@eassosupervisor\\\fi
-        \ifx\tongji@ecosupervisor\@empty
-          \else Cooperate Supervisor : & \tongji@ecosupervisor\\\fi
-      \end{tabular}
-    \end{center}}
-    \vskip -2cm 
-     \begin{center}
-       \sanhao\tongji@edate 
-     \end{center}
-\end{center}} % end of english cover
+              \sihao[1.3]{\tongji@eapply}
+              \par\vskip 1.4cm 
+              \xiaoer[1.5]{\bfseries\sffamily\tongji@etitle}
+              \par\vskip 14pt
+              \ifx\efunds\@empty\else
+                \xiaosi[1.3]{\tongji@efunds}
+                \par\vskip 20bp
+              \fi
+        \end{center}
+      }
+       %\vskip 0.5cm 
+      \hspace*{1.2cm}
+      \parbox[t][8.7cm][t]{\textwidth}
+      {
+        \sanhao[1.5] 
+        \begin{center}
+          \begin{tabular}{lp{6cm}} 
+            Candidate :         & \tongji@eauthor       \\
+            Student Number :    & \tongji@studentnumber \\
+            School/Department : & \tongji@edepartment   \\
+            Discipline :        & \tongji@emajorfirst   \\
+            Major :             & \tongji@emajorsecond  \\
+            Supervisor :        & \tongji@esupervisor \\
+            \ifx\tongji@eassosupervisor\@empty\else
+              Associate Supervisor : & \tongji@eassosupervisor \\
+            \fi
+            \ifx\tongji@ecosupervisor\@empty\else
+              Cooperate Supervisor : & \tongji@ecosupervisor\\
+            \fi            
+          \end{tabular}
+        \end{center}
+      }
+      \vskip -2cm 
+      \begin{center}
+        \sanhao\tongji@edate 
+      \end{center}
+  \end{center}
+} % end of english cover
 
 
 
