@@ -245,7 +245,8 @@
 \fancypagestyle{tongji@empty}{%
   \fancyhf{}
   \renewcommand{\headrulewidth}{0pt}
-  \renewcommand{\footrulewidth}{0pt}}
+  \renewcommand{\footrulewidth}{0pt}
+  }
 \fancypagestyle{tongji@plain}{%
   \fancyhead{}
   \fancyfoot[C]{\songti\wuhao\thepage}
@@ -253,8 +254,8 @@
   \renewcommand{\footrulewidth}{0pt}}
 \fancypagestyle{tongji@headings}{%
   \fancyhead{}
-  \fancyhead[RO]{\wuhao\normalfont\leftmark}
-  \fancyhead[LE]{\wuhao\normalfont\tongji@cheadingtitle}
+  \fancyhead[RO]{\wuhao\songti\leftmark}
+  \fancyhead[LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@ctitle}
   \fancyfoot{}
   \fancyfoot[C]{\songti\wuhao\thepage}
   \renewcommand{\headrulewidth}{0.4pt}
@@ -265,15 +266,20 @@
   \clearpage
   \@mainmatterfalse
   \pagenumbering{Roman}
-  \pagestyle{tongji@empty}}
+  \pagestyle{tongji@empty}
+  }
+% 注意\mainmatter的heading设置除了在这设以外，还需要在下面的\ctexset的pagestyle域进行设置。
 \renewcommand\mainmatter{%
   \clearpage
   \@mainmattertrue
   \pagenumbering{arabic}
-  \pagestyle{tongji@headings}}
+  \pagestyle{tongji@headings}
+  }
 \renewcommand\backmatter{%
   \clearpage
-  \@mainmattertrue}
+  \@mainmatterfalse
+  \pagestyle{fancy}
+  }
 
 
 % 全文首行缩进 2 字符，标点符号用全角
@@ -383,9 +389,8 @@
 % 定义的样式在第一次被调用时会修改 \cs{chaptermark}，这会导致页眉信息错误（多余
 % 章号并且英文大写）
 % thuthesis对此专门进行了解决：
-\AtBeginDocument{%
-  \pagestyle{tongji@empty}
-  \renewcommand{\chaptermark}[1]{\@mkboth{\CTEXthechapter\hskip\ccwd#1}{}}}
+% \AtBeginDocument{%
+%   \pagestyle{tongji@empty}  \renewcommand{\chaptermark}[1]{\@mkboth{\CTEXthechapter\hskip\ccwd#1}{}}}
 % 由于以上bug是基于book.cls的老版本时的bug，新版基于ctexbook的应该没有这个bug了吧？
 
 
@@ -393,7 +398,7 @@
 % 语法：\ifthenelse{<test>}{<then clause>}{<else clause>}
 % \newcommand\tongji@chapter@titleformat[1]{
 %    \ifthenelse
-%       {\equal{#1}{\eabstractname}}%
+%       {\equal{#1}{\eabstractname}}%S
 %       {\bfseries #1}%
 %       {#1}%
 %   }
@@ -474,11 +479,33 @@
   \IfValueTF{#4}
   {%提供了第四个参数，即header
     \ifthenelse{\equal{#4}{}}
-    {\@mkboth{}{}}%header为空
-    {\@mkboth{#4}{#4}}%header不为空
+    {\@mkboth{}{}}%页眉为空为空
+    {%页眉为提供的#4
+      \pagestyle{fancy}
+      \thispagestyle{fancy}
+      \fancyhead{}
+      \fancyhead[RO,LE]{#4}
+      \fancyfoot{}
+      \fancyfoot[C]{\songti\wuhao\thepage}
+      \renewcommand{\headrulewidth}{0.4pt}
+      \renewcommand{\footrulewidth}{0pt}
+      % \thispagestyle{fancy}
+      
+    }
+    % 注：此命令等同于\markboth{left}{right}
+    % 也就是定义一个“left-hand heading” 和“righthand heading”
+    % 这样，\leftmark读出来的就是我们设的left，\rightmark就是我们设的right
+    % 通过这种方式，我们可以很方便地设置页眉。
   }
-  {%header 是页眉出现的标题，如果没有提供header参数，则取 title
-    \@mkboth{#3}{#3}
+  {%header 是页眉出现的标题，如果没有提供header参数，则取 title作为页眉
+     \fancyhead{}
+      \fancyhead[RO,LE]{#3}
+      \fancyfoot{}
+      \fancyfoot[C]{\songti\wuhao\thepage}
+      \renewcommand{\headrulewidth}{0.4pt}
+      \renewcommand{\footrulewidth}{0pt}
+      \thispagestyle{fancy}
+      \pagestyle{fancy}
   }
 }
 
@@ -493,17 +520,10 @@
 
 % 每章标题行前空 6 磅，后空 0 磅。如果使用目录项中英文要使用 Arial，那么就加上 \cs{sffamily}。
 % 章节名中英文用 Arial 字体，页码仍用 Times。
-% 减小目录项中的导引小点跟页码之间的留白。
-% \changes{v2.5.2}{2006/05/29}{用 \cs{thu@chapter*} 改写目录命令。}
-% \changes{v3.0}{2007/05/12}{缩小目录中标题与页码之间\textbf{点}之间的距离。}
-% \changes{v4.0}{2007/11/08}{本科研究生目录字号行距都不同。}
-% \changes{v4.4}{2008/06/04}{本科生目录字号改回\cs{xiaosi}\oarg{1.8}。}
-% \changes{v4.4}{2008/06/04}{本科生目录缩进要求不同。}
-% \changes{v4.4}{2008/06/18}{本科章目录项一直用黑体 (Arial)。}
+% 减小目录项中的导引小点跟页码之间的留白
 % 目录生成命令。
-%    \begin{macrocode}
 \renewcommand\tableofcontents{%
-  \tongji@chapter*[]{\contentsname}
+  \tongji@chapter*{\contentsname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\contentsname] 
   \xiaosi[1.5]\@starttoc{toc}\normalsize}
 % 同济要求目录的行距为18磅
 % 调整目录样式，允许指定目录字体。
@@ -595,7 +615,7 @@
 % 学号
 \tongji@def@term{studentnumber}
 % 校名
-\tongji@def@term{eschoolname}
+% \tongji@def@term{eschoolname}
 
 
 % 摘要最好以环境的形式出现（否则命令的形式会导致开始结束的括号距离太远，我不喜
@@ -821,36 +841,10 @@
   \endgroup
 }
 
-
- % 摘要
-
- \def\ps@tongji@cabstractheadings{
-  \def\@oddhead{\vbox to\headheight{%
-      \hb@xt@\textwidth{\hfill\wuhao\songti%
-      \tongji@schoolname\hskip 2mm \tongji@capply\hskip 2mm \leftmark}%
-      \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
-  \def\@evenhead{\vbox to\headheight{%
-      \hb@xt@\textwidth{\wuhao\songti%
-      \tongji@schoolname\hskip 2mm \tongji@capply\hskip 2mm \leftmark\hfill}%  edited by wildwolf 20090110 even page abstract
-      \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
-  \def\@oddfoot{\hfil\wuhao\thepage\hfil}
-  \let\@evenfoot=\@oddfoot}
-
-\def\ps@tongji@eabstractheadings{
-  \def\@oddhead{\vbox to\headheight{%
-      \hb@xt@\textwidth{\hfill\wuhao\songti%
-      \tongji@eschoolname\hskip 2mm \tongji@edegree\hskip 2mm \leftmark}%
-      \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
-  \def\@evenhead{\vbox to\headheight{%
-      \hb@xt@\textwidth{\wuhao\songti%
-      \tongji@eschoolname\hskip 2mm \tongji@edegree\hskip 2mm \leftmark\hfill}%
-      \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
-  \def\@oddfoot{\hfil\wuhao\thepage\hfil}
-  \let\@evenfoot=\@oddfoot}
-
+% 摘要
 \newcommand{\tongji@makeabstract}{%
   \cleardoublepage % always openright for Abstract
-  \tongji@chapter*[]{\cabstractname} % no tocline
+  \tongji@chapter*[]{\cabstractname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\cabstractname] % no tocline
   % \thispagestyle{tongji@cabstractheadings} 
   % \pagestyle{tongji@cabstractheadings}  
   \pagenumbering{Roman}
@@ -859,15 +853,11 @@
   \setbox0=\hbox{{\heiti\tongji@ckeywords@title}}
   \noindent\hangindent\wd0\hangafter1
     \box0\tongji@ckeywords
-  \clearpage
-  \thispagestyle{tongji@plain}
-  \cleardoublepage % always openright for Abstract  
-  \tongji@chapter*[]{\eabstractname} % no tocline
-  % \thispagestyle{tongji@eabstractheadings} 
-  % \pagestyle{tongji@eabstractheadings}  
+  % \cleardoublepage % always openright for Abstract  
+  \tongji@chapter*[]{\eabstractname}[\wuhao\tongji@eschoolname~\tongji@edegree~\eabstractname] % no tocline
   \tongji@eabstract
   \vskip12bp
-  \setbox0=\hbox{\textbf{Key words:\enskip}}
+  \setbox0=\hbox{{\bfseries Key Words:\enskip}}
   \noindent\hangindent\wd0\hangafter1
     \box0\tongji@ekeywords}
 
@@ -893,9 +883,9 @@
 % 主要符号对照表  
 % 根据清华v5.2.1的改动进行重设，即利用 \pkg{enumitem} 改造环境定义，更直观。
 \newenvironment{denotation}[1][2.5cm]{
-  \tongji@chapter*[]{\tongji@denotation@name} % no tocline
-  \thispagestyle{tongji@cabstractheadings} 
-  \pagestyle{tongji@cabstractheadings}  
+  \tongji@chapter*[]{\tongji@denotation@name}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@denotation@name] % no tocline
+  % \thispagestyle{tongji@cabstractheadings} 
+  % \pagestyle{tongji@cabstractheadings}  
   \vskip-30bp\xiaosi[1.6]\begin{tongji@denotation}[labelwidth=#1]
 }{%
   \end{tongji@denotation}
@@ -916,9 +906,18 @@
 % 致谢以及声明
 \newenvironment{ack}{%
      % \cleardoublepage
-    \tongji@chapter*[\tongji@acklongname]{\tongji@ackname}[\tongji@acklongname]
-  \thispagestyle{tongji@cabstractheadings} 
-  \pagestyle{tongji@cabstractheadings}  
+  % \tongji@chapter*[\tongji@acklongname]{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@acklongname]
+  \tongji@chapter*[\tongji@acklongname]{\tongji@ackname}
+  \pagestyle{fancy}
+  \fancyhead[RO,LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@acklongname}
+            \fancyfoot{}
+      \fancyfoot[C]{\songti\wuhao\thepage}
+      \renewcommand{\headrulewidth}{0.4pt}
+      \renewcommand{\footrulewidth}{0pt}
+      \thispagestyle{fancy}
+      \pagestyle{fancy}
+  % \thispagestyle{tongji@cabstractheadings} 
+  % \pagestyle{tongji@cabstractheadings}  
   }
 
 % 图表索引
@@ -930,8 +929,13 @@
   \let\numberline\oldnumberline}  
 \def\tongji@listof#1{% #1: float type
   \@ifstar
-    {\tongji@chapter*[]{\csname list#1name\endcsname}\tongji@starttoc{#1}}
-    {\tongji@chapter*{\csname list#1name\endcsname}\tongji@starttoc{#1}}}
+    {%带星的不加入目录，如\listoftables*
+      \tongji@chapter*[]{\csname list#1name\endcsname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\csname list#1name\endcsname]
+      \tongji@starttoc{#1}}
+    {%加入目录
+     \tongji@chapter*{\csname list#1name\endcsname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\csname list#1name\endcsname]
+     \tongji@starttoc{#1}}
+  }
 \renewcommand\listoffigures{\tongji@listof{figure}}
 % \renewcommand*\l@figure{\addvspace{6bp}\@dottedtocline{1}{0em}{4em}}
 \renewcommand*\l@figure{\@dottedtocline{1}{0em}{4em}}
@@ -967,8 +971,8 @@
 \def\tongjiphdbib{\iftongji@doctor [dissertation]\else [Doctor Thesis]\fi} 
 \renewenvironment{thebibliography}[1]{%
    \tongji@chapter*{\bibname}%
-   \thispagestyle{tongji@cabstractheadings} 
-   \pagestyle{tongji@cabstractheadings}  
+   % \thispagestyle{tongji@cabstractheadings} 
+   % \pagestyle{tongji@cabstractheadings}  
    \wuhao[1.4]
    \list{\@biblabel{\@arabic\c@enumiv}}%
         {\renewcommand{\makelabel}[1]{##1\hfill}
@@ -995,16 +999,16 @@
 \renewenvironment{appendix}{%
   \tongji@appendix
   \gdef\@chapapp{\appendixname~\thechapter}
-  \thispagestyle{tongji@cabstractheadings} 
-  \pagestyle{tongji@cabstractheadings}  
+  % \thispagestyle{tongji@cabstractheadings} 
+  % \pagestyle{tongji@cabstractheadings}  
   }{}
 
 % 个人简历
 \newenvironment{resume}{%
   % \cleardoublepage
   \tongji@chapter*{\tongji@resume@title}
-  \thispagestyle{tongji@cabstractheadings} 
-  \pagestyle{tongji@cabstractheadings}  
+  % \thispagestyle{tongji@cabstractheadings} 
+  % \pagestyle{tongji@cabstractheadings}  
   \wuhao[1.5] 
   }{}
 \newcommand{\resumeitem}[1]{\vspace{2.5em}{\wuhao\heiti\leftline{#1}}\par} 
