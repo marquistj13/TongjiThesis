@@ -978,11 +978,9 @@
 \def\@onlinecite#1{\begingroup\let\@cite\NAT@citenum\citep{#1}\endgroup}
 \def\tongjidot{\unskip.}
 \def\tongjimasterbib{\iftongji@doctor [dissertation]\else [Master Thesis]\fi} 
-\def\tongjiphdbib{\iftongji@doctor [dissertation]\else [Doctor Thesis]\fi} 
+\def\tongjiphdbib{\iftongji@doctor [dissertation]\else [Doctor Thesis]\fi}
 \renewenvironment{thebibliography}[1]{%
-   \tongji@chapter*{\bibname}%
-   % \thispagestyle{tongji@cabstractheadings} 
-   % \pagestyle{tongji@cabstractheadings}  
+   \tongji@chapter*{\bibname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname]
    \wuhao[1.4]
    \list{\@biblabel{\@arabic\c@enumiv}}%
         {\renewcommand{\makelabel}[1]{##1\hfill}
@@ -1003,7 +1001,17 @@
    {\def\@noitemerr
      {\@latex@warning{Empty `thebibliography' environment}}%
     \endlist\frenchspacing}
-
+% 我实在无能啊，没法解决“页眉无法在environment中显示”的bug了，只好搞出来一个\tjbibliographyheading凑合着用。
+\NewDocumentCommand{\tjbibliographyheading}{}
+{
+      \thispagestyle{fancy}
+      \fancyhead{}
+      \fancyhead[RO,LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname}
+      \fancyfoot{}
+      \fancyfoot[C]{\songti\wuhao\thepage}
+      \renewcommand{\headrulewidth}{0.4pt}
+      \renewcommand{\footrulewidth}{0pt}
+}
 % 附录
 \let\tongji@appendix\appendix
 \renewenvironment{appendix}{%  

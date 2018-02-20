@@ -4,12 +4,20 @@
 
 斗胆将其称为TongjiThesis v2.0。
 
-不过目前仍有很多地方和学校的word版本不一致，我还在继续改。
+不过已经学校的word版本基本一致。
 
 主要参考资料：
 * [ThuThesis 2017/12/24 5.4.3](https://github.com/xueruini/thuthesis)
 * [最新版本的TongjiThesis, 即Tongji LUG 2014年的RC2版](https://sourceforge.net/projects/tongjithesis/)。 以下用`老版`代指。
 * [linxdcn](https://github.com/linxdcn/TongjiThesis)同学汇总的wildwolf(据zhouyuan说，wildwolf是同济汽车学院的老师)、[svandex](https://github.com/svandex/masthesis)、[zhao-chen](https://github.com/zhao-chen/TongjiThesis)的版本。[zhouyuan有本硕博版](https://github.com/zhouyuan/tongjithesis)。主要参考了这几位校友改的封面、摘要等部分，学习其页眉设置技巧。我最终使用了[fire-emblem](https://github.com/fire-emblem/)亲手提供的fancyhdr页眉设置代码，并将其与adapt自thuthesis的`\tongji@chapter`结合，从而实现很优雅的页眉设置方式。
+
+## 一点微小的工作
+### 页眉
+这个页眉问题耗了我两天时间。虽然有前人的代码可以借鉴，但总会碰到新坑的。
+总结一下我花这么久才解决页眉的几个原因：
+1. [linxdcn](https://github.com/linxdcn/TongjiThesis)汇总的版本虽然已经解决了页眉问题，但没有使用fancyhdr，我个人比较倾向于使用新事物哈哈（虽然fancyhdr已经很老了）。
+2. [fire-emblem](https://github.com/fire-emblem/)给我的fancyhdr部分的设定只能部分work（当然他的模板基于book，而我这次的重构是基于ctexbook，他的fancyhdr部分的设置是能够在老版基于book的tongjithesis完美运行的。）。即对于使用newcommand定义的页面，如摘要和目录都能work。如果用environment定义的页面的话，则无法正确设置页眉。详细来说，举个例子，对于“主要符号对照表”，我们建了个denotation环境，也就是说这个页面只有一个environment，那么latex并没有将其识别为新的chapter*,因此继续沿用前面chapt*的页眉设置。原因猜测：目测是ctexbook的bug，即，它不把一个单纯的environment当成新的chapter* 。难道我把ctexset的浮动体对象设的比例不对？ 现在的解决方案是，不用自定义的环境。全部改成`\NewDocumentCommand`。
+3. 历史的进程。
 
 ## 主要改动
 相较于老版tongjithesis，我这个版本融合了thuthesis （ThuThesis 2017/12/24 5.4.3）的很多新改动，个人认为比较大的改动如下:
