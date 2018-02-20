@@ -277,8 +277,8 @@
   }
 \renewcommand\backmatter{%
   \clearpage
-  \@mainmatterfalse
-  \pagestyle{fancy}
+  \@mainmattertrue
+  % \pagestyle{fancy}
   }
 
 
@@ -389,9 +389,9 @@
 % 定义的样式在第一次被调用时会修改 \cs{chaptermark}，这会导致页眉信息错误（多余
 % 章号并且英文大写）
 % thuthesis对此专门进行了解决：
-% \AtBeginDocument{%
-%   \pagestyle{tongji@empty}  \renewcommand{\chaptermark}[1]{\@mkboth{\CTEXthechapter\hskip\ccwd#1}{}}}
-% 由于以上bug是基于book.cls的老版本时的bug，新版基于ctexbook的应该没有这个bug了吧？
+\AtBeginDocument{%
+  \pagestyle{tongji@empty}
+  \renewcommand{\chaptermark}[1]{\@mkboth{\CTEXthechapter\hskip\ccwd#1}{}}}
 
 
 % 各级标题格式设置。
@@ -474,14 +474,13 @@
   }
   {%若没有指定该参数（即#2=-NoValue-），表示目录出现title
     \addcontentsline{toc}{chapter}{#3}
-  }%  
+  }% 
   \chapter*{#3}%
-  \IfValueTF{#4}
+  \IfValueTF{#4}  
   {%提供了第四个参数，即header
     \ifthenelse{\equal{#4}{}}
     {\@mkboth{}{}}%页眉为空为空
     {%页眉为提供的#4
-      \pagestyle{fancy}
       \thispagestyle{fancy}
       \fancyhead{}
       \fancyhead[RO,LE]{#4}
@@ -489,8 +488,6 @@
       \fancyfoot[C]{\songti\wuhao\thepage}
       \renewcommand{\headrulewidth}{0.4pt}
       \renewcommand{\footrulewidth}{0pt}
-      % \thispagestyle{fancy}
-      
     }
     % 注：此命令等同于\markboth{left}{right}
     % 也就是定义一个“left-hand heading” 和“righthand heading”
@@ -498,14 +495,13 @@
     % 通过这种方式，我们可以很方便地设置页眉。
   }
   {%header 是页眉出现的标题，如果没有提供header参数，则取 title作为页眉
+     \thispagestyle{fancy}
      \fancyhead{}
       \fancyhead[RO,LE]{#3}
       \fancyfoot{}
       \fancyfoot[C]{\songti\wuhao\thepage}
       \renewcommand{\headrulewidth}{0.4pt}
-      \renewcommand{\footrulewidth}{0pt}
-      \thispagestyle{fancy}
-      \pagestyle{fancy}
+      \renewcommand{\footrulewidth}{0pt}      
   }
 }
 
@@ -523,7 +519,7 @@
 % 减小目录项中的导引小点跟页码之间的留白
 % 目录生成命令。
 \renewcommand\tableofcontents{%
-  \tongji@chapter*{\contentsname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\contentsname] 
+  \tongji@chapter*[]{\contentsname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\contentsname] 
   \xiaosi[1.5]\@starttoc{toc}\normalsize}
 % 同济要求目录的行距为18磅
 % 调整目录样式，允许指定目录字体。
@@ -841,12 +837,23 @@
   \endgroup
 }
 
+
+\def\ps@tongji@cabstractheadings{
+  \def\@oddhead{\vbox to\headheight{%
+      \hb@xt@\textwidth{\hfill\wuhao\songti%
+      \tongji@schoolname\hskip 2mm \tongji@capply\hskip 2mm \leftmark}%
+      \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
+  \def\@evenhead{\vbox to\headheight{%
+      \hb@xt@\textwidth{\wuhao\songti%
+      \tongji@schoolname\hskip 2mm \tongji@capply\hskip 2mm \leftmark\hfill}%  edited by wildwolf 20090110 even page abstract
+      \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
+  \def\@oddfoot{\hfil\wuhao\thepage\hfil}
+  \let\@evenfoot=\@oddfoot}
+
 % 摘要
 \newcommand{\tongji@makeabstract}{%
   \cleardoublepage % always openright for Abstract
   \tongji@chapter*[]{\cabstractname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\cabstractname] % no tocline
-  % \thispagestyle{tongji@cabstractheadings} 
-  % \pagestyle{tongji@cabstractheadings}  
   \pagenumbering{Roman}
   \tongji@cabstract
   \vskip12bp
@@ -879,13 +886,13 @@
   \normalsize
   \tongji@makeabstract
   \let\@tabular\tongji@tabular}
-
+   
 % 主要符号对照表  
 % 根据清华v5.2.1的改动进行重设，即利用 \pkg{enumitem} 改造环境定义，更直观。
 \newenvironment{denotation}[1][2.5cm]{
-  \tongji@chapter*[]{\tongji@denotation@name}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@denotation@name] % no tocline
+  \tongji@chapter*{\tongji@denotation@name}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@denotation@name] % no tocline
   % \thispagestyle{tongji@cabstractheadings} 
-  % \pagestyle{tongji@cabstractheadings}  
+  
   \vskip-30bp\xiaosi[1.6]\begin{tongji@denotation}[labelwidth=#1]
 }{%
   \end{tongji@denotation}
@@ -901,24 +908,27 @@
   labelsep*=0.5cm,
   itemindent=0pt,
 }
-
+% 注意，由于定义成environment之后，老是出错，因此重新定义成command形式。
+% 目测是ctexbook的bug，即，它不把一个单纯的environment当成新的chapter*
+% 难道我把ctexset的浮动体对象设的比例不对？
+\NewDocumentCommand{\tjdenotation}{O{2.5cm} m}
+{\tongji@chapter*{\tongji@denotation@name}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@denotation@name]
+\vskip-30bp\xiaosi[1.6]
+\begin{tongji@denotation}[labelwidth=2.5cm]
+#2
+\end{tongji@denotation}
+}
 
 % 致谢以及声明
-\newenvironment{ack}{%
-     % \cleardoublepage
-  % \tongji@chapter*[\tongji@acklongname]{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@acklongname]
-  \tongji@chapter*[\tongji@acklongname]{\tongji@ackname}
-  \pagestyle{fancy}
-  \fancyhead[RO,LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@acklongname}
-            \fancyfoot{}
-      \fancyfoot[C]{\songti\wuhao\thepage}
-      \renewcommand{\headrulewidth}{0.4pt}
-      \renewcommand{\footrulewidth}{0pt}
-      \thispagestyle{fancy}
-      \pagestyle{fancy}
-  % \thispagestyle{tongji@cabstractheadings} 
-  % \pagestyle{tongji@cabstractheadings}  
-  }
+\NewDocumentEnvironment{acknowledgement}{}{%
+\tongji@chapter*[\tongji@acklongname]{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@acklongname]  
+ }{}
+% \let\ack\acknowledgement
+
+\NewDocumentCommand{\tjacknowledgement}{m}
+{\tongji@chapter*{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@ackname] 
+#1
+}
 
 % 图表索引
 % 定义图表以及公式目录样式
@@ -994,14 +1004,12 @@
      {\@latex@warning{Empty `thebibliography' environment}}%
     \endlist\frenchspacing}
 
-% 附录 (和新版清华的不一样)
+% 附录
 \let\tongji@appendix\appendix
-\renewenvironment{appendix}{%
-  \tongji@appendix
-  \gdef\@chapapp{\appendixname~\thechapter}
-  % \thispagestyle{tongji@cabstractheadings} 
-  % \pagestyle{tongji@cabstractheadings}  
-  }{}
+\renewenvironment{appendix}{%  
+  \let\title\tongji@appendix@title
+  \tongji@appendix}{%
+  \let\title\@gobble}
 
 % 个人简历
 \newenvironment{resume}{%
@@ -1011,6 +1019,11 @@
   % \pagestyle{tongji@cabstractheadings}  
   \wuhao[1.5] 
   }{}
+\NewDocumentCommand{\tjresume}{m}
+{\tongji@chapter*{\tongji@resume@title}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@resume@title] 
+#1
+}
+
 \newcommand{\resumeitem}[1]{\vspace{2.5em}{\wuhao\heiti\leftline{#1}}\par} 
 
 % 定义破折号

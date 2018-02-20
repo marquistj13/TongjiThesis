@@ -26,7 +26,7 @@
 % 目录
 \tableofcontents
 % 符号对照表
-\input{data/denotation}
+\tjdenotation{\input{data/denotation}}
 
 %%% 以下索引按需要选择
 % 插图索引
@@ -49,14 +49,14 @@
 \bibliography{ref/refs}
 
 % 致谢
-\include{data/ack}
+\tjacknowledgement{\input{data/ack}}
 
 % 附录
 \begin{appendix}
-\input{data/appendix01}
+\input{data/appendix}
 \end{appendix}
 
 % 个人简历
-\include{data/resume}
+\tjresume{\input{data/resume}}
 
 \end{document}
