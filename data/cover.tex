@@ -1,76 +1,46 @@
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
-\secretlevel{保密} \secretyear{2}
-
-\ctitle{同济大学学位论文 \LaTeX{} 模板使用示例}
-
-% 按照申请工学学位设计。如有其它需要，请修改相应文字。
-\makeatletter
-  \iftongji@doctor
-    \cdegree{博士}
-  \else
-    \iftongji@master
-      \cdegree{硕士}
-    \fi
-  \fi
-
-\makeatother
-
-\cdepartment{同济大学Linux用户组}
-
-\cmajorfirst{工学}
-
-\cmajorsecond{电子控制计算机}
-
-\cauthor{同济人}
-\studentnumber{201804}
-
-\csupervisor{钟志华 教授}
-
-% 如果没有副指导老师或者联合指导老师，把各自{}中内容留空即可。
-
-\cassosupervisor{裴刚 教授~（校外）}
-
-
-
-% 日期自动生成，如果你要自己写就改这个cdate
-%\cdate{\CJKdigits{\the\year}年\CJKnumber{\the\month}月}
-\makeatletter
-  \iftongji@doctor
-    \edegree{Doctor of Philosophy}
-  \else
-    \iftongji@master
-      \edegree{Master of Science}
-    \fi
-  \fi
-
-\makeatother
-
-\cfunds{（国家杰出青年基金 (No.123456789) 支持）}
-
-\efunds{(Supported by the Natural Science Foundation of China for\\ Distinguished
-         Young Scholars, Grant No.123456789)}
-
-\etitle{A Simple Sample of Tongji Thesis\\ Using \tongjithesis{}}
-
-\edepartment{TONGJILUG}
-
-\emajorfirst{Gong Xue}
-
-\emajorsecond{DianziControlComputerScience}
-
-\eauthor{Tongji Ren}
-
-\esupervisor{Prof. Zhihua Zhong}
-
-\eassosupervisor{Prof. Gang Pei (XiaoWai)}
-
-
-
-% 这个日期也会自动生成，你要改么？
-% \edate{May, 2009}
+\tongjisetup{
+  %******************************
+  % 注意：
+  %   1. 配置里面不要出现空行
+  %   2. 不需要的配置信息可以删除
+  %******************************
+  %
+  %=====
+  % 秘级
+  %=====
+  secretlevel={保密},
+  secretyear={2},
+  %
+  %=========
+  % 中文信息
+  %=========
+  ctitle={同济大学学位论文 \LaTeX{} 模板使用示例},
+  cauthor={同济人},  
+  studentnumber={201804},
+  cmajorfirst={工学},
+  cmajorsecond={电子控制计算机},
+  cdepartment={同济大学Linux用户组},
+  csupervisor={钟志华 教授}, 
+  % 如果没有副指导老师或者校外指导老师，把{}中内容留空即可，或者直接注释掉。
+  cassosupervisor={裴刚 教授~（校外）}, % 副指导老师
+  % 日期自动使用当前时间，若需指定按如下方式修改：
+  % cdate={超新星纪元},
+  % 没有基金的话就注释掉吧。
+  cfunds={（国家杰出青年基金 (No.123456789) 支持）},
+  %
+  %=========
+  % 英文信息
+  %=========
+  etitle={An Introduction to \LaTeX{} Thesis Template of Tsinghua University v\version},  
+  eauthor={Tongji Ren},
+  emajorfirst={Gong Xue},
+  emajorsecond={DianziControlComputerScience},
+  edepartment={TONGJILUG},
+  efunds={(Supported by the Natural Science Foundation of China for\\ Distinguished Young Scholars, Grant No.123456789)},
+  etitle={A Simple Sample of Tongji Thesis\\ Using \tongjithesis{}},  
+  esupervisor={Prof. Zhihua Zhong},
+  eassosupervisor={Prof. Gang Pei (XiaoWai)}
+  }
 
 % 定义中英文摘要和关键字
 \begin{cabstract}  

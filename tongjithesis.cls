@@ -558,6 +558,7 @@
 % \define@key{tongji}{secretlevel}{\secretlevel{#1}}
 % \gdef\secretlevel#1{\gdef\tongji@secretlevel{#1}}
 % \secretlevel{}
+% 前辈们很明智地定义了三个东西，不设置的时候为空。还可以手动设置。很强啊。
 
 % 定义密级参数。
 \tongji@def@term{secretlevel}
