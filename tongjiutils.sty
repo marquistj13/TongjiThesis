@@ -27,16 +27,16 @@
 \RequirePackage{float}
 
 % 调整目录特殊要求，重定义缩进量
-% \usepackage{titletoc}
-% \titlecontents{chapter}[0pt]{\addvspace{0pt}}%
-%           {\xiaosi\song\thecontentslabel\enspace}%
-%               {\xiaosi\song}{\dotfill\contentspage}[\addvspace{0pt}]
-% \titlecontents{section}[2em]{\addvspace{0pt}}%
-%           {\xiaosi\song \thecontentslabel\enspace}%
-%               {\xiaosi\song}{\dotfill\contentspage}[\addvspace{0pt}]
-% \titlecontents{subsection}[4em]{\addvspace{0pt}}%
-%           {\xiaosi\song\thecontentslabel\enspace}%
-%               {\xiaosi\song}{\dotfill\contentspage}[\addvspace{0pt}]
+ \usepackage{titletoc}
+ \titlecontents{chapter}[0pt]{\filright}%
+           {\xiaosi\songti\thecontentslabel\enspace}%
+               {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
+ \titlecontents{section}[1em]{\addvspace{0pt}}%
+           {\xiaosi\songti \thecontentslabel\enspace}%
+               {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
+ \titlecontents{subsection}[2em]{\addvspace{0pt}}%
+           {\xiaosi\songti\thecontentslabel\enspace}%
+               {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
 
 % 浮动图形控制宏包。
 % 允许上一个~section 的浮动图形出现在下一个~section 的开始部分
