@@ -1,10 +1,7 @@
 # TongjiThesis
 同济大学硕博士论文LaTeX模板。
 
-
-斗胆将其称为TongjiThesis v2.0。
-
-不过已经学校的word版本基本一致。
+目前已经和学校的word版本基本一致。
 
 主要参考资料：
 * [ThuThesis 2017/12/24 5.4.3](https://github.com/xueruini/thuthesis)
@@ -20,7 +17,7 @@
 3. 历史的进程。
 
 ###  这个页眉问题如何解决的呢？
-我试了好久，终于发现了解决方法，就是在每一个environment结束的时候加上一个`\clearpage`，详见这个commit：https://github.com/marquistj13/TongjiThesis/commit/107dc2291b2466058864f6b0dba563cb9b95055b
+我试了好久，终于发现了解决方法，就是在每一个environment结束的时候加上一个`\clearpage`，详见[这个commit](https://github.com/marquistj13/TongjiThesis/commit/107dc2291b2466058864f6b0dba563cb9b95055b)
 原理猜测：我也不知道原因啊，我只知道，像致谢部分、目录部分、摘要部分本质上都是`chapter`，虽然它们是`chapter*`。估计每一个chapter都要手动`\clearpage`？搞不懂啊。好了，不提这么细节的东西了，解决了就ok了。
 
 ### 粗体
