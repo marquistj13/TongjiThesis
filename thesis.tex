@@ -45,12 +45,13 @@
 \backmatter
 
 % 参考文献
-\tjbibliographyheading % 这个用来设置参考文献的页眉
 \bibliographystyle{tongjibib}
 \bibliography{ref/refs}
 
 % 致谢
-\tjacknowledgement{\input{data/ack}}
+\begin{acknowledgement}
+\input{data/ack}
+\end{acknowledgement}
 
 % 附录
 \begin{appendix}
@@ -58,6 +59,8 @@
 \end{appendix}
 
 % 个人简历
-\tjresume{\input{data/resume}}
+\begin{resume}
+\input{data/resume}
+\end{resume}
 
 \end{document}

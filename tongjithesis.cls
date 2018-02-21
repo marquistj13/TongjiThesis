@@ -408,7 +408,9 @@
 \ctexset{%
   chapter={ %章标题
     afterindent=true, % afterindent 选项用于设置章节标题后首段的缩进。
-    pagestyle={tongji@headings},
+    pagestyle={tongji@headings},%这句用来保证章首页的页眉正确
+    % 注意我们在前面\mainmatter时已经定义过\pagestyle{tongji@headings}
+  % 了，但必须在这里重新应用一次，用来保证章首页的页眉正确。
     beforeskip={2bp},%设置章节标题前的垂直间距
     aftername=\hskip\ccwd, %控制章节编号与标题内容之间的距离
     % \ccwd 为一个汉字的宽度。在ctex宏集中有介绍。
@@ -522,7 +524,7 @@
 % 目录生成命令。
 \renewcommand\tableofcontents{%
   \tongji@chapter*[]{\contentsname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\contentsname] 
-  \xiaosi[1.5]\@starttoc{toc}\normalsize}
+  \xiaosi[1.5]\@starttoc{toc}\normalsize\clearpage}
 % 同济要求目录的行距为18磅
 % 调整目录样式，允许指定目录字体。
 \iftongji@arialtoc
@@ -595,33 +597,6 @@
 \tongji@def@term{studentnumber}
 % 校名
 % \tongji@def@term{eschoolname}
-
-
-% 摘要最好以环境的形式出现（否则命令的形式会导致开始结束的括号距离太远，我不喜
-% 欢），这就必须让环境能够自己保存内容留待以后使用。使用 \pkg{environ} 的
-% \cs{Collect@Body} 来实现。
-\newcommand{\tongji@@cabstract}[1]{\long\gdef\tongji@cabstract{#1}}
-\newenvironment{cabstract}{\Collect@Body\tongji@@cabstract}{}
-\newcommand{\tongji@@eabstract}[1]{\long\gdef\tongji@eabstract{#1}}
-\newenvironment{eabstract}{\Collect@Body\tongji@@eabstract}{}
-%   不同论文格式关键词之间的分割不太相同，我们用 \cs{ckeywords} 和
-%    \cs{ekeywords} 来收集关键词列表，然后用本命令来生成符合要求的格式。
-%    \begin{macrocode}
-\def\tongji@parse@keywords#1{
-  \define@key{tongji}{#1}{\csname #1\endcsname{##1}}
-  \expandafter\gdef\csname tongji@#1\endcsname{}
-  \expandafter\gdef\csname #1\endcsname##1{
-    \@for\reserved@a:=##1\do{
-      \expandafter\ifx\csname tongji@#1\endcsname\@empty\else
-        \expandafter\g@addto@macro\csname tongji@#1\endcsname{%
-          \ignorespaces\csname tongji@#1@separator\endcsname}
-      \fi
-      \expandafter\expandafter\expandafter\g@addto@macro%
-        \expandafter\csname tongji@#1\expandafter\endcsname\expandafter{\reserved@a}}}}
-% 利用 \cs{tongji@parse@keywords} 来定义，内部通过 \cs{tongji@ckeywords} 和
-% \cs{tongji@ekeywords} 来引用。
-\tongji@parse@keywords{ckeywords}
-\tongji@parse@keywords{ekeywords}
 
 % 通过 \cs{tongjisetup} 统一设置封面信息。
 % 由上可见，封面和封底有一大堆信息需要设置，为了简化操作界面，提供一
@@ -820,20 +795,32 @@
   \endgroup
 }
 
-
-\def\ps@tongji@cabstractheadings{
-  \def\@oddhead{\vbox to\headheight{%
-      \hb@xt@\textwidth{\hfill\wuhao\songti%
-      \tongji@schoolname\hskip 2mm \tongji@capply\hskip 2mm \leftmark}%
-      \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
-  \def\@evenhead{\vbox to\headheight{%
-      \hb@xt@\textwidth{\wuhao\songti%
-      \tongji@schoolname\hskip 2mm \tongji@capply\hskip 2mm \leftmark\hfill}%  edited by wildwolf 20090110 even page abstract
-      \vskip2pt\hbox{\vrule width\textwidth height0.4pt depth0pt}}}
-  \def\@oddfoot{\hfil\wuhao\thepage\hfil}
-  \let\@evenfoot=\@oddfoot}
-
 % 摘要
+% 摘要最好以环境的形式出现（否则命令的形式会导致开始结束的括号距离太远，我不喜
+% 欢），这就必须让环境能够自己保存内容留待以后使用。使用 \pkg{environ} 的
+% \cs{Collect@Body} 来实现。
+\newcommand{\tongji@@cabstract}[1]{\long\gdef\tongji@cabstract{#1}}
+\newenvironment{cabstract}{\Collect@Body\tongji@@cabstract}{}
+\newcommand{\tongji@@eabstract}[1]{\long\gdef\tongji@eabstract{#1}}
+\newenvironment{eabstract}{\Collect@Body\tongji@@eabstract}{}
+%   不同论文格式关键词之间的分割不太相同，我们用 \cs{ckeywords} 和
+%    \cs{ekeywords} 来收集关键词列表，然后用本命令来生成符合要求的格式。
+%    \begin{macrocode}
+\def\tongji@parse@keywords#1{
+  \define@key{tongji}{#1}{\csname #1\endcsname{##1}}
+  \expandafter\gdef\csname tongji@#1\endcsname{}
+  \expandafter\gdef\csname #1\endcsname##1{
+    \@for\reserved@a:=##1\do{
+      \expandafter\ifx\csname tongji@#1\endcsname\@empty\else
+        \expandafter\g@addto@macro\csname tongji@#1\endcsname{%
+          \ignorespaces\csname tongji@#1@separator\endcsname}
+      \fi
+      \expandafter\expandafter\expandafter\g@addto@macro%
+        \expandafter\csname tongji@#1\expandafter\endcsname\expandafter{\reserved@a}}}}
+% 利用 \cs{tongji@parse@keywords} 来定义，内部通过 \cs{tongji@ckeywords} 和
+% \cs{tongji@ekeywords} 来引用。
+\tongji@parse@keywords{ckeywords}
+\tongji@parse@keywords{ekeywords}
 \newcommand{\tongji@makeabstract}{%
   \cleardoublepage % always openright for Abstract
   \tongji@chapter*[]{\cabstractname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\cabstractname] % no tocline
@@ -873,12 +860,11 @@
 % 主要符号对照表  
 % 根据清华v5.2.1的改动进行重设，即利用 \pkg{enumitem} 改造环境定义，更直观。
 \newenvironment{denotation}[1][2.5cm]{
-  \tongji@chapter*{\tongji@denotation@name}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@denotation@name] % no tocline
-  % \thispagestyle{tongji@cabstractheadings} 
-  
+  \tongji@chapter*{\tongji@denotation@name}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@denotation@name]
   \vskip-30bp\xiaosi[1.6]\begin{tongji@denotation}[labelwidth=#1]
 }{%
   \end{tongji@denotation}
+  \clearpage
 }
 \newlist{tongji@denotation}{description}{1}
 \setlist[tongji@denotation]{%
@@ -904,8 +890,8 @@
 
 % 致谢以及声明
 \NewDocumentEnvironment{acknowledgement}{}{%
-\tongji@chapter*[\tongji@acklongname]{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@acklongname]  
- }{}
+\tongji@chapter*[\tongji@ackname]{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@ackname]  
+ }{\clearpage}
 % \let\ack\acknowledgement
 
 \NewDocumentCommand{\tjacknowledgement}{m}
@@ -924,10 +910,12 @@
   \@ifstar
     {%带星的不加入目录，如\listoftables*
       \tongji@chapter*[]{\csname list#1name\endcsname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\csname list#1name\endcsname]
-      \tongji@starttoc{#1}}
+      \tongji@starttoc{#1}
+      \clearpage}
     {%加入目录
      \tongji@chapter*{\csname list#1name\endcsname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\csname list#1name\endcsname]
-     \tongji@starttoc{#1}}
+     \tongji@starttoc{#1}
+     \clearpage}
   }
 \renewcommand\listoffigures{\tongji@listof{figure}}
 % \renewcommand*\l@figure{\addvspace{6bp}\@dottedtocline{1}{0em}{4em}}
@@ -983,37 +971,33 @@
     \sfcode`\.\@m}
    {\def\@noitemerr
      {\@latex@warning{Empty `thebibliography' environment}}%
-    \endlist\frenchspacing}
-% 我实在无能啊，没法解决“页眉无法在environment中显示”的bug了，只好搞出来一个\tjbibliographyheading凑合着用。
-\NewDocumentCommand{\tjbibliographyheading}{}
-{
-      \thispagestyle{fancy}
-      \fancyhead{}
-      \fancyhead[RO,LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname}
-      \fancyfoot{}
-      \fancyfoot[C]{\songti\wuhao\thepage}
-      \renewcommand{\headrulewidth}{0.4pt}
-      \renewcommand{\footrulewidth}{0pt}
-}
+    \endlist\frenchspacing\clearpage}%注意这个\clearpage是必须的。
+
 % 附录
+\fancypagestyle{tongji@appendix@heading}{%
+  \fancyhead{}
+  \fancyhead[RO,LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\appendixname}
+  \fancyfoot{}
+  \fancyfoot[C]{\songti\wuhao\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0pt}
+  }
 \let\tongji@appendix\appendix
-\renewenvironment{appendix}{%  
+\renewenvironment{appendix}{% 
+  \ctexset{%附录仍属于mainmattertrue才能正确编号成附录A的形式
+  % 因此，此处的pagestyle仍然会沿用我们前面设的chapter的pagestyle，而我们需要更改附录的页眉，因此需要重新设置一下页眉。
+    chapter/pagestyle={tongji@appendix@heading}%这句用来保证章首页的页眉正确
+    } 
+  \pagestyle{tongji@appendix@heading} % 这一句是保证附录非章首页的其他页面的也没正确。
   \let\title\tongji@appendix@title
   \tongji@appendix}{%
-  \let\title\@gobble}
+  \let\title\@gobble  \clearpage}
 
 % 个人简历
 \newenvironment{resume}{%
-  % \cleardoublepage
-  \tongji@chapter*{\tongji@resume@title}
-  % \thispagestyle{tongji@cabstractheadings} 
-  % \pagestyle{tongji@cabstractheadings}  
+  \tongji@chapter*{\tongji@resume@title}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@resume@title] 
   \wuhao[1.5] 
-  }{}
-\NewDocumentCommand{\tjresume}{m}
-{\tongji@chapter*{\tongji@resume@title}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@resume@title] 
-#1
-}
+  }{\clearpage}
 
 \newcommand{\resumeitem}[1]{\vspace{2.5em}{\bfseries\wuhao\heiti\leftline{#1}}\par} 
 
