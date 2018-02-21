@@ -73,6 +73,8 @@
 % 为 CMR。其他引擎下没有这个问题，这一行会被无视。
 \PassOptionsToPackage{no-math}{fontspec}
 
+%将伪粗体与伪斜体的选项传递给xeCJK package
+\PassOptionsToPackage{AutoFakeBold,AutoFakeSlant}{xeCJK}
 % 使用 \CTeX\ 宏宝的默认中文字体配置，支持不同引擎
 \LoadClass[a4paper,openany,UTF8,zihao=-4,scheme=plain]{ctexbook}
 
@@ -407,11 +409,11 @@
   chapter={ %章标题
     afterindent=true, % afterindent 选项用于设置章节标题后首段的缩进。
     pagestyle={tongji@headings},
-    beforeskip={24bp},%设置章节标题前的垂直间距
+    beforeskip={2bp},%设置章节标题前的垂直间距
     aftername=\hskip\ccwd, %控制章节编号与标题内容之间的距离
     % \ccwd 为一个汉字的宽度。在ctex宏集中有介绍。
     afterskip={18bp}, %控制章节标题与后面下方之间的距离
-    format={\centering\tongji@title@font\sanhao[1]},
+    format={\centering\bfseries\tongji@title@font\sanhao[1]},
     % format 项用于控制章节标题的全局格式，作用域为章节名字和随后的标题内容。可以用于
     % 控制章节标题的对齐方式、整体字体字号等格
     nameformat=\relax,
@@ -527,38 +529,19 @@
   \def\tongji@toc@font{\sffamily}
 \fi
 
-\def\@pnumwidth{2em} % 这个参数没用了
-\def\@tocrmarg{\@pnumwidth}
-\def\@dotsep{1} % 目录点间的距离
-\patchcmd{\@dottedtocline}{#4}{\csname tongji@toc@font\endcsname #4}{}{}
-\patchcmd{\@dottedtocline}{\hb@xt@\@pnumwidth}{\hbox}{}{}
-\renewcommand*\l@chapter[2]{%
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \vskip 4bp  \@plus\p@
-    \setlength\@tempdima{4em}%
-    \begingroup
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
-      \leavevmode
-      \advance\leftskip\@tempdima
-      \hskip -\leftskip
-      % numberline is called here, and it uses \@tempdima
-      {\csname tongji@toc@font\endcsname \heiti #1} %黑体
-      \leaders\hbox{$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill
-      \nobreak{\normalfont\normalcolor #2}\par
-      \penalty\@highpenalty
-    \endgroup
-  \fi}
+% 调整目录特殊要求，重定义缩进量
 % 研究生学位论文写作指南中规定：目录中的章标题行居左书写，一级节标题行缩进 1 个
 % 汉字符（2个字符），二级节标题行缩进 2 个汉字符（4个字符）
-\renewcommand*\l@section{%
-  \@dottedtocline{1}{\ccwd}{2.1em}}
-\renewcommand*\l@subsection{%
-  \@dottedtocline{2}{2\ccwd}{3em}}
-\renewcommand*\l@subsubsection{%
-  \@dottedtocline{3}{3.5em}{3.8em}}
-
+ \RequirePackage{titletoc}
+ \titlecontents{chapter}[0pt]{\filright}%
+           {\xiaosi\songti\thecontentslabel\enspace}%
+               {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
+ \titlecontents{section}[1em]{\addvspace{0pt}}%
+           {\xiaosi\songti \thecontentslabel\enspace}%
+               {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
+ \titlecontents{subsection}[2em]{\addvspace{0pt}}%
+           {\xiaosi\songti\thecontentslabel\enspace}%
+               {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
 
 % 封面和封底
 % 方便的定义封面的一些替换命令
@@ -857,7 +840,7 @@
   \pagenumbering{Roman}
   \tongji@cabstract
   \vskip12bp
-  \setbox0=\hbox{{\heiti\tongji@ckeywords@title}}
+  \setbox0=\hbox{{\bfseries\heiti\tongji@ckeywords@title}}
   \noindent\hangindent\wd0\hangafter1
     \box0\tongji@ckeywords
   % \cleardoublepage % always openright for Abstract  
@@ -1032,7 +1015,7 @@
 #1
 }
 
-\newcommand{\resumeitem}[1]{\vspace{2.5em}{\wuhao\heiti\leftline{#1}}\par} 
+\newcommand{\resumeitem}[1]{\vspace{2.5em}{\bfseries\wuhao\heiti\leftline{#1}}\par} 
 
 % 定义破折号
 \newcommand{\pozhehao}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}

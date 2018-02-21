@@ -19,6 +19,9 @@
 2. [fire-emblem](https://github.com/fire-emblem/)给我的fancyhdr部分的设定只能部分work（当然他的模板基于book，而我这次的重构是基于ctexbook，他的fancyhdr部分的设置是能够在老版基于book的tongjithesis完美运行的。）。即对于使用newcommand定义的页面，如摘要和目录都能work。如果用environment定义的页面的话，则无法正确设置页眉。详细来说，举个例子，对于“主要符号对照表”，我们建了个denotation环境，也就是说这个页面只有一个environment，那么latex并没有将其识别为新的chapter*,因此继续沿用前面chapt*的页眉设置。原因猜测：目测是ctexbook的bug，即，它不把一个单纯的environment当成新的chapter* 。难道我把ctexset的浮动体对象设的比例不对？ 现在的解决方案是，不用自定义的环境。全部改成`\NewDocumentCommand`。
 3. 历史的进程。
 
+### 粗体
+使用xeCJK伪斜体实现黑体的加粗。
+
 ## 主要改动
 相较于老版tongjithesis，我这个版本融合了thuthesis （ThuThesis 2017/12/24 5.4.3）的很多新改动，个人认为比较大的改动如下:
 1. 加入更详尽的注释。我甚至将很多宏的用法用例子进行阐述，当然详细的注释主要集中在“宏展开”的部分。这就极大地方便了模板的阅读和理解，期待校友们更多地参与到对此模板的改进。
@@ -30,6 +33,7 @@
 1. 修改了老版的许多错误参数（当年也许是对的）。
 1. 章节标题的设置使用ctex宏集提供的`\ctexset`进行设置。
 1. 使用较新的性能更强的宏包替代老宏包。如etoolbox引入了LATEX kernel commands的不同实现，但功能一样;xparse提供了更强的`\NewDocumentCommand`，以替代`\newcommand`;使用subcaption替代subfig，并使用subcaption进行浮动体参数的设定等。
+1. chapter标题段前距离的修改
 
 ## 运行
 本人使用Texlive2017发行版，xelatex 可以编译通过。
