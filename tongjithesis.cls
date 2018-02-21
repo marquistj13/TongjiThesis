@@ -1015,7 +1015,7 @@
 #1
 }
 
-\newcommand{\resumeitem}[1]{\vspace{2.5em}{\wuhao\heiti\leftline{#1}}\par} 
+\newcommand{\resumeitem}[1]{\vspace{2.5em}{\bfseries\wuhao\heiti\leftline{#1}}\par} 
 
 % 定义破折号
 \newcommand{\pozhehao}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
