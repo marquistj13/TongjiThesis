@@ -529,38 +529,19 @@
   \def\tongji@toc@font{\sffamily}
 \fi
 
-\def\@pnumwidth{2em} % 这个参数没用了
-\def\@tocrmarg{\@pnumwidth}
-\def\@dotsep{1} % 目录点间的距离
-\patchcmd{\@dottedtocline}{#4}{\csname tongji@toc@font\endcsname #4}{}{}
-\patchcmd{\@dottedtocline}{\hb@xt@\@pnumwidth}{\hbox}{}{}
-\renewcommand*\l@chapter[2]{%
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \vskip 4bp  \@plus\p@
-    \setlength\@tempdima{4em}%
-    \begingroup
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
-      \leavevmode
-      \advance\leftskip\@tempdima
-      \hskip -\leftskip
-      % numberline is called here, and it uses \@tempdima
-      {\csname tongji@toc@font\endcsname \heiti #1} %黑体
-      \leaders\hbox{$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill
-      \nobreak{\normalfont\normalcolor #2}\par
-      \penalty\@highpenalty
-    \endgroup
-  \fi}
+% 调整目录特殊要求，重定义缩进量
 % 研究生学位论文写作指南中规定：目录中的章标题行居左书写，一级节标题行缩进 1 个
 % 汉字符（2个字符），二级节标题行缩进 2 个汉字符（4个字符）
-\renewcommand*\l@section{%
-  \@dottedtocline{1}{\ccwd}{2.1em}}
-\renewcommand*\l@subsection{%
-  \@dottedtocline{2}{2\ccwd}{3em}}
-\renewcommand*\l@subsubsection{%
-  \@dottedtocline{3}{3.5em}{3.8em}}
-
+ \RequirePackage{titletoc}
+ \titlecontents{chapter}[0pt]{\filright}%
+           {\xiaosi\songti\thecontentslabel\enspace}%
+               {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
+ \titlecontents{section}[1em]{\addvspace{0pt}}%
+           {\xiaosi\songti \thecontentslabel\enspace}%
+               {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
+ \titlecontents{subsection}[2em]{\addvspace{0pt}}%
+           {\xiaosi\songti\thecontentslabel\enspace}%
+               {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
 
 % 封面和封底
 % 方便的定义封面的一些替换命令
