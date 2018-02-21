@@ -9,11 +9,12 @@
 * 去掉了所有`\if@openright`的判断，因为没这个需求。这样也能简化代码逻辑。
 * 使用fancyhdr设置页眉页脚
 * 原模板的图表字体用大五，现在改成了五号
-* 并排图形。\pkg{subfigure}、\pkg{subfig} 已经不再推荐，用新的\pkg{subcaption}.
+* 并排图形。\pkg{subfigure}、\pkg{subfig} 已经不再推荐，用新的\pkg{subcaption}. 
+需要注意的是，由于我们的新模板中使用了subcaption的浮动体的配置，并且加载了subcaption，就不能再加载subfig了（两个包有冲突），因此我们再也无法使用subfig提供的`\subfloat`命令了。不用这么悲伤，我们可以使用subcaption的`subcaptionbox`直接将其替换即可。同时注意标题在`subcaptionbox`中是必选参数，即用`{}`,而非`\subfloat`的`[]`
 * 增加xeCJK伪斜体伪粗体选项。
 * 关键词加粗
 * chapter段前距离修改
-需要注意的是，由于我们的新模板中使用了subcaption的浮动体的配置，并且加载了subcaption，就不能再加载subfig了（两个包有冲突），因此我们再也无法使用subfig提供的`\subfloat`命令了。不用这么悲伤，我们可以使用subcaption的`subcaptionbox`直接将其替换即可。同时注意标题在`subcaptionbox`中是必选参数，即用`{}`,而非`\subfloat`的`[]`
+
 
 ##  要改的地方：
 * 目录字体
