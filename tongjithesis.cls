@@ -975,6 +975,7 @@
 \newenvironment{resume}{%
   \tongji@chapter*{\tongji@resume@title}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@resume@title] 
   \wuhao[1.5] 
+  \setlist[enumerate,1]{leftmargin=2em}   %设置enumerate左间隙距离
   }{\clearpage}
 
 \newcommand{\resumeitem}[1]{\vspace{2.5em}{\bfseries\wuhao\heiti\leftline{#1}}\par} 
