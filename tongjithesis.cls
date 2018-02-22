@@ -147,7 +147,7 @@
 \RequirePackage{booktabs}
 
 % 参考文献引用宏包。新版thu的不包含numbers,super选项。
-\RequirePackage[numbers,super,sort&compress]{natbib}
+\RequirePackage[numbers,super,sort&compress,square]{natbib}    %z增加square选项，给上标加上方括号
 
 % 生成有书签的 pdf 及其开关，请结合 gbk2uni 避免书签乱码。
 \RequirePackage{hyperref}
@@ -921,6 +921,7 @@
 \renewcommand\listoffigures{\tongji@listof{figure}}
 % \renewcommand*\l@figure{\addvspace{6bp}\@dottedtocline{1}{0em}{4em}}
 \renewcommand*\l@figure{\@dottedtocline{1}{0em}{4em}}
+\renewcommand{\@dotsep}{2}              %改变索引中点间距
 \renewcommand\listoftables{\tongji@listof{table}}
 \let\l@table\l@figure
 %   本命令只是为了生成公式列表，所以这个 caption 是假的。如果要编号最好用
