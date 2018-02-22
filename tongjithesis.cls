@@ -1,10 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{tongjithesis}
-[2018/02/15 2.0 Tongji University Thesis Template]
+[2018/02/15 2 Tongji University Thesis Template]
 \hyphenation{Tongji-Thesis}
 % \textsc 将所有字符大写。用于强调。
 \def\tongjithesis{\textsc{TongjiThesis}}
-\def\version{2.0}
+\def\version{2}
 
 
 \RequirePackage{kvoptions}
@@ -51,8 +51,7 @@
 % 将选项传递给 \pkg{ctexbook}
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 
-% 打开默认选项
-% 注意我们的目录不是清华的arial 字体，此处要改。
+% 打开默认选项。
 \kvsetkeys{tongji}{
   raggedbottom,
   arialtitle}
@@ -280,7 +279,6 @@
 \renewcommand\backmatter{%
   \clearpage
   \@mainmattertrue
-  % \pagestyle{fancy}
   }
 
 
@@ -671,7 +669,7 @@
               \tongji@put@title{\tongji@cauthortitle}        & \tongji@title@sep 
               & \tongji@cauthor\\
               \tongji@put@title{\tongji@cstudentnumbertitle} & \tongji@title@sep 
-              & \ziju{1bp}\tongji@studentnumber\\
+              & \tongji@studentnumber\\
               \tongji@put@title{\tongji@cdepartmenttitle}    & \tongji@title@sep 
               & \tongji@cdepartment\\
               \tongji@put@title{\tongji@cmajorfirsttitle}    & \tongji@title@sep
@@ -684,10 +682,6 @@
                 \tongji@put@title{\tongji@cassosupertitle}   & \tongji@title@sep 
                 & \tongji@cassosupervisor\\
               \fi
-              % \ifx\tongji@ccosupervisor\@empty\else
-              %   \tongji@put@title{\tongji@ccosupertitle}     & \tongji@title@sep 
-              %   & \tongji@ccosupervisor\\
-              % \fi
             \end{tabular}
         \end{center}}
     }
@@ -746,10 +740,7 @@
             Supervisor :        & \tongji@esupervisor \\
             \ifx\tongji@eassosupervisor\@empty\else
               Associate Supervisor : & \tongji@eassosupervisor \\
-            \fi
-            % \ifx\tongji@ecosupervisor\@empty\else
-            %   Cooperate Supervisor : & \tongji@ecosupervisor\\
-            % \fi            
+            \fi     
           \end{tabular}
         \end{center}
       }
@@ -878,27 +869,12 @@
   labelsep*=0.5cm,
   itemindent=0pt,
 }
-% 注意，由于定义成environment之后，老是出错，因此重新定义成command形式。
-% 目测是ctexbook的bug，即，它不把一个单纯的environment当成新的chapter*
-% 难道我把ctexset的浮动体对象设的比例不对？
-\NewDocumentCommand{\tjdenotation}{O{2.5cm} m}
-{\tongji@chapter*{\tongji@denotation@name}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@denotation@name]
-\vskip-30bp\xiaosi[1.6]
-\begin{tongji@denotation}[labelwidth=2.5cm]
-#2
-\end{tongji@denotation}
-}
 
 % 致谢以及声明
 \NewDocumentEnvironment{acknowledgement}{}{%
 \tongji@chapter*[\tongji@ackname]{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@ackname]  
  }{\clearpage}
 % \let\ack\acknowledgement
-
-\NewDocumentCommand{\tjacknowledgement}{m}
-{\tongji@chapter*{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@ackname] 
-#1
-}
 
 % 图表索引
 % 定义图表以及公式目录样式
@@ -1002,9 +978,6 @@
   }{\clearpage}
 
 \newcommand{\resumeitem}[1]{\vspace{2.5em}{\bfseries\wuhao\heiti\leftline{#1}}\par} 
-
-% 定义破折号
-\newcommand{\pozhehao}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
 
 % 书脊
 % 单独使用书脊命令会在新的一页产生竖排书脊。

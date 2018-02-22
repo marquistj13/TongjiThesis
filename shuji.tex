@@ -1,0 +1,18 @@
+\documentclass[14pt,a3paper,landscape]{article}
+\usepackage{CJK,CJKvert}
+\usepackage{geometry}
+\geometry{verbose,tmargin=0cm,bmargin=0cm,lmargin=0cm,rmargin=0cm}
+\newcommand*{\ziju}[1]{\renewcommand{\CJKglue}{\hskip #1}}
+
+\begin{document}
+\pagestyle{empty}
+\begin{CJK*}{GBK}{fs}
+    \newcommand{\ctitle}{同济大学学位论文模板使用实例}
+    \newcommand{\cauthor}{同济人}
+    \newcommand{\university}{同济大学}
+    \begin{center}
+        \rotatebox{-90}{\mbox{\ziju{16pt}\hskip 5cm\ctitle\hskip
+        1cm \cauthor\hskip 0.3cm\university\hskip 2cm}}
+    \end{center}
+\end{CJK*}
+\end{document}

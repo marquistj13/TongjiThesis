@@ -1,4 +1,4 @@
-\ProvidesPackage{tongjiutils}[2018/02/15 2.0 put any packages you would like to use here]
+\ProvidesPackage{tongjiutils}[2018/02/15 2 put any packages you would like to use here]
 
 % 处理数学公式中的黑斜体的宏包
 %\RequirePackage{bm}
@@ -6,10 +6,6 @@
 
 % 不同于~|\mathcal| or |\mathfrak| 之类的英文花体字体
 %\RequirePackage{mathrsfs}
-
-% 虽然我们已经加载了subcaption，且subfig已经不再更新，为了兼容同济老模板的内容，还是加载一下吧。
-% 啊，它俩不兼容，纳尼？
-% \RequirePackage{subfig}
 
 % 表格中支持跨行
 \RequirePackage{multirow}
@@ -54,5 +50,6 @@
 
 % 定义自己常用的东西
 \newcommand{\china}{中华人民共和国}
-
+% 定义破折号
+\newcommand{\pozhehao}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
 \endinput

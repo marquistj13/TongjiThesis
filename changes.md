@@ -16,15 +16,7 @@
 * chapter段前距离修改
 
 
-##  要改的地方：
-* 目录字体
-```
-% 打开默认选项
-% 注意我们的目录不是清华的arial 字体，此处要改。
-\kvsetkeys{tongji}{
-  raggedbottom,
-  arialtitle}
-```
+##  要改的地方
 * 图标的标题要求单倍行距
 探索：
 ```
@@ -38,11 +30,8 @@ https://liam0205.me/2013/10/17/LaTeX-Linespace/  这里介绍了行距的概念�
 http://bbs.ctex.org/forum.php?mod=viewthread&tid=41619 这里说1.5就是word的单倍行距。
 下面这个链接：https://tex.stackexchange.com/questions/13742/what-does-double-spacing-mean
 有讨论，有空看看。
-* 章节标题具体设置在.cfg中，但各级标题的具体字号设置仍需核实（在cls中）,行距也是需要核实。
-* 目录中的章标题，清华的是黑体小四，咱的是宋体小四，怎么改？
 
 ##  要尝试的地方
 * 使用ctex宏集的\zihao 代替\tongji@define@fontsize
 * 清华的授权页支持扫描
 `\includepdf{#1}`这个命令实现的，有机会可以用一下。
-* 图索引，同济的少了个\addvspace{6bp}
