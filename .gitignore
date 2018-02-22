@@ -125,6 +125,10 @@ acs-*.bib
 # listings
 *.lol
 
+#figure&table
+*.figure
+*.table
+
 # makeidx
 *.idx
 *.ilg
