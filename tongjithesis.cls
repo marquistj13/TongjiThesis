@@ -73,7 +73,7 @@
 \PassOptionsToPackage{no-math}{fontspec}
 
 %将伪粗体与伪斜体的选项传递给xeCJK package
-\PassOptionsToPackage{AutoFakeBold,AutoFakeSlant}{xeCJK}
+\PassOptionsToPackage{AutoFakeBold=1.2,AutoFakeSlant}{xeCJK}
 % 使用 \CTeX\ 宏宝的默认中文字体配置，支持不同引擎
 \LoadClass[a4paper,openany,UTF8,zihao=-4,scheme=plain]{ctexbook}
 
@@ -426,20 +426,20 @@
     afterindent=true,
     beforeskip={24bp \@plus 1ex \@minus .2ex},
     afterskip={6bp \@plus .2ex},
-    format={\tongji@title@font\xiaosan[1]},
+    format={\tongji@title@font\xiaosan[1.5]},
   },
   subsection={
     afterindent=true,
     beforeskip={12bp \@plus 1ex \@minus .2ex},
     afterskip={6bp \@plus .2ex},
-    format={\tongji@title@font \sihao[1]},
+    format={\tongji@title@font \sihao[1.35]},
     % numberformat={\tongji@title@font\sihao[1]},
   },
   subsubsection={
     afterindent=true,
     beforeskip={12bp \@plus 1ex \@minus .2ex},
     afterskip={6bp \@plus .2ex},
-    format={\tongji@title@font\xiaosi[1]},
+    format={\tongji@title@font\xiaosi[1.5]},
   },
   paragraph/afterindent=true,
   subparagraph/afterindent=true}
