@@ -284,6 +284,11 @@
 \renewcommand\backmatter{%
   \clearpage
   \@mainmattertrue
+  \renewcommand\thesection{\Alph{chapter}.~\arabic{section}}                                                      %附录中的chapter需要使用英文标号
+  \renewcommand\thesubsection{\Alph{chapter}.~\arabic{section}.~\arabic{subsection}}
+  \renewcommand\thesubsubsection{\Alph{chapter}.~\arabic{section}.~\arabic{subsection}.~\arabic{subsubsection}}
+  \renewcommand\thefigure{\Alph{chapter}.~\arabic{figure}}
+  \renewcommand\thetable{\Alph{chapter}.~\arabic{table}}
   }
 
 
