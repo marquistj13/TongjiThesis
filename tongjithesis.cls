@@ -540,7 +540,8 @@
 % 研究生学位论文写作指南中规定：目录中的章标题行居左书写，一级节标题行缩进 1 个
 % 汉字符（2个字符），二级节标题行缩进 2 个汉字符（4个字符）
  \RequirePackage{titletoc}
- \titlecontents{chapter}[0pt]{\filright}%
+ \contentsmargin{0em}
+ \titlecontents{chapter}[0em]{\filright}%
            {\xiaosi\songti\thecontentslabel\enspace}%
                {\xiaosi\songti}{\dotfill\contentspage}[\addvspace{0pt}]
  \titlecontents{section}[1em]{\addvspace{0pt}}%
