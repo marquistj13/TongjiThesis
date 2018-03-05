@@ -275,20 +275,20 @@
   \@mainmattertrue
   \pagenumbering{arabic}
   \pagestyle{tongji@headings}
-  \renewcommand\thesection{\arabic{chapter}.\ \arabic{section}}                                                      %各级标题以及图标序号格式修改（增加序号中点后的空格）
-  \renewcommand\thesubsection{\arabic{chapter}.\ \arabic{section}.\ \arabic{subsection}}
-  \renewcommand\thesubsubsection{\arabic{chapter}.\ \arabic{section}.\ \arabic{subsection}.\ \arabic{subsubsection}}
-  \renewcommand\thefigure{\arabic{chapter}.\ \arabic{figure}}
-  \renewcommand\thetable{\arabic{chapter}.\ \arabic{table}}
+  % \renewcommand\thesection{\arabic{chapter}.\ \arabic{section}}                                                      %各级标题以及图标序号格式修改（增加序号中点后的空格）
+  % \renewcommand\thesubsection{\arabic{chapter}.\ \arabic{section}.\ \arabic{subsection}}
+  % \renewcommand\thesubsubsection{\arabic{chapter}.\ \arabic{section}.\ \arabic{subsection}.\ \arabic{subsubsection}}
+  % \renewcommand\thefigure{\arabic{chapter}.\ \arabic{figure}}
+  % \renewcommand\thetable{\arabic{chapter}.\ \arabic{table}}
   }
 \renewcommand\backmatter{%
   \clearpage
   \@mainmattertrue
-  \renewcommand\thesection{\Alph{chapter}.\ \arabic{section}}                                                      %附录中的chapter需要使用英文标号
-  \renewcommand\thesubsection{\Alph{chapter}.\ \arabic{section}.\ \arabic{subsection}}
-  \renewcommand\thesubsubsection{\Alph{chapter}.\ \arabic{section}.\ \arabic{subsection}.\ \arabic{subsubsection}}
-  \renewcommand\thefigure{\Alph{chapter}.\ \arabic{figure}}
-  \renewcommand\thetable{\Alph{chapter}.\ \arabic{table}}
+  % \renewcommand\thesection{\Alph{chapter}.\ \arabic{section}}                                                      %附录中的chapter需要使用英文标号
+  % \renewcommand\thesubsection{\Alph{chapter}.\ \arabic{section}.\ \arabic{subsection}}
+  % \renewcommand\thesubsubsection{\Alph{chapter}.\ \arabic{section}.\ \arabic{subsection}.\ \arabic{subsubsection}}
+  % \renewcommand\thefigure{\Alph{chapter}.\ \arabic{figure}}
+  % \renewcommand\thetable{\Alph{chapter}.\ \arabic{table}}
   }
 
 
@@ -332,7 +332,7 @@
 
 % 允许太长的公式断行、分页等。
 \allowdisplaybreaks[4]
-\renewcommand\theequation{\ifnum \c@chapter>\z@ \thechapter.\ \fi\@arabic\c@equation}
+\renewcommand\theequation{\ifnum \c@chapter>\z@ \thechapter.\fi\@arabic\c@equation}
 
 % 公式距前后文的距离由 4 个参数控制，参见 \cs{normalsize} 的定义
 % 定理标题使用黑体，正文使用宋体，冒号隔开。
