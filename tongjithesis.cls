@@ -73,7 +73,7 @@
 \PassOptionsToPackage{no-math}{fontspec}
 
 %将伪粗体与伪斜体的选项传递给xeCJK package
-\PassOptionsToPackage{AutoFakeBold,AutoFakeSlant}{xeCJK}
+\PassOptionsToPackage{AutoFakeBold=1.2,AutoFakeSlant}{xeCJK}
 % 使用 \CTeX\ 宏宝的默认中文字体配置，支持不同引擎
 \LoadClass[a4paper,openany,UTF8,zihao=-4,scheme=plain]{ctexbook}
 
@@ -256,7 +256,7 @@
 \fancypagestyle{tongji@headings}{%
   \fancyhead{}
   \fancyhead[RO]{\wuhao\songti\leftmark}
-  \fancyhead[LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@ctitle}
+  \fancyhead[LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@cheadingtitle}
   \fancyfoot{}
   \fancyfoot[C]{\songti\wuhao\thepage}
   \renewcommand{\headrulewidth}{0.4pt}
@@ -570,6 +570,7 @@
 \tongji@def@term{secretyear}
 % 论文中英文题目
 \tongji@def@term{ctitle}
+\tongji@def@term{cheadingtitle}
 \tongji@def@term{etitle}
 % 作者、导师、副导师（校外）老师。
 \tongji@def@term{cauthor}
