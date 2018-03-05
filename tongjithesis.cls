@@ -191,8 +191,8 @@
 % 正文小四号 (12bp) 字，行距为固定值 20 bp
 \renewcommand\normalsize{%
   \@setfontsize\normalsize{12bp}{20bp}%
-  \abovedisplayskip=20bp \@plus 2bp \@minus 2bp %\abovedisplayskip用来调整math相关的skip，其它三个也是同样的功能。其解释详见The texbook
-  \abovedisplayshortskip=20bp \@plus 2bp \@minus 2bp
+  \abovedisplayskip=10bp \@plus 2bp \@minus 2bp %\abovedisplayskip用来调整math相关的skip，其它三个也是同样的功能。其解释详见The texbook
+  \abovedisplayshortskip=10bp \@plus 2bp \@minus 2bp
   \belowdisplayskip=\abovedisplayskip
   \belowdisplayshortskip=\abovedisplayshortskip}
 % \fontsize的内部实现就是：
@@ -256,7 +256,7 @@
 \fancypagestyle{tongji@headings}{%
   \fancyhead{}
   \fancyhead[RO]{\wuhao\songti\leftmark}
-  \fancyhead[LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@ctitle}
+  \fancyhead[LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@cheadingtitle}
   \fancyfoot{}
   \fancyfoot[C]{\songti\wuhao\thepage}
   \renewcommand{\headrulewidth}{0.4pt}
@@ -275,6 +275,11 @@
   \@mainmattertrue
   \pagenumbering{arabic}
   \pagestyle{tongji@headings}
+  \renewcommand\thesection{\arabic{chapter}.~\arabic{section}}                                                      %各级标题以及图标序号格式修改（增加序号中点后的空格）
+  \renewcommand\thesubsection{\arabic{chapter}.~\arabic{section}.~\arabic{subsection}}
+  \renewcommand\thesubsubsection{\arabic{chapter}.~\arabic{section}.~\arabic{subsection}.~\arabic{subsubsection}}
+  \renewcommand\thefigure{\arabic{chapter}.~\arabic{figure}}
+  \renewcommand\thetable{\arabic{chapter}.~\arabic{table}}
   }
 \renewcommand\backmatter{%
   \clearpage
@@ -425,21 +430,23 @@
   section={ %一级节标题
     afterindent=true,
     beforeskip={24bp \@plus 1ex \@minus .2ex},
-    afterskip={6bp \@plus .2ex},
-    format={\tongji@title@font\xiaosan[1.5]},
+    afterskip={13bp \@plus .2ex},
+    format={\tongji@title@font\xiaosan[1.8]},
+	numberformat={\tongji@title@font\sanhao[1]},
   },
   subsection={
     afterindent=true,
     beforeskip={12bp \@plus 1ex \@minus .2ex},
-    afterskip={6bp \@plus .2ex},
-    format={\tongji@title@font \sihao[1.35]},
-    % numberformat={\tongji@title@font\sihao[1]},
+    afterskip={13bp \@plus .2ex},
+    format={\tongji@title@font \sihao[1.8]},
+    numberformat={\tongji@title@font\xiaosan[1]},
   },
   subsubsection={
     afterindent=true,
     beforeskip={12bp \@plus 1ex \@minus .2ex},
-    afterskip={6bp \@plus .2ex},
-    format={\tongji@title@font\xiaosi[1.5]},
+    afterskip={13bp \@plus .2ex},
+    format={\tongji@title@font\xiaosi[1.8]},
+	numberformat={\tongji@title@font\banxiaosi[1]},
   },
   paragraph/afterindent=true,
   subparagraph/afterindent=true}
@@ -564,6 +571,7 @@
 \tongji@def@term{secretyear}
 % 论文中英文题目
 \tongji@def@term{ctitle}
+\tongji@def@term{cheadingtitle}
 \tongji@def@term{etitle}
 % 作者、导师、副导师（校外）老师。
 \tongji@def@term{cauthor}
