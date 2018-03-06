@@ -141,6 +141,9 @@
 % 表格控制
 \RequirePackage{array}
 \RequirePackage{longtable}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}            %定义三种新的column对齐格式，允许使用L C R的带长度的表格列
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 % 使用三线表：\cs{toprule}，\cs{midrule}，\cs{bottomrule}。
 \RequirePackage{booktabs}
@@ -332,7 +335,7 @@
 
 % 允许太长的公式断行、分页等。
 \allowdisplaybreaks[4]
-\renewcommand\theequation{\ifnum \c@chapter>\z@ \thechapter-\fi\@arabic\c@equation}
+\renewcommand\theequation{\ifnum \c@chapter>\z@ \thechapter.\fi\@arabic\c@equation}
 
 % 公式距前后文的距离由 4 个参数控制，参见 \cs{normalsize} 的定义
 % 定理标题使用黑体，正文使用宋体，冒号隔开。
