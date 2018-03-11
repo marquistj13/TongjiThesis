@@ -27,6 +27,7 @@
 1. 使用较新的性能更强的宏包替代老宏包。如etoolbox引入了LATEX kernel commands的不同实现，但功能一样;xparse提供了更强的`\NewDocumentCommand`，以替代`\newcommand`;使用subcaption替代subfig，并使用subcaption进行浮动体参数的设定等。
 1. chapter标题段前距离的修改
 1. 各级标题上下间隙调整
+1. 增加degreetype选项
 
 ## 运行
 本人使用Texlive2017发行版，xelatex 可以编译通过。
