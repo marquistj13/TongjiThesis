@@ -59,11 +59,9 @@ jPicEdt, jaxdraw 等等。
 和图~\ref{fig:subfig2}。推荐使用 \verb|\subcaption|，不要再用\verb|\subfloat|，\verb|\subfigure| 和 \verb|\subtable|了。
 \begin{figure} %[h]
   \centering%
-  \subcaptionbox{第一个小图形}{%
-    \label{fig:subfig1}
+  \subcaptionbox{第一个小图形\label{fig:subfig1}}{%    
     \includegraphics[height=2cm]{tongji-fig-logo.png}}\hspace{4em}%
-  \subcaptionbox{第二个小图形。如果标题很长的话，它会自动换行，这个 caption 就是这样的例子}{%
-    \label{fig:subfig2}
+  \subcaptionbox{第二个小图形。如果标题很长的话，它会自动换行，这个 caption 就是这样的例子\label{fig:subfig2}}{%    
     \includegraphics[height=2cm]{tongji-text-logo.png}}
   \caption{包含子图形的大图形}
   \label{fig:big1}
