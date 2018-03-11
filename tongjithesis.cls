@@ -12,7 +12,7 @@
   family=tongji,
   prefix=tongji@,
   setkeys=\kvsetkeys}
-\newif\iftongji@electronic\tongji@electronicfalse % added by wildwolf 20100109 boolean
+
 \newif\iftongji@master
 \newif\iftongji@doctor
 \define@key{tongji}{degree}{%
@@ -20,8 +20,20 @@
   \tongji@doctorfalse
   \expandafter\csname tongji@#1true\endcsname}
 
+% 学术型|专业型|同等学力
+\newif\iftongji@academic
+\tongji@academictrue % 默认为学术型
+\newif\iftongji@profession
+\newif\iftongji@equaleducation
+\define@key{tongji}{degreetype}{%
+  \tongji@academicfalse
+  \tongji@professionfalse
+  \tongji@equaleducationfalse
+  \expandafter\csname tongji@#1true\endcsname}
 
 
+% 封面的electronic选项（打印时删除）
+\DeclareBoolOption{electronic}
 % 论文是否保密
 \DeclareBoolOption{secret}%
 % 目录中英文是否用 Arial 字体（默认关闭）
@@ -66,6 +78,14 @@
                     degree=[master | doctor]}{}      
     \fi
   \fi
+% 杜绝非法的degreetype选项。
+\iftongji@academic\relax\else
+  \iftongji@profession\relax\else
+    \iftongji@equaleducation\relax\else
+        \ClassError{tongjithesis}{Unknown degree type option.\MessageBreak Please check your degree type, good luck!}{}  
+    \fi
+  \fi
+\fi
 
 % 使用 \XeTeX\ 引擎时，\pkg{fontspec} 宏包会被 \pkg{xeCJK} 自动调用。传递
 % 给 \pkg{fontspec} 宏包 \option{no-math} 选项，避免部分数学符号字体自动调整
@@ -641,7 +661,7 @@
       \\[0.1cm]
 %        \parbox[t][9cm][t]{\paperwidth-10cm}{
     %\hspace*{.4cm} 
-      \iftongji@electronic{{\kaiti\xiaosi\tongji@thesistype （打印时删除）}}
+      \iftongji@electronic{{\kaishu\xiaosi\bfseries\itshape\tongji@thesistype （打印时删除）}}
         \else\rule{1cm}{0cm}
       \fi
     }
@@ -656,8 +676,13 @@
     { 
       % \renewcommand{\baselinestretch}{1} %单倍行距
       \begin{center}
-            \erhao[1]{{\bfseries\erhao\lishu\tongji@capply}}
-            \par\vskip 1.8cm  
+            \erhao[1]{{\bfseries\lishu\tongji@capply}}
+            \iftongji@academic{\par\vskip 1.8cm}
+            \else \iftongji@profession{\par\vskip 0.4cm \sihao[1]{{\bfseries\lishu（专业学位）}} \par\vskip 0.9cm}
+                    \else \iftongji@equaleducation {\par\vskip 0.4cm \sihao[1]{{\bfseries\lishu（同等学力）}} \par\vskip 0.9cm}                        
+                          \fi
+                    \fi
+            \fi
             % \linespread{0.7}
             % \linespread{0.7}相当于\renewcommand{\baselinestretch}{0.7}
             % 需要执行\selectfont才能生效。
@@ -676,31 +701,58 @@
       {
         \fangsong\sanhao[1.5]        
         \begin{center}
-          \setlength{\tongji@title@width}{5em}
-          \setlength{\extrarowheight}{4pt}
-          \ifxetex % todo: ugly codes
-            \begin{tabular}{p{\tongji@title@width}@{}c@{\extracolsep{8pt}}p{7cm}l}
+          
+          \setlength{\extrarowheight}{4pt}          
+          \iftongji@profession
+            \setlength{\tongji@title@width}{6em}
+            \ifxetex % todo: ugly codes
+              \begin{tabular}{p{\tongji@title@width}@{}c@{\extracolsep{8pt}}p{7cm}l}
+            \else
+              \begin{tabular}{p{\tongji@title@width}c@{\extracolsep{8pt}}p{7cm}l}
+            \fi              
+            \tongji@put@title{\tongji@cauthortitle}        & \tongji@title@sep 
+            & \tongji@cauthor\\
+            \tongji@put@title{\tongji@cstudentnumbertitle} & \tongji@title@sep 
+            & \tongji@studentnumber\\
+            \tongji@put@title{\tongji@cdepartmenttitle}    & \tongji@title@sep 
+            & \tongji@cdepartment\\                
+            \tongji@put@title{\tongji@cmajorfirsttitleprofession}    & \tongji@title@sep
+            & \tongji@cmajorfirst\\
+            \tongji@put@title{\tongji@cmajorsecondtitleprofession}   & \tongji@title@sep
+            & \tongji@cmajorsecond\\ 
+            \tongji@put@title{\tongji@csupervisortitle}    & \tongji@title@sep 
+            & \tongji@csupervisor\\
+            \ifx\tongji@cassosupervisor\@empty\else
+              \tongji@put@title{\tongji@cassosupertitle}   & \tongji@title@sep 
+              & \tongji@cassosupervisor\\
+            \fi
           \else
-            \begin{tabular}{p{\tongji@title@width}c@{\extracolsep{8pt}}p{7cm}l}
-          \fi
-              \tongji@put@title{\tongji@cauthortitle}        & \tongji@title@sep 
-              & \tongji@cauthor\\
-              \tongji@put@title{\tongji@cstudentnumbertitle} & \tongji@title@sep 
-              & \tongji@studentnumber\\
-              \tongji@put@title{\tongji@cdepartmenttitle}    & \tongji@title@sep 
-              & \tongji@cdepartment\\
-              \tongji@put@title{\tongji@cmajorfirsttitle}    & \tongji@title@sep
-              & \tongji@cmajorfirst\\
-              \tongji@put@title{\tongji@cmajorsecondtitle}   & \tongji@title@sep
-              & \tongji@cmajorsecond\\             
-              \tongji@put@title{\tongji@csupervisortitle}    & \tongji@title@sep 
-              & \tongji@csupervisor\\
-              \ifx\tongji@cassosupervisor\@empty\else
-                \tongji@put@title{\tongji@cassosupertitle}   & \tongji@title@sep 
-                & \tongji@cassosupervisor\\
-              \fi
-            \end{tabular}
-        \end{center}}
+            \setlength{\tongji@title@width}{5em}
+            \ifxetex % todo: ugly codes
+              \begin{tabular}{p{\tongji@title@width}@{}c@{\extracolsep{8pt}}p{7cm}l}
+            \else
+              \begin{tabular}{p{\tongji@title@width}c@{\extracolsep{8pt}}p{7cm}l}
+            \fi              
+            \tongji@put@title{\tongji@cauthortitle}        & \tongji@title@sep 
+            & \tongji@cauthor\\
+            \tongji@put@title{\tongji@cstudentnumbertitle} & \tongji@title@sep 
+            & \tongji@studentnumber\\
+            \tongji@put@title{\tongji@cdepartmenttitle}    & \tongji@title@sep 
+            & \tongji@cdepartment\\
+            \tongji@put@title{\tongji@cmajorfirsttitle}    & \tongji@title@sep
+            & \tongji@cmajorfirst\\
+            \tongji@put@title{\tongji@cmajorsecondtitle}   & \tongji@title@sep
+            & \tongji@cmajorsecond\\
+            \tongji@put@title{\tongji@csupervisortitle}    & \tongji@title@sep 
+            & \tongji@csupervisor\\
+            \ifx\tongji@cassosupervisor\@empty\else
+              \tongji@put@title{\tongji@cassosupertitle}   & \tongji@title@sep 
+              & \tongji@cassosupervisor\\
+            \fi
+          \fi            
+              
+          \end{tabular}
+      \end{center}}
     }
     \\[1.3cm]
     % \vskip2cm
