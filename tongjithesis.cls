@@ -141,6 +141,9 @@
 % 表格控制
 \RequirePackage{array}
 \RequirePackage{longtable}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}            %定义三种新的column对齐格式，允许使用L C R的带长度的表格列
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 % 使用三线表：\cs{toprule}，\cs{midrule}，\cs{bottomrule}。
 \RequirePackage{booktabs}

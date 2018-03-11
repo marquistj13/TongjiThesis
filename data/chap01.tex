@@ -326,6 +326,46 @@ EP.B.8 & 126.74 & 0.003 & 0.017 & 0.005 & 0.083 & 1656 \\
 \bottomrule[1.5pt]
 \end{longtable}
 
+表~\ref{tab:chap1:IPM_function}使用新定义的\texttt{columntype}设置每列的对齐格式以及宽度。
+\begin{table}[h]
+\centering
+\caption{IPM~智能功率模块引脚功能列表}
+\label{tab:chap1:IPM_function}
+\begin{tabular}{C{3.6cm}L{1.8cm}L{7.2cm}}
+\toprule
+\textbf{序号} & \textbf{名称} & \textbf{说明} \\
+\midrule
+1      & $U_P$   & $U_P$~相控制信号输入端子            \\
+2      & $V_{P1}$  & $U_P$~相控制电源端子              \\
+3      & $V_{UFB}$ & $U_P$~相驱动电源端子              \\
+4      & $V_{UFS}$ & $U_P$~相驱动电源~GND~端子           \\
+5      & $V_P$   & $V_P$~相控制信号输入端子            \\
+6      & $V_{P1}$  & $V_P$相控制电源端子              \\
+7      & $V_{VFB}$ & $V_P$相驱动电源端子              \\
+8      & $V_{VFS}$ & $V_P$相驱动电源~GND~端子           \\
+9      & $W_P$   & $W_P$~相控制信号输入端子            \\
+10     & $V_{P1}$  & $W_P$~相控制电源端子              \\
+11     & $V_{PC}$  & $U,V,W$~相控制电源GND端子       \\
+12     & $V_{WFB}$ & $W_P$~相驱动电源端子              \\
+13     & $V_{WFS}$ & $W_P$~相驱动电源GND端子           \\
+14     & $V_{N1}$  & N~侧控制电源端子               \\
+15     & $V_{NC}$  & N~侧控制电源~GND~端子            \\
+16     & $C_{IN}$  & 短路保护触发电压端子             \\
+17     & $C_{FO}$  & $F_O$~输出脉宽设定端子             \\
+18     & $F_O$   & $F_O$~输出端子                 \\
+19     & $U_N$   & $U_N$~相控制信号输入端子            \\
+20     & $V_N$   & $V_N$~相控制信号输入端子            \\
+21     & $W_N$   & $W_N$~相控制信号输入端子            \\
+22     & $P$    & 逆变器直流输入端子              \\
+23     & $U$  & $U$~相输出端子               \\
+24     & $V$  & $V$~相输出端子               \\
+25     & $W$  & $W$~相输出端子               \\
+26     & $N$    & 逆变器直流~GND~ 端子             \\
+其余引脚   &      & 虚设端子，不与电路其他端子相连 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{其它}
 \label{sec:tableother}
 有的同学不想让某个表格或者图片出现在索引里面，那么请使用命令 \verb|\caption*{}|，
