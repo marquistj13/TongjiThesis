@@ -22,10 +22,9 @@ jPicEdt, jaxdraw 等等。
 
 \subsection{插图}
 \label{sec:graphs}
+关于子图形的使用细节请参看 \textsf{subcaption} 的说明文档。
 
-强烈推荐《\LaTeXe 插图指南》！关于子图形的使用细节请参看 \textsf{subcaption} 的说明文档。
-
-\subsubsection{一个图形}
+\subsection{一个图形}
 \label{sec:onefig}
 一般图形都是处在浮动环境中。之所以称为浮动是指最终排版效果图形的位置不一定与源文
 件中的位置对应\footnote{This is not a bug, but a feature of
@@ -51,7 +50,7 @@ jPicEdt, jaxdraw 等等。
 \hfill \pozhehao《大学》
 
 
-\subsubsection{多个图形}
+\subsection{简单子图}
 \label{sec:multifig}
 
 如果多个图形相互独立，并不共用一个图形计数器，那么用 \verb|minipage| 或者
@@ -83,7 +82,25 @@ jPicEdt, jaxdraw 等等。
 其贤不及孔子。孔子曰：“三人行，必有我师。”是故弟子不必不如师，师不必贤於弟子。
 闻道有先後，术业有专攻，如是而已。
 
-如果要把编号的两个图形并排，那么小页就非常有用了：
+\subsection{复杂子图要注意遮挡}
+使用子图的方法如图~\ref{fig:chap2:zitu}所示，使用\texttt{subcaptionbox}环境设置每一个子图，注意\texttt{subcaptionbox}其后需要有括号，以及子图换行时需要使用\texttt{vskip}，以免下一排子图会对上一排子图的图名造成遮挡。
+\begin{figure}[htbp]
+\centering
+  \subcaptionbox{第一个小图形}{\label{fig:chap1:zitu:a}
+  \includegraphics[width=5cm]{tongji-fig-logo}\hskip2cm}
+  \subcaptionbox{第二个小图形}{\label{fig:chap1:zitu:b}
+  \includegraphics[width=5cm]{tongji-fig-logo}}
+\vskip0.5cm
+  \subcaptionbox{第三个小图形}{\label{fig:chap1:zitu:c}
+  \includegraphics[width=5cm]{tongji-fig-logo}\hskip2cm}
+  \subcaptionbox{第四个小图形}{\label{fig:chap1:zitu:d}
+  \includegraphics[width=5cm]{tongji-fig-logo}}
+\caption{多子图用\texttt{subcaptionbox}}\label{fig:chap2:zitu}
+\end{figure}
+
+
+\subsection{多个图形独立}
+如果要把编号的两个图形并排，那么小页就非常有用了，如图~\ref{fig:parallel2}：
 \begin{figure}
 \begin{minipage}{0.48\textwidth}
   \centering
@@ -99,22 +116,13 @@ jPicEdt, jaxdraw 等等。
 \end{minipage}
 \end{figure}
 
-使用子图的方法如图~\ref{fig:chap2:zitu}所示，使用\texttt{subcaptionbox}环境设置每一个子图，注意\texttt{subcaptionbox}其后需要有括号，以及子图换行时需要使用\texttt{vskip}，以免下一排子图会对上一排子图的图名造成遮挡。
-\begin{figure}[htbp]
-\centering
-	\subcaptionbox{第一个小图形}{\label{fig:chap1:zitu:a}
-	\includegraphics[width=5cm]{tongji-fig-logo}\hskip2cm}
-	\subcaptionbox{第二个小图形}{\label{fig:chap1:zitu:b}
-	\includegraphics[width=5cm]{tongji-fig-logo}}
-\vskip0.5cm
-	\subcaptionbox{第三个小图形}{\label{fig:chap1:zitu:c}
-	\includegraphics[width=5cm]{tongji-fig-logo}\hskip2cm}
-	\subcaptionbox{第四个小图形}{\label{fig:chap1:zitu:d}
-	\includegraphics[width=5cm]{tongji-fig-logo}}
-\caption{多子图用\texttt{subcaptionbox}}\label{fig:chap2:zitu}
-\end{figure}
 
 李氏子蟠，年十七，好古文、六艺，经传皆通习之，不拘於时，学於余。余嘉其能行古
 道，作师说以贻之。
 
 \hfill \pozhehao 韩愈（唐）
+
+
+\subsection{插图大原则}
+同志们，如果遇到问题一定要会搜索，要么看别人的问答，要么看宏包的文档，希望你不要成为重度伸手党。
+一点微小的工作，谢谢大家。

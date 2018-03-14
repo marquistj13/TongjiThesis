@@ -70,9 +70,6 @@ UNIX~的历史开始于1969年~ken Thompson，Dennis Ritchie~（即著名的~K\&
 \subsection{基本表格}
 \label{sec:basictable}
 
-\subsubsection{基本表格2}
-\label{sec:basictable2}
-
 模板中关于表格的宏包有三个： \textsf{booktabs}、\textsf{array} 和
 \textsf{longtabular}，命令有一个 \verb|\hlinewd|。三线表可以用 \textsf{booktabs}
 提供的 \verb|\toprule|、\verb|\midrule| 和 \verb|\bottomrule|。它们与
@@ -103,13 +100,15 @@ UNIX~的历史开始于1969年~ken Thompson，Dennis Ritchie~（即著名的~K\&
   \end{minipage}
 \end{table}
 
+
+
 首先来看一个最简单的表格。表 \ref{tab:template-files} 列举了本模板主要文件及其功
 能。请大家注意三线表中各条线对应的命令。这个例子还展示了如何在表格中正确使用脚注。
 由于 \LaTeX{} 本身不支持在表格中使用 \verb|\footnote|，所以我们不得不将表格放在
 小页中，而且最好将表格的宽度设置为小页的宽度，这样脚注看起来才更美观。
 
-\subsection{复杂表格}
-\label{sec:complicatedtable}
+\subsection{表格下方标注数据来源}
+\label{sec:tabsource}
 
 我们经常会在表格下方标注数据来源，或者对表格里面的条目进行解释。前面的脚注是一种
 不错的方法，如果你不喜欢脚注。那么完全可以在表格后面自己写注释，比如表~\ref{tab:tabexamp1}。
@@ -150,9 +149,10 @@ UNIX~的历史开始于1969年~ken Thompson，Dennis Ritchie~（即著名的~K\&
 冰为当涂令，白往依之。代宗立，以左拾遗召，而白已卒。文宗时，诏以白歌诗、裴旻剑舞、
 张旭草书为三绝云。集三十卷。今编诗二十五卷。\hfill\pozhehao《全唐诗》诗人小传
 
+\subsection{浮动体的并排放置}
 浮动体的并排放置一般有两种情况：1）二者没有关系，为两个独立的浮动体；2）二者隶属
-于同一个浮动体。对表格来说并排表格既可以像图~\ref{tab:parallel1}、图~\ref{tab:parallel2}
-使用小页环境，也可以如图~\ref{tab:subtable} 使用子表格来做。图的例子参见第~\ref{sec:multifig} 节。
+于同一个浮动体。对表格来说并排表格既可以像表~\ref{tab:parallel1}、表~\ref{tab:parallel2}
+使用小页环境，也可以如表~\ref{tab:subtable} 使用子表格来做。图的例子参见第~\ref{sec:multifig} 节。
 \begin{table}[h]
 \noindent\begin{minipage}{0.5\textwidth}
 \centering
@@ -214,6 +214,7 @@ UNIX~的历史开始于1969年~ken Thompson，Dennis Ritchie~（即著名的~K\&
 }
 \end{table}
 
+\subsection{非常复杂非常漂亮的表格}
 不可否认 \LaTeX{} 的表格功能没有想象中的那么强大，不过只要你足够认真，足够细致，那么
 同样可以排出来非常复杂非常漂亮的表格。请参看表~\ref{tab:tabexamp2}。
 \begin{table}[hb]
@@ -251,6 +252,7 @@ UNIX~的历史开始于1969年~ken Thompson，Dennis Ritchie~（即著名的~K\&
 都是使用 Word 等字处理工具，以为 \LaTeX{}模板的用法也应该类似，所以就沿袭同样的思
 路来对待这种所见非所得的排版工具，结果被折腾的焦头烂额，疲惫不堪。
 
+\subsection{续表 ：表格长度超过一页}
 如果您要排版的表格长度超过一页，那么推荐使用 \textsf{longtable} 或者 \textsf{supertabular}
 宏包，模板对 \textsf{longtable} 进行了相应的设置，所以用起来可能简单一些。
 表~\ref{tab:performance} 就是 \textsf{longtable} 的简单示例。
@@ -326,7 +328,22 @@ EP.B.8 & 126.74 & 0.003 & 0.017 & 0.005 & 0.083 & 1656 \\
 \bottomrule[1.5pt]
 \end{longtable}
 
+\subsection{设置每列的对齐格式以及宽度}
 表~\ref{tab:chap1:IPM_function}使用新定义的\texttt{columntype}设置每列的对齐格式以及宽度。
+
+
+泉眼无声惜细流，树阴照水爱晴柔。
+小荷才露尖尖角，早有蜻蜓立上头。
+试问世界上有这么好的诗么？
+\begin{verbatim}
+门前大桥下
+游过一群鸭
+快来快来数一数
+二四六七八
+嘎嘎嘎嘎
+真呀真多呀
+\end{verbatim}
+
 \begin{table}[h]
 \centering
 \caption{IPM~智能功率模块引脚功能列表}
