@@ -941,7 +941,8 @@
 
 % 致谢以及声明
 \NewDocumentEnvironment{acknowledgement}{}{%
-\tongji@chapter*[\tongji@ackname]{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@ackname]  
+\tongji@chapter*[\tongji@ackname]{\tongji@ackname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\tongji@ackname] 
+\fangsong 
  }{\clearpage}
 % \let\ack\acknowledgement
 
