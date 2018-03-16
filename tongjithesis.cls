@@ -996,8 +996,8 @@
 \DeclareRobustCommand\onlinecite{\@onlinecite}
 \def\@onlinecite#1{\begingroup\let\@cite\NAT@citenum\citep{#1}\endgroup}
 \def\tongjidot{\unskip.}
-\def\tongjimasterbib{\iftongji@doctor [dissertation]\else [Master Thesis]\fi} 
-\def\tongjiphdbib{\iftongji@doctor [dissertation]\else [Doctor Thesis]\fi}
+\def\tongjimasterbib{\iftongji@doctor [dissertation]\else ~[\tongji@capply]\fi} 
+\def\tongjiphdbib{\iftongji@doctor [dissertation]\else ~[\tongji@capply]\fi}
 \renewenvironment{thebibliography}[1]{%
    \tongji@chapter*{\bibname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname]
    \wuhao[1.4]
