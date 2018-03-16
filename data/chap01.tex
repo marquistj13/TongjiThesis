@@ -383,6 +383,49 @@ EP.B.8 & 126.74 & 0.003 & 0.017 & 0.005 & 0.083 & 1656 \\
 \end{tabular}
 \end{table}
 
+\subsection{表格内部的换行}
+有时候我们希望某个格子是多行的，有很多种方法。
+第一种方法，就需要用到 \verb|\tabincell{c}{格子内容}| 命令,如表~\ref{tab:stability_reliability_robust_tab}。
+第二种方法，可以用 \verb|p{3cm}| 实现，这样当文字宽度超过指定数值的时候，便会自动换行，且左对齐，但貌似 \verb|\multicolumn|就没法正常显示了，如如表~\ref{tab:stability_reliability_robust_auto}。
+大家自行取舍。
+或许还有更好的方法，没时间细究了。
+
+\begin{table}[htbp]
+\centering
+ \caption{稳定性、可靠性、鲁棒性概念的区别}
+  \label{tab:stability_reliability_robust_tab}
+\begin{tabular}{|C{2cm}|C{2.5cm}|C{2.5cm}|C{3cm}|C{3cm}|}
+\hline
+                                     &稳定性       &可靠性     &稳定鲁棒性     &性能鲁棒性\\
+\hline
+ 问题产生的原因      &外部扰动  &外部扰动、系统内部参数及结构变化等     &内部模型不确定性与外部摄动  &内部模型不确定性与外部摄动 \\
+\hline
+          主要关注点       &能抵御外界扰动的幅值和相位的上限  &满足规定参数的工作时间  &在内部模型不确定性和外部摄动情况下，系统能否保持内稳定  &  在内部模型不确定性和外部摄动情况下，系统能否保持动态指标在规定范围内  \\
+\hline
+            评价指标         &\tabincell{c}{幅值相位裕度、\\Lyapunov渐近\\稳定等}    &\tabincell{c}{可靠度、失效\\率、平均无故\\障时间等 }    & \multicolumn{2}{c|}{\tabincell{c}{ Kharitonov区间理论、H∞控制理论\\、结构奇异值理论(μ理论)等}}     \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[htbp]
+\centering
+ \caption{稳定性、可靠性、鲁棒性概念的区别}
+  \label{tab:stability_reliability_robust_auto}
+\begin{tabular}{|p{2cm}|p{2.5cm}|p{2.5cm}|p{3cm}|p{3cm}|}
+\hline
+                                     &稳定性       &可靠性     &稳定鲁棒性     &性能鲁棒性\\
+\hline
+ 问题产生的原因      &外部扰动  &外部扰动、系统内部参数及结构变化等     &内部模型不确定性与外部摄动  &内部模型不确定性与外部摄动 \\
+\hline
+          主要关注点       &能抵御外界扰动的幅值和相位的上限  &满足规定参数的工作时间  &在内部模型不确定性和外部摄动情况下，系统能否保持内稳定  &  在内部模型不确定性和外部摄动情况下，系统能否保持动态指标在规定范围内  \\
+\hline
+            评价指标         &p幅值相位裕度、Lyapunov渐近稳定等    &可靠度、失效率、平均无故障时间等    &  \multicolumn{2}{c|}{Kharitonov区间理论、H∞控制理论、结构奇异值理论(μ理论)等 咖啡咖啡机}  \\
+\hline
+\end{tabular}
+\end{table}
+
+
 \subsection{其它}
 \label{sec:tableother}
 有的同学不想让某个表格或者图片出现在索引里面，那么请使用命令 \verb|\caption*{}|，
