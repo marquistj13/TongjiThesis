@@ -28,6 +28,7 @@
 1. chapter标题段前距离的修改
 1. 各级标题上下间隙调整
 1. 增加degreetype选项
+1. 增加author-year的引用。
 
 ## 运行
 本人使用Texlive2017发行版，xelatex 可以编译通过。

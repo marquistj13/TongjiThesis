@@ -169,7 +169,7 @@
 \RequirePackage{booktabs}
 
 % 参考文献引用宏包。新版thu的不包含numbers,super选项。
-\RequirePackage[numbers,super,sort&compress,square]{natbib}    %z增加square选项，给上标加上方括号
+\RequirePackage[sort&compress]{natbib}    %z增加square选项，给上标加上方括号
 
 % 生成有书签的 pdf 及其开关，请结合 gbk2uni 避免书签乱码。
 \RequirePackage{hyperref}
@@ -989,37 +989,54 @@
 
 
 % 参考文献
-%\bibpunct{（}{）}{，}{a}{}{，}
-\renewcommand\NAT@citesuper[3]{\ifNAT@swa%
-  \unskip\kern\p@\textsuperscript{\NAT@@open #1\NAT@@close}%
-  \if*#3*\else\ (#3)\fi\else #1\fi\endgroup}
-\DeclareRobustCommand\onlinecite{\@onlinecite}
-\def\@onlinecite#1{\begingroup\let\@cite\NAT@citenum\citep{#1}\endgroup}
-\def\tongjidot{\unskip.}
-\def\tongjimasterbib{\iftongji@doctor [dissertation]\else ~[\tongji@capply]\fi} 
-\def\tongjiphdbib{\iftongji@doctor [dissertation]\else ~[\tongji@capply]\fi}
-\renewenvironment{thebibliography}[1]{%
-   \tongji@chapter*{\bibname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname]
-   \wuhao[1.4]
-   \list{\@biblabel{\@arabic\c@enumiv}}%
-        {\renewcommand{\makelabel}[1]{##1\hfill}
-         \settowidth\labelwidth{1.1cm}
-         \setlength{\labelsep}{0.4em}
-         \setlength{\itemindent}{0pt}
-         \setlength{\leftmargin}{\labelwidth+\labelsep}
-         \addtolength{\itemsep}{-0.7em}
-         \usecounter{enumiv}%
-         \let\p@enumiv\@empty
-         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
-    \sloppy\frenchspacing
-    \clubpenalty4000
-    \@clubpenalty \clubpenalty
-    \widowpenalty4000%
-    \interlinepenalty4000%
-    \sfcode`\.\@m}
-   {\def\@noitemerr
-     {\@latex@warning{Empty `thebibliography' environment}}%
-    \endlist\frenchspacing\clearpage}%注意这个\clearpage是必须的。
+% 依赖于 \pkg{natbib} 宏包，修改其中的命令。 旧命令 \cs{onlinecite} 依然可用
+\newcommand\bibstyle@inline{\bibpunct{[}{]}{,}{n}{,}{,}}
+\DeclareRobustCommand\inlinecite{\@inlinecite}
+\def\@inlinecite#1{\begingroup\let\@cite\NAT@citenum\citep{#1}\endgroup}
+\let\onlinecite\inlinecite
+% 复用 \pkg{natbib} 的 \texttt{thebibliography} 环境，调整距离。
+\renewcommand\bibsection{\tongji@chapter*{\bibname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname]
+   \wuhao[1.4]}
+\renewcommand\bibfont{\wuhao[1.5]}
+\setlength\bibhang{2\ccwd}
+\addtolength{\bibsep}{-0.7em}
+\setlength{\labelsep}{0.4em}
+% % 两种引用样式：
+\expandafter\newcommand\csname bibstyle@tongjithesis-numeric\endcsname{%
+  \bibpunct{[}{]}{,}{s}{,}{\textsuperscript{,}}}
+\expandafter\newcommand\csname bibstyle@tongjithesis-author-year\endcsname{%
+  \bibpunct{(}{)}{;}{a}{,}{,}}
+% 下面修改 \pkg{natbib} 的引用格式，主要是将页码写在上标位置。
+% numeric 模式的 \cs{citet} 的页码：  
+\patchcmd\NAT@citexnum{%
+  \@ifnum{\NAT@ctype=\z@}{%
+    \if*#2*\else\NAT@cmt#2\fi
+  }{}%
+  \NAT@mbox{\NAT@@close}%
+}{%
+  \NAT@mbox{\NAT@@close}%
+  \@ifnum{\NAT@ctype=\z@}{%
+    \if*#2*\else\textsuperscript{#2}\fi
+  }{}%
+}{}{}
+% Numeric 模式的 \cs{citep} 的页码：
+\renewcommand\NAT@citesuper[3]{\ifNAT@swa
+  \if*#2*\else#2\NAT@spacechar\fi
+\unskip\kern\p@\textsuperscript{\NAT@@open#1\NAT@@close\if*#3*\else#3\fi}%
+   \else #1\fi\endgroup}
+% Author-year 模式的 \cs{citet} 的页码：
+\patchcmd{\NAT@citex}{%
+  \if*#2*\else\NAT@cmt#2\fi
+  \if\relax\NAT@date\relax\else\NAT@@close\fi
+}{%
+  \if\relax\NAT@date\relax\else\NAT@@close\fi
+  \if*#2*\else\textsuperscript{#2}\fi
+}{}{}
+% Author-year 模式的 \cs{citep} 的页码：
+\renewcommand\NAT@cite%
+    [3]{\ifNAT@swa\NAT@@open\if*#2*\else#2\NAT@spacechar\fi
+        #1\NAT@@close\if*#3*\else\textsuperscript{#3}\fi\else#1\fi\endgroup}
+
 
 % 附录
 \fancypagestyle{tongji@appendix@heading}{%
