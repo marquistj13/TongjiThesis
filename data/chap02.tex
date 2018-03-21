@@ -126,3 +126,53 @@ jPicEdt, jaxdraw 等等。
 \subsection{插图大原则}
 同志们，如果遇到问题一定要会搜索，要么看别人的问答，要么看宏包的文档，希望你不要成为重度伸手党。
 一点微小的工作，谢谢大家。
+
+\section{插入pdf格式图片的问题}
+\label{sec:problem}
+在\LaTeX{}中插入高清图片一般有两种方式：1）插入~eps~矢量图，2）插入~pdf~格式图片。在模板测试过程中遇到一个插入
+~pdf~格式图片的问题。
+
+问题描述
+
+插入~pdf~格式的图，有时采用~XeLaTeX~编译后，插图被翻转~90~度。有时却不会出现该问题。问题图片如图~\ref{rotatedBode}~所示。
+\begin{figure}[H] 
+  \centering
+  \includegraphics[width=12cm]{BodeGraph.pdf}
+  \caption{被自动翻转的bode图}
+  \label{rotatedBode}
+\end{figure}
+
+问题原因
+
+同一幅图片，XeLaTeX~编译出现图片翻转，而~pdfLaTeX~编译，输出正常。
+原因可能是出现在~XeLaTeX~编译过程中会将有些~pdf~文件自身多余的旋转命令编译出来。
+
+问题解决方法
+
+采用GhostScript软件消除多余的旋转命令。
+
+使用方法：
+
+\begin{itemize}
+    \item 下载安装~GhostScript~软件，官网为\url{https://www.ghostscript.com/download/gsdnld.html/}
+        
+    \item 将安装后的bin文件夹地址加入用户环境变量，在我电脑上为~\verb|D:|\verb|\Program Files|\verb|\gs|\verb|\gs9.22|\verb|\bin|
+	
+    \item cmd~命令行进入想转换图片所在文件夹，执行命令\\gswin32c -sDEVICE=pdfwrite -o newname.pdf  previousname.pdf
+              得到一个去除多余旋转命令的~newname.pdf~文件。
+
+    \item 在\LaTeX{}中插入该~pdf~文件，XeLaTeX~编译。
+\end{itemize}
+
+处理之后的图片如图~\ref{Bode}~所示。
+\begin{figure}[H] 
+  \centering
+  \includegraphics[width=12cm]{Bode.pdf}
+  \caption{处理后的bode图}
+  \label{Bode}
+\end{figure}
+
+
+
+
+
