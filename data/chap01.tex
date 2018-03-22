@@ -694,6 +694,22 @@ p(y|\mathbf{x}) = \frac{p(\mathbf{x},y)}{p(\mathbf{x})}=
 \end{equation}
 这些跟规划相关的公式都来自于刘宝碇老师《不确定规划》的课件。
 
+对于复杂公式，采用\verb|\frac|方式书写公式不美观，如~\ref{equ5}所示。 
+
+\begin{equation}
+\label{equ5}
+  S_s\left(s\right)  =\frac{1}{1+\frac{\left(1+sR_2C_1\right)\cdot\left[1+s\left(R_1+R_3\right)C_3\right]}{\left[{sR_1}\cdot\left(C_1+C_2\right)\cdot\left[1+s\frac{R_2C_1C_2}{C_1+C_2}\right]\cdot\left(1+sR_3C_3\right)\cdot{V_m}\right]}\cdot\frac{V_{out}}{D}\cdot\frac{1}{s^2LC+{s}\frac{L}{R_L}+1}\cdot\frac{R_y}{R_x+R_y}}
+\end{equation}
+
+为了使得多级分式中二级以上分子分母大小与普通分式大小相同，定义新的命令\verb|\FS|，具体定义见~.cls文件。采用\verb|\FS|命令书写多级公式
+效果如下
+
+\begin{small}
+\begin{equation}
+\label{equ6}
+  S_s\left(s\right) =\FS{1}{1+\FS{\left(1+sR_2C_1\right)\cdot\left[1+s\left(R_1+R_3\right)C_3\right]}{\left[{sR_1}\cdot\left(C_1+C_2\right)\cdot\left[1+s\FS{R_2C_1C_2}{C_1+C_2}\right]\cdot\left(1+sR_3C_3\right)\cdot{V_m}\right]}\cdot\FS{V_{out}}{D}\cdot\FS{1}{s^2LC+{s}\FS{L}{R_L}+1}\cdot\FS{R_y}{R_x+R_y}}
+\end{equation}
+\end{small}
 \section{破折号}
 \label{sec:pozhehao}
 
