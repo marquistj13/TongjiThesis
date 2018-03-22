@@ -54,4 +54,14 @@
 \newcommand{\pozhehao}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
 %多级公式输入时修改分子分母字母大小
  \newcommand{\FS}[2]{\displaystyle\frac{#1}{#2}} 
+ %采用supertabular实现长表格分页显示
+ \RequirePackage{supertabular}
+%定义三种新的column对齐格式，允许使用L C R的带长度的表格列
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}           
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+%表格内部强制换行
+\newcommand{\tabincell}[2]{
+\begin{tabular}{@{}#1@{}}#2\end{tabular}
+}    
 \endinput
