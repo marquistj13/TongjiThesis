@@ -6,6 +6,7 @@
 主要贡献者：
 * [marquistj13](https://github.com/marquistj13)
 * [CNchence](https://github.com/CNchence)
+* [Wenda](https://github.com/Williamwenda)
 
 主要参考资料：
 * [ThuThesis 2017/12/24 5.4.3](https://github.com/xueruini/thuthesis)
