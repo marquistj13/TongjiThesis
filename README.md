@@ -1,7 +1,7 @@
 # TongjiThesis
 同济大学硕博士论文LaTeX模板。
 
-效果预览：请到[最新发布版页面下载PDF](https://github.com/marquistj13/TongjiThesis/releases/latest)
+效果预览：请到[最新发布版页面下载PDF](https://github.com/marquistj13/TongjiThesis/releases/latest)。
 
 本次修改的发起者：
 * [marquistj13](https://github.com/marquistj13)
