@@ -328,6 +328,98 @@ EP.B.8 & 126.74 & 0.003 & 0.017 & 0.005 & 0.083 & 1656 \\
 \bottomrule[1.5pt]
 \end{longtable}
 
+表~\ref{tab:data}~为采用\textsf{supertabular}实现长表格功能的示例。
+\begin{center} \tablecaption{电容、电感以及电阻元件不确定时系统鲁棒稳定裕度参数 \label{tab:data}}
+\tablefirsthead{
+\toprule
+\multicolumn{1}{c}{T$\left(^{\circ}C\right)$} &
+\multicolumn{1}{c}{ $\gamma_C$}  &
+\multicolumn{1}{c}{ $\gamma_L$}  &
+\multicolumn{1}{c}{ $\gamma_R$} \\}
+\tablehead{\multicolumn{4}{c}{\small 续表 \ref{tab:data}~电容、电感以及电阻元件不确定时系统鲁棒稳定裕度参数}\\
+\bottomrule
+\multicolumn{1}{c}{T$\left(^{\circ}C\right)$} &
+\multicolumn{1}{c}{ $\gamma_C$}  &
+\multicolumn{1}{c}{ $\gamma_L$}  &
+\multicolumn{1}{c}{ $\gamma_R$} \\
+\bottomrule}
+\tabletail{\bottomrule
+\multicolumn{2}{c}{\small 接下页} \\}
+\tablelasttail{\bottomrule}
+\begin{supertabular}{C{3cm}C{3cm}C{3cm}C{3cm}}
+ \midrule
+        $-60$                      & $0.8295$              & $0.7854$             & $0.9011$      \\
+
+        $-50$                      & $0.8189$              & $0.7754$             & $0.9011$       \\
+
+        $-40$                      & $0.8096$              & $0.7651$             & $0.9010$      \\
+
+        $-30$                      & $0.7995$              & $0.7547$             & $0.9009$       \\
+
+        $-20$                      & $0.7896$              & $0.7444$             & $0.9009$       \\
+
+        $-10$                      & $0.7800$              & $0.7345$             & $0.9008$       \\
+
+        $0$                         & $0.7707$              & $0.7248$             & $0.9008$        \\
+
+        $10$                      & $0.7617$              & $0.7155$             & $0.9008$         \\
+
+        $20$                      & $0.7529$              & $0.7063$             & $0.9007$       \\
+
+        $30$                      & $0.7442$              & $0.6972$             & $0.9007$       \\
+
+        $40$                      & $0.7356$              & $0.6881$             & $0.9007$      \\
+
+        $50$                      & $0.7269$              & $0.6789$             & $0.9007$       \\
+
+        $60$                      & $0.7182$              & $0.6697$             & $0.9007$       \\
+
+        $70$                      & $0.7095$              & $0.6605$             & $0.9006$       \\
+
+        $80$                      & $0.7009$              & $0.6514$             & $0.9006$       \\
+
+        $90$                      & $0.6925$              & $0.6425$             & $0.9006$      \\
+
+        $100$                    & $0.6846$              & $0.6340$             & $0.9006$       \\
+
+        $110$                    & $0.6774$              & $0.6263$             & $0.9006$      \\
+
+        $120$                    & $0.6711$              & $0.6196$             & $0.9006$      \\
+
+        $130$                    & $0.6659$              & $0.6140$             & $0.9006$       \\
+
+        $140$                    & $0.6621$              & $0.6100$             & $0.9005$       \\
+
+        $150$                    & $0.6599$              & $0.6076$             & $0.9005$       \\
+
+        $160$                    & $0.6594$              & $0.6070$             & $0.9005$       \\
+
+        $170$                    & $0.6606$              & $0.6083$             & $0.9005$       \\
+
+        $180$                    & $0.6634$              & $0.6113$             & $0.9006$       \\
+
+        $190$                    & $0.6676$              & $0.6158$             & $0.9006$       \\
+
+        $200$                    & $0.6729$              & $0.6215$             & $0.9006$       \\
+
+        $210$                    & $0.6789$              & $0.6279$             & $0.9006$       \\
+
+        $220$                    & $0.6848$              & $0.6342$             & $0.9006$       \\
+
+        $230$                    & $0.6902$              & $0.6400$             & $0.9006$      \\
+
+        $240$                    & $0.6945$              & $0.6446$             & $0.9006$       \\
+
+        $250$                    & $0.6978$              & $0.6480$             & $0.9006$       \\
+
+        $260$                    & $0.7006$              & $0.6511$             & $0.9006$       \\
+
+        $270$                    & $0.7050$              & $0.6557$             & $0.9006$      \\
+
+        $280$                    & $0.7148$              & $0.6661$             & $0.9006$      \\
+\end{supertabular}
+\end{center}
+
 \subsection{设置每列的对齐格式以及宽度}
 表~\ref{tab:chap1:IPM_function}使用新定义的\texttt{columntype}设置每列的对齐格式以及宽度。
 
@@ -694,6 +786,22 @@ p(y|\mathbf{x}) = \frac{p(\mathbf{x},y)}{p(\mathbf{x})}=
 \end{equation}
 这些跟规划相关的公式都来自于刘宝碇老师《不确定规划》的课件。
 
+对于复杂公式，采用\verb|\frac|方式书写公式不美观，如~\ref{equ5}所示。 
+
+\begin{equation}
+\label{equ5}
+  S_s\left(s\right)  =\frac{1}{1+\frac{\left(1+sR_2C_1\right)\cdot\left[1+s\left(R_1+R_3\right)C_3\right]}{\left[{sR_1}\cdot\left(C_1+C_2\right)\cdot\left[1+s\frac{R_2C_1C_2}{C_1+C_2}\right]\cdot\left(1+sR_3C_3\right)\cdot{V_m}\right]}\cdot\frac{V_{out}}{D}\cdot\frac{1}{s^2LC+{s}\frac{L}{R_L}+1}\cdot\frac{R_y}{R_x+R_y}}
+\end{equation}
+
+为了使得多级分式中二级以上分子分母大小与普通分式大小相同，定义新的命令\verb|\FS|，具体定义见~.cls文件。采用\verb|\FS|命令书写多级公式
+效果如下
+
+\begin{small}
+\begin{equation}
+\label{equ6}
+  S_s\left(s\right) =\FS{1}{1+\FS{\left(1+sR_2C_1\right)\cdot\left[1+s\left(R_1+R_3\right)C_3\right]}{\left[{sR_1}\cdot\left(C_1+C_2\right)\cdot\left[1+s\FS{R_2C_1C_2}{C_1+C_2}\right]\cdot\left(1+sR_3C_3\right)\cdot{V_m}\right]}\cdot\FS{V_{out}}{D}\cdot\FS{1}{s^2LC+{s}\FS{L}{R_L}+1}\cdot\FS{R_y}{R_x+R_y}}
+\end{equation}
+\end{small}
 \section{破折号}
 \label{sec:pozhehao}
 
@@ -713,3 +821,5 @@ p(y|\mathbf{x}) = \frac{p(\mathbf{x},y)}{p(\mathbf{x})}=
 默认的列表环境上下间距很大，模板将其重定义为 \textsf{paralist} 中的压缩环境，看起
 来要好一些。如果还是不满意，自己也可以调 \verb|\itemsep| 的。\textsf{paralist} 还
 可以方便的指定标签的样式。
+
+

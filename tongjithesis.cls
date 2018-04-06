@@ -161,12 +161,6 @@
 % 表格控制
 \RequirePackage{array}
 \RequirePackage{longtable}
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}            %定义三种新的column对齐格式，允许使用L C R的带长度的表格列
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcommand{\tabincell}[2]{
-\begin{tabular}{@{}#1@{}}#2\end{tabular}
-}    
 % 使用三线表：\cs{toprule}，\cs{midrule}，\cs{bottomrule}。
 \RequirePackage{booktabs}
 
@@ -239,7 +233,7 @@
 % \selectfont 用来使得字体的配置生效
 % 关于 #1 \dimexpr #2,其实就是#1 和 #2相乘。其中\dimexpr来自etex，而目前的tex基本上都自带了etex的高效实现来替代原tex（来源请求）。
 % 以上的例子我们用\tongji@define@fontsize{chuhao}{42bp}展开就是这样：
-% \newcommand \tongji@define@fontsize [1][1.3]{\fontsize{42bp}{#1\dimexpr 42bp}\selectfont}}
+% \newcommand \chuhao [1][1.3]{\fontsize{42bp}{#1\dimexpr 42bp}\selectfont}}
 % 其中，[1][1.3]表示只有一个参数，该参数默认为1.3
 \tongji@define@fontsize{chuhao}{42bp}
 \tongji@define@fontsize{xiaochu}{36bp}
