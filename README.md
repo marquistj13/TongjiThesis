@@ -1,17 +1,19 @@
 # TongjiThesis
 同济大学硕博士论文LaTeX模板。
 
-目前已经和学校的word版本基本一致。
+效果预览：请到[最新发布版页面下载PDF](https://github.com/marquistj13/TongjiThesis/releases/latest)
 
-主要贡献者：
+本次修改的发起者：
 * [marquistj13](https://github.com/marquistj13)
 * [CNchence](https://github.com/CNchence)
-* [Wenda](https://github.com/Williamwenda)
+
+贡献者列表:[请点击这里](https://github.com/marquistj13/TongjiThesis/graphs/contributors)。
 
 主要参考资料：
 * [ThuThesis 2017/12/24 5.4.3](https://github.com/xueruini/thuthesis)
 * [老版的TongjiThesis, 即Tongji LUG 2014年的RC2版](https://sourceforge.net/projects/tongjithesis/)。 以下用`老版`代指。
 * [linxdcn](https://github.com/linxdcn/TongjiThesis)同学汇总的wildwolf(据zhouyuan说，wildwolf是同济汽车学院的老师)、[svandex](https://github.com/svandex/masthesis)、[zhao-chen](https://github.com/zhao-chen/TongjiThesis)的版本。[zhouyuan有本硕博版](https://github.com/zhouyuan/tongjithesis)。主要参考了这几位校友改的封面、摘要等部分，学习其页眉设置技巧。我最终使用了[fire-emblem](https://github.com/fire-emblem/)亲手提供的fancyhdr页眉设置代码，并将其与adapt自thuthesis的`\tongji@chapter`结合，从而实现很优雅的页眉设置方式。
+* 各种LaTex宏包的文档。
 
 
 
