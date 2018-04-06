@@ -991,6 +991,17 @@
 
 
 % 参考文献
+% 这个\tjbibliographyheading暂时用来解决参考文献的第二页以后页面的页眉显示为正文章节页眉的问题。
+\NewDocumentCommand{\tjbibliographyheading}{}
+{
+      \thispagestyle{fancy}
+      \fancyhead{}
+      \fancyhead[RO,LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname}
+      \fancyfoot{}
+      \fancyfoot[C]{\songti\wuhao\thepage}
+      \renewcommand{\headrulewidth}{0.4pt}
+      \renewcommand{\footrulewidth}{0pt}
+}
 % 依赖于 \pkg{natbib} 宏包，修改其中的命令。 旧命令 \cs{onlinecite} 依然可用
 \newcommand\bibstyle@inline{\bibpunct{[}{]}{,}{n}{,}{,}}
 \DeclareRobustCommand\inlinecite{\@inlinecite}
