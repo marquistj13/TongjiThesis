@@ -985,17 +985,6 @@
 
 
 % 参考文献
-% 这个\tjbibliographyheading暂时用来解决参考文献的第二页以后页面的页眉显示为正文章节页眉的问题。
-\NewDocumentCommand{\tjbibliographyheading}{}
-{
-      \thispagestyle{fancy}
-      \fancyhead{}
-      \fancyhead[RO,LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname}
-      \fancyfoot{}
-      \fancyfoot[C]{\songti\wuhao\thepage}
-      \renewcommand{\headrulewidth}{0.4pt}
-      \renewcommand{\footrulewidth}{0pt}
-}
 % 依赖于 \pkg{natbib} 宏包，修改其中的命令。 旧命令 \cs{onlinecite} 依然可用
 \newcommand\bibstyle@inline{\bibpunct{[}{]}{,}{n}{,}{,}}
 \DeclareRobustCommand\inlinecite{\@inlinecite}
@@ -1044,6 +1033,25 @@
     [3]{\ifNAT@swa\NAT@@open\if*#2*\else#2\NAT@spacechar\fi
         #1\NAT@@close\if*#3*\else\textsuperscript{#3}\fi\else#1\fi\endgroup}
 
+% 参考文献页眉处理
+% % 这个\tjbibliographyheading暂时用来解决参考文献的第二页以后页面的页眉显示为正文章节页眉的问题。
+% \NewDocumentCommand{\tjbibliographyheading}{}
+% {
+%       \thispagestyle{fancy}
+%       \fancyhead{}
+%       \fancyhead[RO,LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname}
+%       \fancyfoot{}
+%       \fancyfoot[C]{\songti\wuhao\thepage}
+%       \renewcommand{\headrulewidth}{0.4pt}
+%       \renewcommand{\footrulewidth}{0pt}
+% }
+% \let\tj@tmp@thebibliography\thebibliography
+% \RenewDocumentEnvironment{thebibliography}{}
+% {\tjbibliographyheading \tj@tmp@thebibliography}{\clearpage}
+% 我发现不需要重新加入\tjbibliographyheading，只需要clearpage就行了。
+\let\tj@tmp@thebibliography\thebibliography
+\RenewDocumentEnvironment{thebibliography}{}
+{\tj@tmp@thebibliography}{\clearpage}
 
 % 附录
 \fancypagestyle{tongji@appendix@heading}{%
