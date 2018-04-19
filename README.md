@@ -6,6 +6,7 @@
 本次修改的发起者：
 * [marquistj13](https://github.com/marquistj13)
 * [CNchence](https://github.com/CNchence)
+* [Wenda](https://github.com/Williamwenda)
 
 贡献者列表:[请点击这里](https://github.com/marquistj13/TongjiThesis/graphs/contributors)。
 
