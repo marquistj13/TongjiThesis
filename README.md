@@ -34,7 +34,7 @@
 1. 增加degreetype选项
 1. 增加author-year的引用。
 
-## 运行
+## 如何运行
 本人使用Texlive2017发行版，xelatex 可以编译通过。
 
 注：
@@ -42,3 +42,20 @@
 1. 如果提示缺少某字体，请自行下载安装到系统中（如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书）。
 1. 原则上pdflatex,lualatex都可以编译，但目测由于字体问题无法编译通过。暂时不管这个问题了，反正xelatex用着很爽。
 
+## 实用技能 以及 注意事项
+__免责声明：__ 以下内容基本上属于锦上添花的小技能。 不属于本模板的范畴，如对以下内容有任何疑问，请自行搜索解决，请勿提issue，谢谢。
+
+### author year 的引用
+_大前提_：
+不管是author year还是数字式引用，你从文献库导出bib文件的时候都要选择bibtex的格式，而非biblatex的格式
+
+_基本用法_：
+示例文件的 1.5 节介绍了数字式引用的例子。
+如果你喜欢使用 author year 的引用，最好将 `\cite` 替换成 `\citep`。
+这样就和学校的模板一样了，关于 author year 的更多引用格式，如引用的时候指定章节等，请上网搜索 Reference sheet for natbib usage。
+另外，author year 引用的时候涉及到排序问题，参照 [林博士](https://github.com/linxdcn/TongjiThesis) 的方法，可以这样：
+>中文文献应该添加lang和pinyin域，lang用于分离中英文文献，默认为英文；pinyin用于中文文献排序
+
+_实用技能_：
+如果你也用zotero管理文献的话，可以参考 [这里]
+(https://marquistj13.github.io/MyBlog/2018/05/zotero-export/#%E8%B0%83%E6%95%99better-bibtex-%E6%8F%92%E4%BB%B6%E7%94%9F%E6%88%90%E7%9A%84bib%E6%96%87%E4%BB%B6%E7%9A%84field)的文献库导出设置，这样就可以方便地在bib文件添加lang域。

@@ -731,8 +731,12 @@ V_j & = v_j, & \qquad X_j & = x_j,
 写。
 
 本模板推荐使用 BIB\TeX，样式文件为
-tongjibib.bst，基本符合学校的参考文献格式（如专利
-等引用未加详细测试）。看看这个例子，关于书的\cite{tex, companion,
+tongjithesis-author-year.bst 和 tongjithesis-numeric.bst，基本符合学校的参考文献格式（如专利
+等引用未加详细测试）。
+以下默认使用数字式的引用，这些例子都是为数字式引用准备的，如果你喜欢使用 author year 的引用，最好将以下的 \textbackslash cite 替换成 \textbackslash citep。
+这样就和学校的模板一样了，关于 author year 的更多引用格式，如引用的时候指定章节等，请上网搜索 Reference sheet for natbib usage。
+
+看看这个例子，关于书的\cite{tex, companion,
 ColdSources}， 还有这些\cite{Krasnogor2004e, clzs,
 zjsw}，关于杂志的\cite{ELIDRISSI94,
   MELLINGER96, SHELL02}，硕士论文\cite{zhubajie, metamori2004}，博士论文
@@ -742,6 +746,8 @@ zjsw}，关于杂志的\cite{ELIDRISSI94,
 请手动修改 bbl 文件。试一下很多个参考文献的情况吧\cite{BogdanSLOPEAdaptiveVariable2014,GossmannIdentificationsignificantgenetic2015,AlbrechtTopologicalapproachfuzzy1999,AlbrechtTopologicalConceptsHierarchies2001,AlbrechtTopologicaltheoryfuzziness1999,MoriasiModelevaluationguidelines2007,Jdatamodels2003}。
 
 有时候不想要上标，那么可以这样 \inlinecite{shaheshang}，这个非常重要。
+
+
 
 \section{公式}
 \label{sec:equation}
