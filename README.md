@@ -57,5 +57,4 @@ _基本用法_：
 >中文文献应该添加lang和pinyin域，lang用于分离中英文文献，默认为英文；pinyin用于中文文献排序
 
 _实用技能_：
-如果你也用zotero管理文献的话，可以参考 [这里]
-(https://marquistj13.github.io/MyBlog/2018/05/zotero-export/#%E8%B0%83%E6%95%99better-bibtex-%E6%8F%92%E4%BB%B6%E7%94%9F%E6%88%90%E7%9A%84bib%E6%96%87%E4%BB%B6%E7%9A%84field)的文献库导出设置，这样就可以方便地在bib文件添加lang域。
+如果你也用zotero管理文献的话，可以参考 [这里](https://marquistj13.github.io/MyBlog/2018/05/zotero-export/#%E8%B0%83%E6%95%99better-bibtex-%E6%8F%92%E4%BB%B6%E7%94%9F%E6%88%90%E7%9A%84bib%E6%96%87%E4%BB%B6%E7%9A%84field) 的文献库导出设置，这样就可以方便地在bib文件添加lang域。
