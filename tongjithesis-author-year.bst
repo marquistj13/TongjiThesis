@@ -1256,7 +1256,7 @@ FUNCTION {map}
 FUNCTION {mastersthesis}
 { is.in.chinese
     { "\tongjimasterbib{}" }
-    { "D" }
+    { "\tongjidissertationbib" }
   if$
  set.mark
   monograph
@@ -1270,7 +1270,7 @@ FUNCTION {newspaper}
 FUNCTION {phdthesis}
 { is.in.chinese
     { "\tongjiphdbib{}" }
-    { "D" }
+    { "\tongjidissertationbib" }
   if$
  set.mark
   monograph
