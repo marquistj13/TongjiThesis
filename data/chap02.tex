@@ -149,11 +149,11 @@ jPicEdt, jaxdraw 等等。
 
 问题解决方法
 
-采用GhostScript软件消除多余的旋转命令。
+第一种方法（抄自刘海洋大牛的方案）：
+使用命令\\ \texttt{pdfcrop foo.pdf foo-new.pdf}，当然，新文件名可以和旧文件名相同。 这个方法的好处就是 pdfcrop 是texlive自带的，我装的是texlive2017，因此自带了。
 
-使用方法：
-
-\begin{itemize}
+第二种方法：采用GhostScript软件消除多余的旋转命令。
+\begin{enumerate}
     \item 下载安装~GhostScript~软件，官网为\url{https://www.ghostscript.com/download/gsdnld.html/}
         
     \item 将安装后的bin文件夹地址加入用户环境变量，在我电脑上为~\verb|D:|\verb|\Program Files|\verb|\gs|\verb|\gs9.22|\verb|\bin|
@@ -162,7 +162,7 @@ jPicEdt, jaxdraw 等等。
               得到一个去除多余旋转命令的~newname.pdf~文件。
 
     \item 在\LaTeX{}中插入该~pdf~文件，XeLaTeX~编译。
-\end{itemize}
+\end{enumerate}
 
 处理之后的图片如图~\ref{Bode}~所示。
 \begin{figure}[H] 
