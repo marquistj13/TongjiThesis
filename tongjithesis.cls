@@ -685,7 +685,7 @@
             \erhao[2]{\bfseries\heiti\tongji@ctitle}
             \par\vskip 17pt
             \ifx\cfunds\@empty\else
-              {\xiaosi\tongji@cfunds}
+              {\parbox[t]{\paperwidth-7cm}{\begin{center}\zihao{-4}\linespread{1.3}\selectfont\tongji@cfunds\end{center}}}
               \par\vskip 20bp
             \fi
       \end{center}
