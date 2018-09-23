@@ -24,7 +24,7 @@
 只要下载最新版的texlive就行了。
 
 注：
-1. 基本的编译步骤是：tex,bibtex,tex,tex(这里的tex替换成你常用的tex，如xelatex)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
+1. 基本的编译步骤是：tex,biber,tex,tex(这里的tex替换成你常用的tex，如xelatex)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
 1. 首选xelatex编译，次选pdflatex，lualatex貌似也能用。
 1. 使用xelatex时，如果提示缺少某字体，请自行下载安装到系统中（如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书）。
 
@@ -32,44 +32,7 @@
 __免责声明：__ 以下内容基本上属于锦上添花的小技能。 不属于本模板的范畴，如对以下内容有任何疑问，请自行搜索解决，请勿提issue，谢谢。
 
 ### 关于 author year 的引用
-_大前提_：
-不管是author year还是数字式引用，你从文献库导出bib文件的时候都要选择bibtex的格式，而非biblatex的格式
-
-_基本用法_：
-示例文件的 1.5 节介绍了数字式引用的例子。
-如果你喜欢使用 author year 的引用，最好将 `\cite` 替换成 `\citep`。
-这样就和学校的模板一样了，关于 author year 的更多引用格式，如引用的时候指定章节等，请上网搜索 Reference sheet for natbib usage。
-另外，author year 引用的时候涉及到排序问题，参照 [林博士](https://github.com/linxdcn/TongjiThesis) 的方法，可以这样：
-`中文文献应该添加pinyin域，pinyin用于中文文献排序`,详见示例bib文件。
-
-### 关于文献语言的识别
-另外，bst文件可以自动识别文献语言，因此不需要设置language域，如果你的bib文件自带`language={中文}`字眼（zotero自己抓的文献数据就是这样的），应将language域删掉。
-如果你也用zotero管理文献的话，可以参考 [这里](https://marquistj13.github.io/MyBlog/2018/05/zotero-export/#%E8%B0%83%E6%95%99better-bibtex-%E6%8F%92%E4%BB%B6%E7%94%9F%E6%88%90%E7%9A%84bib%E6%96%87%E4%BB%B6%E7%9A%84field) 的文献库导出设置，这样就可以方便地将bib文件的language域删掉或另行处理。
-
-注：识别文献语言的作用，就是对中文学位论文添加标识，详见校标以及下面参考文献格式的解释。
-
-### 参考文献格式
-####  校标与国标的权衡
-你可能发现本模板的生成的参考文献和学校的要求不太一致，初步的解释在[这里](https://github.com/marquistj13/TongjiThesis/issues/11)。
-
-#### 关于参考文献中“博士学位论文”等的标注。
-校标里规定中文学位论文后边应加博士学位论文或硕士学位论文的标识，英文的学位论文后边加dissertation。
-如果你坚持要国标，不想这么搞的话，可以这么做：
-将`tongjithesis.cfg`文件的最后几行的：
-```tex
-\def\tongjimasterbib{硕士学位论文} 
-\def\tongjiphdbib{博士学位论文}
-\def\tongjidissertationbib{dissertation}
-```
-改成：
-```tex
-\def\tongjimasterbib{D} 
-\def\tongjiphdbib{D}
-\def\tongjidissertationbib{D}
-```
-
-
-
+默认使用数字上标的引用格式，若想使用author-year格式，可在cls文件中搜索biblatex进行修改。
 
 ## 本模板对老模板的主要改动
 相较于老版tongjithesis，我这个版本融合了thuthesis （ThuThesis 2017/12/24 5.4.3）的很多新改动，个人认为比较大的改动如下:
@@ -85,4 +48,5 @@ _基本用法_：
 1. chapter标题段前距离的修改
 1. 各级标题上下间隙调整
 1. 增加degreetype选项
+1. 使用biblatex包实现参考文献的引用
 1. 增加author-year的引用。
