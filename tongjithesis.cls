@@ -165,8 +165,10 @@
 \RequirePackage{booktabs}
 
 % 参考文献引用宏包。使用biblatex包
-\RequirePackage[backend=biber,style=gb7714-2015,gbpub=false,citestyle=gb7714-2015]{biblatex}  %若需使用author-year格式的文献引用，可将style选择为：gb7714-2015ay
-%gbpub=false :用于去除参考文献中的出版地不详、出版者不详等信息
+\RequirePackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false]{biblatex}  
+% 若需使用author-year格式的文献引用，可将style选择为：gb7714-2015ay
+% gbpub=false :用于去除参考文献中的出版地不详、出版者不详等信息
+% 后边 isbn 和 doi 选项同理
 
 % 生成有书签的 pdf 及其开关，请结合 gbk2uni 避免书签乱码。
 \RequirePackage{hyperref}
@@ -942,6 +944,15 @@
 \fangsong 
  }{\clearpage}
 % \let\ack\acknowledgement
+
+% 参考文献 调整
+% 兼容参考文献的老命令
+\let\inlinecite\parencite
+% 全局字体
+\renewcommand{\bibfont}{\zihao{5}\songti}%宋体五号
+% \setlength{\bibitemsep}{0ex}
+\setlength{\bibnamesep}{0ex}
+\setlength{\bibinitsep}{0ex}
 
 % 图表索引
 % 定义图表以及公式目录样式
