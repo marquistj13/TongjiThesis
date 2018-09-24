@@ -20,19 +20,20 @@
 
 
 ## 如何运行
-我们用的是Texlive2017发行版。
-只要下载最新版的texlive就行了。
+我们用的是Texlive2018 发行版。
+推荐下载最新版的Texlive就行了。
+（由于本模板参考文献部分依赖`biblatex-gb7714-2015`宏包的2018版本，因此最好安装Texlive最新版）
 
 注：
-1. 基本的编译步骤是：tex,biber,tex,tex(这里的tex替换成你常用的tex，如xelatex)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
-1. 首选xelatex编译，次选pdflatex，lualatex貌似也能用。
-1. 使用xelatex时，如果提示缺少某字体，请自行下载安装到系统中（如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书）。
+1. 基本的编译步骤是：`tex,biber,tex,tex`(这里的tex替换成你常用的`tex`，如`xelatex`)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
+1. 首选`xelatex`编译，次选`pdflatex`，`lualatex`貌似也能用。
+1. 使用`xelatex`时，如果提示缺少某字体，请自行下载安装到系统中（如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书）。
 
 ## 实用技能 以及 注意事项
-__免责声明：__ 以下内容基本上属于锦上添花的小技能。 不属于本模板的范畴，如对以下内容有任何疑问，请自行搜索解决，请勿提issue，谢谢。
-
+__免责声明：__ 以下内容不属于本模板的主要维护范畴，如对以下内容有任何疑问，请自行搜索解决，请勿提issue，谢谢。
 ### 关于 author year 的引用
-默认使用数字上标的引用格式，若想使用author-year格式，可在cls文件中搜索biblatex进行修改。
+默认使用数字上标的引用格式，若想使用author-year格式，可在cls文件中搜索biblatex，按照该处的说明进行修改。
+_注意：_ 学校word模板中的author-year格式在正文中是符合国标的，但参考文献列表明显是numeric的，这么混用不能忍啊！本模板严格遵循国标，如对此有疑问，请通过借酒消愁等方式解决。
 
 ## 本模板对老模板的主要改动
 相较于老版tongjithesis，我这个版本融合了thuthesis （ThuThesis 2017/12/24 5.4.3）的很多新改动，个人认为比较大的改动如下:
