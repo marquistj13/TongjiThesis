@@ -165,7 +165,7 @@
 \RequirePackage{booktabs}
 
 % 参考文献引用宏包。使用biblatex包
-\RequirePackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false]{biblatex}  
+\RequirePackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex}  
 % 若需使用author-year格式的文献引用，可将style选择为：gb7714-2015ay
 % gbpub=false :用于去除参考文献中的出版地不详、出版者不详等信息
 % 后边 isbn 和 doi 选项同理

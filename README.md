@@ -20,9 +20,10 @@
 
 
 ## 如何运行
-我们用的是Texlive2018 发行版。
-推荐下载最新版的Texlive就行了。
-（由于本模板参考文献部分依赖`biblatex-gb7714-2015`宏包的2018版本，因此最好安装Texlive最新版）
+使用 Texlive2018 发行版，并更新其自带的`biblatex-gb7714-2015`宏包，否则无法使用。
+
+>推荐下载最新版的Texlive。  
+由于本模板参考文献部分依赖`biblatex-gb7714-2015`宏包的2018版本，因此最好安装Texlive最新版，Texlive2018 自带的`biblatex-gb7714-2015`宏包依然较老，推荐使用其包管理器更新此宏包，如若更新失败（我更新了好几次都失败了，它还把我的这个宏包给删了，郁闷），那么可按照 [官方页面](https://github.com/hushidong/biblatex-gb7714-2015) 的安装介绍，在你的tex安装目录搜索`biblatex-gb7714-2015`文件夹，将该文件夹中的四个文件替换为[官方页面](https://github.com/hushidong/biblatex-gb7714-2015) 提供的文件即可。
 
 注：
 1. 基本的编译步骤是：`tex,biber,tex,tex`(这里的tex替换成你常用的`tex`，如`xelatex`)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
@@ -33,7 +34,12 @@
 __免责声明：__ 以下内容不属于本模板的主要维护范畴，如对以下内容有任何疑问，请自行搜索解决，请勿提issue，谢谢。
 ### 关于 author year 的引用
 默认使用数字上标的引用格式，若想使用author-year格式，可在cls文件中搜索biblatex，按照该处的说明进行修改。
-_注意：_ 学校word模板中的author-year格式在正文中是符合国标的，但参考文献列表明显是numeric的，这么混用不能忍啊！本模板严格遵循国标，如对此有疑问，请通过借酒消愁等方式解决。
+
+>_注意：_ 学校word模板中的author-year格式在正文中是符合国标的，但参考文献列表明显是numeric的，这么混用不能忍啊！本模板严格遵循国标，如对此有疑问，请通过借酒消愁等方式解决。
+
+### 关于参考文献bib的生成
+推荐使用 Zotero 进行文献管理和bib生成，其中bib的生成推荐使用 Zotero 的 `Better Bib(La)TeX` 插件。
+如果你也用zotero管理文献的话，可以参考 [这里](https://marquistj13.github.io/MyBlog/2018/05/zotero-export/#%E8%B0%83%E6%95%99better-bibtex-%E6%8F%92%E4%BB%B6%E7%94%9F%E6%88%90%E7%9A%84bib%E6%96%87%E4%BB%B6%E7%9A%84field) 的文献库导出设置，这样就可以方便地将bib文件的language域删掉或另行处理，（很久以前需要删掉这个language域，现在不确定是否需要删，没时间测试了，诸位自行定夺）。
 
 ## 本模板对老模板的主要改动
 相较于老版tongjithesis，我这个版本融合了thuthesis （ThuThesis 2017/12/24 5.4.3）的很多新改动，个人认为比较大的改动如下:
