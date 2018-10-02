@@ -20,6 +20,15 @@
   \tongji@doctorfalse
   \expandafter\csname tongji@#1true\endcsname}
 
+% 数字式引用 以及 作者-年份引用
+\newif\iftongji@numeric
+\tongji@numerictrue % 默认为数字式引用
+\newif\iftongji@authoryear
+\define@key{tongji}{bibtype}{%
+  \tongji@numericfalse
+  \tongji@authoryearfalse
+  \expandafter\csname tongji@#1true\endcsname}
+
 % 学术型|专业型|同等学力
 \newif\iftongji@academic
 \tongji@academictrue % 默认为学术型
@@ -82,9 +91,15 @@
 \iftongji@academic\relax\else
   \iftongji@profession\relax\else
     \iftongji@equaleducation\relax\else
-        \ClassError{tongjithesis}{Unknown degree type option.\MessageBreak Please check your degree type, good luck!}{}  
+        \ClassError{tongjithesis}{Unknown degree type option.\MessageBreak Please check your degree type option, good luck!}{}  
     \fi
   \fi
+\fi
+% 杜绝非法的bibtype选项。
+\iftongji@numeric\relax\else
+  \iftongji@authoryear\relax\else    
+      \ClassError{tongjithesis}{Unknown bib type option.\MessageBreak Please check your bib type option, good luck!}{}  
+   \fi
 \fi
 
 % 使用 \XeTeX\ 引擎时，\pkg{fontspec} 宏包会被 \pkg{xeCJK} 自动调用。传递
@@ -165,8 +180,14 @@
 \RequirePackage{booktabs}
 
 % 参考文献引用宏包。使用biblatex包
-\RequirePackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex}  
-% 若需使用author-year格式的文献引用，可将style选择为：gb7714-2015ay
+\iftongji@numeric
+  \RequirePackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex} 
+\else
+  \iftongji@authoryear % 若需使用author-year格式的文献引用，可将style选择为：gb7714-2015ay
+    \RequirePackage[backend=biber,style=gb7714-2015ay,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex} 
+  \fi
+\fi
+% 参考文献宏包的其他选项：
 % gbpub=false :用于去除参考文献中的出版地不详、出版者不详等信息
 % 后边 isbn 和 doi 选项同理
 
@@ -953,6 +974,8 @@
 % \setlength{\bibitemsep}{0ex}
 \setlength{\bibnamesep}{0ex}
 \setlength{\bibinitsep}{0ex}
+% 解决参考文献页眉问题（当存在附录时，参考文献页眉会出问题）
+\newcommand\printTJbibliography{\printbibliography[heading=bibintoc]\clearpage}
 
 % 图表索引
 % 定义图表以及公式目录样式
