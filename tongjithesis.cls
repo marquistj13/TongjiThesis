@@ -20,6 +20,15 @@
   \tongji@doctorfalse
   \expandafter\csname tongji@#1true\endcsname}
 
+% 数字式引用 以及 作者-年份引用
+\newif\iftongji@numeric
+\tongji@numerictrue % 默认为数字式引用
+\newif\iftongji@authoryear
+\define@key{tongji}{bibtype}{%
+  \tongji@numericfalse
+  \tongji@authoryearfalse
+  \expandafter\csname tongji@#1true\endcsname}
+
 % 学术型|专业型|同等学力
 \newif\iftongji@academic
 \tongji@academictrue % 默认为学术型
@@ -82,9 +91,15 @@
 \iftongji@academic\relax\else
   \iftongji@profession\relax\else
     \iftongji@equaleducation\relax\else
-        \ClassError{tongjithesis}{Unknown degree type option.\MessageBreak Please check your degree type, good luck!}{}  
+        \ClassError{tongjithesis}{Unknown degree type option.\MessageBreak Please check your degree type option, good luck!}{}  
     \fi
   \fi
+\fi
+% 杜绝非法的bibtype选项。
+\iftongji@numeric\relax\else
+  \iftongji@authoryear\relax\else    
+      \ClassError{tongjithesis}{Unknown bib type option.\MessageBreak Please check your bib type option, good luck!}{}  
+   \fi
 \fi
 
 % 使用 \XeTeX\ 引擎时，\pkg{fontspec} 宏包会被 \pkg{xeCJK} 自动调用。传递
@@ -164,8 +179,17 @@
 % 使用三线表：\cs{toprule}，\cs{midrule}，\cs{bottomrule}。
 \RequirePackage{booktabs}
 
-% 参考文献引用宏包。新版thu的不包含numbers,super选项。
-\RequirePackage[sort&compress]{natbib}    %z增加square选项，给上标加上方括号
+% 参考文献引用宏包。使用biblatex包
+\iftongji@numeric
+  \RequirePackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex} 
+\else
+  \iftongji@authoryear % 若需使用author-year格式的文献引用，可将style选择为：gb7714-2015ay
+    \RequirePackage[backend=biber,style=gb7714-2015ay,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex} 
+  \fi
+\fi
+% 参考文献宏包的其他选项：
+% gbpub=false :用于去除参考文献中的出版地不详、出版者不详等信息
+% 后边 isbn 和 doi 选项同理
 
 % 生成有书签的 pdf 及其开关，请结合 gbk2uni 避免书签乱码。
 \RequirePackage{hyperref}
@@ -942,6 +966,17 @@
  }{\clearpage}
 % \let\ack\acknowledgement
 
+% 参考文献 调整
+% 兼容参考文献的老命令
+\let\inlinecite\parencite
+% 全局字体
+\renewcommand{\bibfont}{\zihao{5}\songti}%宋体五号
+% \setlength{\bibitemsep}{0ex}
+\setlength{\bibnamesep}{0ex}
+\setlength{\bibinitsep}{0ex}
+% 解决参考文献页眉问题（当存在附录时，参考文献页眉会出问题）
+\newcommand\printTJbibliography{\printbibliography[heading=bibintoc]\clearpage}
+
 % 图表索引
 % 定义图表以及公式目录样式
 \def\tongji@starttoc#1{% #1: float type, prepend type name in \listof*** entry.
@@ -983,75 +1018,6 @@
 \newcommand\listofequations{\tongji@listof{equation}}
 \let\l@equation\l@figure
 
-
-% 参考文献
-% 依赖于 \pkg{natbib} 宏包，修改其中的命令。 旧命令 \cs{onlinecite} 依然可用
-\newcommand\bibstyle@inline{\bibpunct{[}{]}{,}{n}{,}{,}}
-\DeclareRobustCommand\inlinecite{\@inlinecite}
-\def\@inlinecite#1{\begingroup\let\@cite\NAT@citenum\citep{#1}\endgroup}
-\let\onlinecite\inlinecite
-% 复用 \pkg{natbib} 的 \texttt{thebibliography} 环境，调整距离。
-\renewcommand\bibsection{\tongji@chapter*{\bibname}[\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname]
-   \wuhao[1.4]}
-\renewcommand\bibfont{\wuhao[1.5]}
-\setlength\bibhang{2\ccwd}
-\addtolength{\bibsep}{-0.7em}
-\setlength{\labelsep}{0.4em}
-% % 两种引用样式：
-\expandafter\newcommand\csname bibstyle@tongjithesis-numeric\endcsname{%
-  \bibpunct{[}{]}{,}{s}{,}{\textsuperscript{,}}}
-\expandafter\newcommand\csname bibstyle@tongjithesis-author-year\endcsname{%
-  \bibpunct{(}{)}{;}{a}{,}{,}}
-% 下面修改 \pkg{natbib} 的引用格式，主要是将页码写在上标位置。
-% numeric 模式的 \cs{citet} 的页码：  
-\patchcmd\NAT@citexnum{%
-  \@ifnum{\NAT@ctype=\z@}{%
-    \if*#2*\else\NAT@cmt#2\fi
-  }{}%
-  \NAT@mbox{\NAT@@close}%
-}{%
-  \NAT@mbox{\NAT@@close}%
-  \@ifnum{\NAT@ctype=\z@}{%
-    \if*#2*\else\textsuperscript{#2}\fi
-  }{}%
-}{}{}
-% Numeric 模式的 \cs{citep} 的页码：
-\renewcommand\NAT@citesuper[3]{\ifNAT@swa
-  \if*#2*\else#2\NAT@spacechar\fi
-\unskip\kern\p@\textsuperscript{\NAT@@open#1\NAT@@close\if*#3*\else#3\fi}%
-   \else #1\fi\endgroup}
-% Author-year 模式的 \cs{citet} 的页码：
-\patchcmd{\NAT@citex}{%
-  \if*#2*\else\NAT@cmt#2\fi
-  \if\relax\NAT@date\relax\else\NAT@@close\fi
-}{%
-  \if\relax\NAT@date\relax\else\NAT@@close\fi
-  \if*#2*\else\textsuperscript{#2}\fi
-}{}{}
-% Author-year 模式的 \cs{citep} 的页码：
-\renewcommand\NAT@cite%
-    [3]{\ifNAT@swa\NAT@@open\if*#2*\else#2\NAT@spacechar\fi
-        #1\NAT@@close\if*#3*\else\textsuperscript{#3}\fi\else#1\fi\endgroup}
-
-% 参考文献页眉处理
-% % 这个\tjbibliographyheading暂时用来解决参考文献的第二页以后页面的页眉显示为正文章节页眉的问题。
-% \NewDocumentCommand{\tjbibliographyheading}{}
-% {
-%       \thispagestyle{fancy}
-%       \fancyhead{}
-%       \fancyhead[RO,LE]{\wuhao\songti\tongji@schoolname~\tongji@capply~\bibname}
-%       \fancyfoot{}
-%       \fancyfoot[C]{\songti\wuhao\thepage}
-%       \renewcommand{\headrulewidth}{0.4pt}
-%       \renewcommand{\footrulewidth}{0pt}
-% }
-% \let\tj@tmp@thebibliography\thebibliography
-% \RenewDocumentEnvironment{thebibliography}{}
-% {\tjbibliographyheading \tj@tmp@thebibliography}{\clearpage}
-% 我发现不需要重新加入\tjbibliographyheading，只需要clearpage就行了。
-\let\tj@tmp@thebibliography\thebibliography
-\RenewDocumentEnvironment{thebibliography}{}
-{\tj@tmp@thebibliography}{\clearpage}
 
 % 附录
 \fancypagestyle{tongji@appendix@heading}{%

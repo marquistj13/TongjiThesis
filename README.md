@@ -19,57 +19,29 @@
 * 各种LaTex宏包的文档。
 
 
-## 如何运行
-我们用的是Texlive2017发行版。
-只要下载最新版的texlive就行了。
+## 如何运行和使用
+### 安装
+使用 Texlive2017 或 Texlive2018 发行版，并更新其自带的`biblatex-gb7714-2015`宏包至最新版本，否则无法使用。
 
-注：
-1. 基本的编译步骤是：tex,bibtex,tex,tex(这里的tex替换成你常用的tex，如xelatex)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
-1. 首选xelatex编译，次选pdflatex，lualatex貌似也能用。
-1. 使用xelatex时，如果提示缺少某字体，请自行下载安装到系统中（如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书）。
+>由于本模板参考文献部分依赖`biblatex-gb7714-2015`宏包的2018版本，因此必须在安装好Texlive后更新此宏包，Texlive2018 自带的`biblatex-gb7714-2015`宏包依然较老，无法正常运行本模板。
+推荐使用其包管理器更新此宏包，如若更新失败（我更新了好几次都失败了，它还把我的这个宏包给删了，郁闷），那么可按照 [官方页面](https://github.com/hushidong/biblatex-gb7714-2015) 的安装介绍，在你的tex安装目录搜索`biblatex-gb7714-2015`文件夹，将该文件夹中的四个文件替换为[官方页面](https://github.com/hushidong/biblatex-gb7714-2015) 提供的文件即可。
+
+### 使用
+主文件为 `thesis.tex`，该文档头部说明了本模板的所有选项（包含 __数字式引用及作者年份引用的切换选项__，默认使用数字上标的引用格式）。
+
+1. 基本的编译步骤是：`tex,biber,tex,tex`(这里的tex替换成你常用的`tex`，如`xelatex`)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
+1. 首选`xelatex`编译，次选`pdflatex`，`lualatex`貌似也能用。
+1. 使用`xelatex`时，如果提示缺少某字体，请自行下载安装到系统中（如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书）。
+
 
 ## 实用技能 以及 注意事项
-__免责声明：__ 以下内容基本上属于锦上添花的小技能。 不属于本模板的范畴，如对以下内容有任何疑问，请自行搜索解决，请勿提issue，谢谢。
-
+__免责声明：__ 以下内容不属于本模板的主要维护范畴，如对以下内容有任何疑问，请自行搜索解决，请勿提issue，谢谢。
 ### 关于 author year 的引用
-_大前提_：
-不管是author year还是数字式引用，你从文献库导出bib文件的时候都要选择bibtex的格式，而非biblatex的格式
+学校word模板中的author-year格式在正文中是符合国标的，但参考文献列表明显是numeric的，这么混用不能忍啊！本模板严格遵循国标，如对此有疑问，请通过借酒消愁等方式解决。
 
-_基本用法_：
-示例文件的 1.5 节介绍了数字式引用的例子。
-如果你喜欢使用 author year 的引用，最好将 `\cite` 替换成 `\citep`。
-这样就和学校的模板一样了，关于 author year 的更多引用格式，如引用的时候指定章节等，请上网搜索 Reference sheet for natbib usage。
-另外，author year 引用的时候涉及到排序问题，参照 [林博士](https://github.com/linxdcn/TongjiThesis) 的方法，可以这样：
-`中文文献应该添加pinyin域，pinyin用于中文文献排序`,详见示例bib文件。
-
-### 关于文献语言的识别
-另外，bst文件可以自动识别文献语言，因此不需要设置language域，如果你的bib文件自带`language={中文}`字眼（zotero自己抓的文献数据就是这样的），应将language域删掉。
-如果你也用zotero管理文献的话，可以参考 [这里](https://marquistj13.github.io/MyBlog/2018/05/zotero-export/#%E8%B0%83%E6%95%99better-bibtex-%E6%8F%92%E4%BB%B6%E7%94%9F%E6%88%90%E7%9A%84bib%E6%96%87%E4%BB%B6%E7%9A%84field) 的文献库导出设置，这样就可以方便地将bib文件的language域删掉或另行处理。
-
-注：识别文献语言的作用，就是对中文学位论文添加标识，详见校标以及下面参考文献格式的解释。
-
-### 参考文献格式
-####  校标与国标的权衡
-你可能发现本模板的生成的参考文献和学校的要求不太一致，初步的解释在[这里](https://github.com/marquistj13/TongjiThesis/issues/11)。
-
-#### 关于参考文献中“博士学位论文”等的标注。
-校标里规定中文学位论文后边应加博士学位论文或硕士学位论文的标识，英文的学位论文后边加dissertation。
-如果你坚持要国标，不想这么搞的话，可以这么做：
-将`tongjithesis.cfg`文件的最后几行的：
-```tex
-\def\tongjimasterbib{硕士学位论文} 
-\def\tongjiphdbib{博士学位论文}
-\def\tongjidissertationbib{dissertation}
-```
-改成：
-```tex
-\def\tongjimasterbib{D} 
-\def\tongjiphdbib{D}
-\def\tongjidissertationbib{D}
-```
-
-
-
+### 关于参考文献bib的生成
+推荐使用 Zotero 进行文献管理和bib生成，其中bib的生成推荐使用 Zotero 的 `Better Bib(La)TeX` 插件。
+如果你也用zotero管理文献的话，可以参考 [这里](https://marquistj13.github.io/MyBlog/2018/05/zotero-export/#%E8%B0%83%E6%95%99better-bibtex-%E6%8F%92%E4%BB%B6%E7%94%9F%E6%88%90%E7%9A%84bib%E6%96%87%E4%BB%B6%E7%9A%84field) 的文献库导出设置，这样就可以方便地将bib文件的language域删掉或另行处理，（很久以前需要删掉这个language域，现在不确定是否需要删，没时间测试了，诸位自行定夺）。
 
 ## 本模板对老模板的主要改动
 相较于老版tongjithesis，我这个版本融合了thuthesis （ThuThesis 2017/12/24 5.4.3）的很多新改动，个人认为比较大的改动如下:
@@ -85,4 +57,5 @@ _基本用法_：
 1. chapter标题段前距离的修改
 1. 各级标题上下间隙调整
 1. 增加degreetype选项
+1. 使用biblatex包实现参考文献的引用
 1. 增加author-year的引用。
