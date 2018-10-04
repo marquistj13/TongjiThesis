@@ -7,6 +7,13 @@
 % 不同于~|\mathcal| or |\mathfrak| 之类的英文花体字体
 %\RequirePackage{mathrsfs}
 
+% 用于支持算法列写
+\usepackage{algorithm}
+\usepackage{algorithmic} 
+\renewcommand{\algorithmicrequire}{ \textbf{Input:}} 
+\renewcommand{\algorithmicensure}{ \textbf{Output:}} 
+
+
 % 表格中支持跨行
 \RequirePackage{multirow}
 
