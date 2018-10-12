@@ -32,13 +32,25 @@ __注意：__ 采用`biber`编译参考文献。
 
 1. 基本的编译步骤是：`tex,biber,tex,tex`(这里的tex替换成你常用的`tex`，如`xelatex`)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
 1. 首选`xelatex`编译，次选`pdflatex`，`lualatex`貌似也能用。
-1. 使用`xelatex`时，如果提示缺少某字体，请自行下载安装到系统中（如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书）。
+1. 使用`xelatex`时，如果提示缺少某字体，请自行下载安装到系统中（各种系统对应的字库详见： [ctex 宏集文档](https://ctan.org/pkg/ctex)。如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书，Mac系统的字体则是华文字库，且其隶书的设置较为复杂，详见下节的配置。）
 
 
 ## 实用技能 以及 注意事项
 __免责声明：__ 以下内容不属于本模板的主要维护范畴，如对以下内容有任何疑问，请自行搜索解决，请勿提issue，谢谢。
+
 ### 编译过程中出现未知的奇怪的错误怎么办
-清除所有临时文件，重新编译。
+若提示缺少字体，安装该字体即可。若碰到奇怪的错误，最好的方法就是： __清除所有临时文件，重新编译__ 。
+
+
+
+### Mac系统隶书的配置（MacTeX发行版）
+切换至 `/usr/local/texlive/2018/texmf-dist/tex/latex/ctex/fontset/` 目录，打开`ctex-fontset-mac.def`文件。
+1. 在`\setCJKfamilyfont { zhkai }  { STKaiti }`后边添加一行：`\setCJKfamilyfont { zhli }    { STLiti }`
+2. 在`\NewDocumentCommand \kaishu   { } { \CJKfamily { zhkai } }` 后边添加一行：`\NewDocumentCommand \lishu    { } { \CJKfamily { zhli } }`
+
+> 注：我们要在系统里安装华文隶书，然后打开系统的字体查看软件，就会看到，该字体的名字就是`STLiti`，因此，其它字体若不支持的话，也可以采用此方法进行添加。
+大原则为：先安装字体文件，若安装好该字体文件以后，仍无法使用对应的字体命令，如'\lishu'，就采用以上方法添加该字体的命令。
+如 `\songti，\heiti，\fangsong，\kaishu，\lishu，\youyuan，\yahei`，目测幼圆字体即可按上述原则进行配置。
 
 ### 关于 author year 的引用
 学校word模板中的author-year格式在正文中是符合国标的，但参考文献列表明显是numeric的，这么混用不能忍啊！本模板严格遵循国标，如对此有疑问，请通过借酒消愁等方式解决。

@@ -48,15 +48,11 @@
 % 目录中英文是否用 Arial 字体（默认关闭）
 \DeclareBoolOption{arialtoc}
 % 章节标题中的英文是否用 Arial 字体（默认打开）
-\DeclareBoolOption{arialtitle}%
-% 在 Windows Vista 或之后系统下时，默认使用微软雅黑，这可能会导致审查不合格。
-% 下面设置默认不使用微软雅黑，同时保持跨平台兼容性。
-% 注：win下面没有/dev/null。
-\IfFileExists{/dev/null}{}{\PassOptionsToClass{fontset=windowsold}{ctexbook}}
+\DeclareBoolOption{arialtitle}
+
 % 以往，为LATEX 文档配置中文支持是一件相当繁琐的事情。默认情况下，CTEX 宏集能自
 % 动检测用户使用的编译方式和操作系统，选择合适的底层支持和字库，从而简化配置过程。
 % 在Windows Vista 及以后的Windows 操作系统上，采用的是中易字库+ 微软雅黑。
-
 % CTEX 宏集预定义的中文字库还定义了一些字体命令。
 % \songti，\heiti，\fangsong，\kaishu，\lishu，\youyuan，\yahei
 % 等价的，CJK命令为\CJKfamily{zhsong}等。
@@ -66,7 +62,7 @@
 % \raggedbottom 是tex的。如果没有调用\raggedbottom，那么tex就会尽量使得所有page的bottom margins相等，而这个命令就是告诉tex不要这么搞，即我们允许不同page的bottom margins不一样。这个设定在我们不希望一大段材料跨页的时候很重要。.  
 \DeclareBoolOption{raggedbottom}
 %
-% 在脚注标记中使用 \pkg{pifont} 的带圈数字（默认关闭）
+% 在脚注标记中使用 \pkg{pifont} 的带圈数字（默认打开），此选项生成的带圈数字更漂亮。
 \DeclareBoolOption{pifootnote}
 %
 % 将选项传递给 \pkg{ctexbook}
@@ -75,6 +71,7 @@
 % 打开默认选项。
 \kvsetkeys{tongji}{
   raggedbottom,
+  pifootnote,
   arialtitle}
 
 % 解析用户传递过来的选项，并加载 \pkg{ctexbook}。
