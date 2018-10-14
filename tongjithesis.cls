@@ -704,7 +704,7 @@
             % \linespread{0.7}相当于\renewcommand{\baselinestretch}{0.7}
             % 需要执行\selectfont才能生效。
             \erhao[2]{\bfseries\heiti\tongji@ctitle}
-            \par\vskip 17pt
+            \par\vskip -0.3cm
             \ifx\cfunds\@empty\else
               {\parbox[t]{\paperwidth-7cm}{\begin{center}\zihao{-4}\linespread{1.3}\selectfont\tongji@cfunds\end{center}}}
               \par\vskip 20bp
