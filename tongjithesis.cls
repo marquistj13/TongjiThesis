@@ -463,7 +463,7 @@
     aftername=\hskip\ccwd, %控制章节编号与标题内容之间的距离
     % \ccwd 为一个汉字的宽度。在ctex宏集中有介绍。
     afterskip={18bp}, %控制章节标题与后面下方之间的距离
-    format={\centering\bfseries\tongji@title@font\sanhao[1]},
+    format={\centering\bfseries\tongji@title@font\sanhao[1.8]},
     % format 项用于控制章节标题的全局格式，作用域为章节名字和随后的标题内容。可以用于
     % 控制章节标题的对齐方式、整体字体字号等格
     nameformat=\relax,
