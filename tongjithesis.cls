@@ -150,6 +150,9 @@
 %  environ使得我们在创建新的环境的时候可以定义new author interface
 \RequirePackage{environ}
 
+% This package suppresses page numbers and headings from appearing on empty pages. 例如 \cleardoublepage 创建的空白页。
+\RequirePackage{emptypage} 
+
 % 禁止 \LaTeX 自动调整多余的页面底部空白，并保持脚注仍然在底部。
 % 脚注按页编号。
 \iftongji@raggedbottom
@@ -311,7 +314,7 @@
   }
 % 注意\mainmatter的heading设置除了在这设以外，还需要在下面的\ctexset的pagestyle域进行设置。
 \renewcommand\mainmatter{%
-  \clearpage
+  \cleardoublepage %强迫第一章的首页从右边开始，在双面打印中，即奇数页在右边。
   \@mainmattertrue
   \pagenumbering{arabic}
   \pagestyle{tongji@headings}
