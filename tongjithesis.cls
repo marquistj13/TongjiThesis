@@ -747,7 +747,11 @@
               & \tongji@cassosupervisor\\
             \fi
           \else
-            \setlength{\tongji@title@width}{5em}
+            \ifx\tongji@cassosupervisor\@empty
+              \setlength{\tongji@title@width}{4em}
+            \else
+              \setlength{\tongji@title@width}{5em}
+            \fi                        
             \ifxetex % todo: ugly codes
               \begin{tabular}{p{\tongji@title@width}@{}c@{\extracolsep{8pt}}p{7cm}l}
             \else
@@ -769,8 +773,7 @@
               \tongji@put@title{\tongji@cassosupertitle}   & \tongji@title@sep 
               & \tongji@cassosupervisor\\
             \fi
-          \fi            
-              
+          \fi               
           \end{tabular}
       \end{center}}
     }
