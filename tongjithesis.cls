@@ -45,10 +45,12 @@
 \DeclareBoolOption{electronic}
 % 论文是否保密
 \DeclareBoolOption{secret}%
-% 目录中英文是否用 Arial 字体（默认关闭）
-\DeclareBoolOption{arialtoc}
-% 章节标题中的英文是否用 Arial 字体（默认打开）
-\DeclareBoolOption{arialtitle}
+% 目录中英文是否用 Times new roman 字体（默认关闭）
+%\DeclareBoolOption{romantoc}
+% 章节标题中的英文以及标号是否用 Times new roman 字体（默认打开）
+
+\DeclareBoolOption{romantitle}
+\IfFileExists{/dev/null}{}{\PassOptionsToClass{fontset=windowsold}{ctexbook}}  %simhei字体
 
 % 以往，为LATEX 文档配置中文支持是一件相当繁琐的事情。默认情况下，CTEX 宏集能自
 % 动检测用户使用的编译方式和操作系统，选择合适的底层支持和字库，从而简化配置过程。
@@ -72,7 +74,7 @@
 \kvsetkeys{tongji}{
   raggedbottom,
   pifootnote,
-  arialtitle}
+  romantitle}
 
 % 解析用户传递过来的选项，并加载 \pkg{ctexbook}。
 % 强制指定一个degree选项。
@@ -433,9 +435,9 @@
 
 % 章节标题具体设置在.cfg中,各级标题格式设置在本文件后边。
 
-% 如果章节题目中的英文要使用 arial，那么就加上 \cs{sffamily}
+% 如果章节题目中的英文要使用 Times new roman，那么就加上 rmfamily
 \def\tongji@title@font{%
-  \iftongji@arialtitle\sffamily\else\heiti\fi}
+  \iftongji@romantitle\rmfamily\else\heiti\fi}
 
 
 % \pkg{fancyhdr} 定义页眉页脚很方便，但是有一个非常隐蔽的坑。通过 \pkg{fancyhdr}
@@ -580,9 +582,9 @@
   \xiaosi[1.5]\@starttoc{toc}\normalsize\clearpage}
 % 同济要求目录的行距为18磅
 % 调整目录样式，允许指定目录字体。
-\iftongji@arialtoc
-  \def\tongji@toc@font{\sffamily}
-\fi
+%\iftongji@arialtoc
+%  \def\tongji@toc@font{\sffamily}
+%\fi
 
 % 调整目录特殊要求，重定义缩进量
 % 研究生学位论文写作指南中规定：目录中的章标题行居左书写，一级节标题行缩进 1 个
