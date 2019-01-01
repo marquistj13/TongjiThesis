@@ -20,6 +20,15 @@
   \tongji@doctorfalse
   \expandafter\csname tongji@#1true\endcsname}
 
+% 数字式引用 以及 作者-年份引用
+\newif\iftongji@numeric
+\tongji@numerictrue % 默认为数字式引用
+\newif\iftongji@authoryear
+\define@key{tongji}{bibtype}{%
+  \tongji@numericfalse
+  \tongji@authoryearfalse
+  \expandafter\csname tongji@#1true\endcsname}
+
 % 学术型|专业型|同等学力
 \newif\iftongji@academic
 \tongji@academictrue % 默认为学术型
@@ -39,15 +48,11 @@
 % 目录中英文是否用 Arial 字体（默认关闭）
 \DeclareBoolOption{arialtoc}
 % 章节标题中的英文是否用 Arial 字体（默认打开）
-\DeclareBoolOption{arialtitle}%
-% 在 Windows Vista 或之后系统下时，默认使用微软雅黑，这可能会导致审查不合格。
-% 下面设置默认不使用微软雅黑，同时保持跨平台兼容性。
-% 注：win下面没有/dev/null。
-\IfFileExists{/dev/null}{}{\PassOptionsToClass{fontset=windowsold}{ctexbook}}
+\DeclareBoolOption{arialtitle}
+
 % 以往，为LATEX 文档配置中文支持是一件相当繁琐的事情。默认情况下，CTEX 宏集能自
 % 动检测用户使用的编译方式和操作系统，选择合适的底层支持和字库，从而简化配置过程。
 % 在Windows Vista 及以后的Windows 操作系统上，采用的是中易字库+ 微软雅黑。
-
 % CTEX 宏集预定义的中文字库还定义了一些字体命令。
 % \songti，\heiti，\fangsong，\kaishu，\lishu，\youyuan，\yahei
 % 等价的，CJK命令为\CJKfamily{zhsong}等。
@@ -57,7 +62,7 @@
 % \raggedbottom 是tex的。如果没有调用\raggedbottom，那么tex就会尽量使得所有page的bottom margins相等，而这个命令就是告诉tex不要这么搞，即我们允许不同page的bottom margins不一样。这个设定在我们不希望一大段材料跨页的时候很重要。.  
 \DeclareBoolOption{raggedbottom}
 %
-% 在脚注标记中使用 \pkg{pifont} 的带圈数字（默认关闭）
+% 在脚注标记中使用 \pkg{pifont} 的带圈数字（默认打开），此选项生成的带圈数字更漂亮。
 \DeclareBoolOption{pifootnote}
 %
 % 将选项传递给 \pkg{ctexbook}
@@ -66,6 +71,7 @@
 % 打开默认选项。
 \kvsetkeys{tongji}{
   raggedbottom,
+  pifootnote,
   arialtitle}
 
 % 解析用户传递过来的选项，并加载 \pkg{ctexbook}。
@@ -82,9 +88,15 @@
 \iftongji@academic\relax\else
   \iftongji@profession\relax\else
     \iftongji@equaleducation\relax\else
-        \ClassError{tongjithesis}{Unknown degree type option.\MessageBreak Please check your degree type, good luck!}{}  
+        \ClassError{tongjithesis}{Unknown degree type option.\MessageBreak Please check your degree type option, good luck!}{}  
     \fi
   \fi
+\fi
+% 杜绝非法的bibtype选项。
+\iftongji@numeric\relax\else
+  \iftongji@authoryear\relax\else    
+      \ClassError{tongjithesis}{Unknown bib type option.\MessageBreak Please check your bib type option, good luck!}{}  
+   \fi
 \fi
 
 % 使用 \XeTeX\ 引擎时，\pkg{fontspec} 宏包会被 \pkg{xeCJK} 自动调用。传递
@@ -138,6 +150,9 @@
 %  environ使得我们在创建新的环境的时候可以定义new author interface
 \RequirePackage{environ}
 
+% This package suppresses page numbers and headings from appearing on empty pages. 例如 \cleardoublepage 创建的空白页。
+\RequirePackage{emptypage} 
+
 % 禁止 \LaTeX 自动调整多余的页面底部空白，并保持脚注仍然在底部。
 % 脚注按页编号。
 \iftongji@raggedbottom
@@ -165,8 +180,16 @@
 \RequirePackage{booktabs}
 
 % 参考文献引用宏包。使用biblatex包
-\RequirePackage[backend=biber,style=gb7714-2015,gbpub=false,citestyle=gb7714-2015]{biblatex}  %若需使用author-year格式的文献引用，可将style选择为：gb7714-2015ay
-%gbpub=false :用于去除参考文献中的出版地不详、出版者不详等信息
+\iftongji@numeric
+  \RequirePackage[backend=biber,style=gb7714-2015,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex} 
+\else
+  \iftongji@authoryear % 若需使用author-year格式的文献引用，可将style选择为：gb7714-2015ay
+    \RequirePackage[backend=biber,style=gb7714-2015ay,gbpub=false,isbn=false,doi=false,gbtitlelink=true,url=false,sortlocale=zh__pinyin]{biblatex} 
+  \fi
+\fi
+% 参考文献宏包的其他选项：
+% gbpub=false :用于去除参考文献中的出版地不详、出版者不详等信息
+% 后边 isbn 和 doi 选项同理
 
 % 生成有书签的 pdf 及其开关，请结合 gbk2uni 避免书签乱码。
 \RequirePackage{hyperref}
@@ -291,7 +314,7 @@
   }
 % 注意\mainmatter的heading设置除了在这设以外，还需要在下面的\ctexset的pagestyle域进行设置。
 \renewcommand\mainmatter{%
-  \clearpage
+  \cleardoublepage %强迫第一章的首页从右边开始，在双面打印中，即奇数页在右边。
   \@mainmattertrue
   \pagenumbering{arabic}
   \pagestyle{tongji@headings}
@@ -443,7 +466,7 @@
     aftername=\hskip\ccwd, %控制章节编号与标题内容之间的距离
     % \ccwd 为一个汉字的宽度。在ctex宏集中有介绍。
     afterskip={18bp}, %控制章节标题与后面下方之间的距离
-    format={\centering\bfseries\tongji@title@font\sanhao[1]},
+    format={\centering\bfseries\tongji@title@font\sanhao[1.8]},
     % format 项用于控制章节标题的全局格式，作用域为章节名字和随后的标题内容。可以用于
     % 控制章节标题的对齐方式、整体字体字号等格
     nameformat=\relax,
@@ -684,7 +707,7 @@
             % \linespread{0.7}相当于\renewcommand{\baselinestretch}{0.7}
             % 需要执行\selectfont才能生效。
             \erhao[2]{\bfseries\heiti\tongji@ctitle}
-            \par\vskip 17pt
+            \par\vskip -0.3cm
             \ifx\cfunds\@empty\else
               {\parbox[t]{\paperwidth-7cm}{\begin{center}\zihao{-4}\linespread{1.3}\selectfont\tongji@cfunds\end{center}}}
               \par\vskip 20bp
@@ -724,7 +747,11 @@
               & \tongji@cassosupervisor\\
             \fi
           \else
-            \setlength{\tongji@title@width}{5em}
+            \ifx\tongji@cassosupervisor\@empty
+              \setlength{\tongji@title@width}{4em}
+            \else
+              \setlength{\tongji@title@width}{5em}
+            \fi                        
             \ifxetex % todo: ugly codes
               \begin{tabular}{p{\tongji@title@width}@{}c@{\extracolsep{8pt}}p{7cm}l}
             \else
@@ -746,8 +773,7 @@
               \tongji@put@title{\tongji@cassosupertitle}   & \tongji@title@sep 
               & \tongji@cassosupervisor\\
             \fi
-          \fi            
-              
+          \fi               
           \end{tabular}
       \end{center}}
     }
@@ -942,6 +968,17 @@
 \fangsong 
  }{\clearpage}
 % \let\ack\acknowledgement
+
+% 参考文献 调整
+% 兼容参考文献的老命令
+\let\inlinecite\parencite
+% 全局字体
+\renewcommand{\bibfont}{\zihao{5}\songti}%宋体五号
+% \setlength{\bibitemsep}{0ex}
+\setlength{\bibnamesep}{0ex}
+\setlength{\bibinitsep}{0ex}
+% 解决参考文献页眉问题（当存在附录时，参考文献页眉会出问题）
+\newcommand\printTJbibliography{\printbibliography[heading=bibintoc]\clearpage}
 
 % 图表索引
 % 定义图表以及公式目录样式

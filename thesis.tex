@@ -1,10 +1,11 @@
-\documentclass[degree=doctor]{tongjithesis}
+\documentclass[degree=doctor,bibtype=numeric]{tongjithesis}
 % 选项：
 %   degree=[master|doctor], 							% 必选
+%   bibtype=[numeric|authoryear], 						% 可选，数字式引用|作者-年份引用，默认为数字式（上标）引用
 %   degreetype=[academic|profession|equaleducation],  	% 可选, 学术型|专业型|同等学力，默认为学术型
 % 	electronic,                                 		% 可选, 电子版，(打印时删除)
-%   secret,                                     		% 可选
-%   pifootnote,                                 		% 可选（建议打开）
+%   secret,                                     		% 可选，是否保密，基本不用
+%   pifootnote,                                 		% 可选，默认已打开
 %   arial,                                     			% 可选，基本不用
 %   arialtoc,                                  			% 可选，基本不用
 %   arialtitle                                  		% 可选，默认已打开
@@ -59,7 +60,8 @@
 \end{acknowledgement}
 
 % 参考文献
-\printbibliography[heading=bibintoc]
+\printTJbibliography
+
 
 % 附录
 \begin{appendix}
