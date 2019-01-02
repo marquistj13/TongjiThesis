@@ -35,7 +35,7 @@ __注意：__ 采用`biber`编译参考文献。
 1. 使用`xelatex`时，如果提示缺少某字体，请自行下载安装到系统中（各种系统对应的字库详见： [ctex 宏集文档](https://ctan.org/pkg/ctex)。如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书，Mac系统的字体则是华文字库，且其隶书的设置较为复杂，详见下节的配置。）
 
 >__注意：__ 
-1. 对于`windows系统`而言：本模板使用的字体是ctex宏集的默认配置，即 `中易字库+微软雅黑`，此非官方word版本中所用的黑体，但如果不仔细看是看不出来的。 如果介意的话，请参考 [自动进行字体配置+pifont](https://github.com/marquistj13/TongjiThesis/commit/8d88c8fce195e78d9d485a6b65eae5867582e243)的修改，将这一行：`\IfFileExists{/dev/null}{}{\PassOptionsToClass{fontset=windowsold}{ctexbook}}` 重新加到`tongjithesis.cls`中。但加了这一行之后一般就需要根据编译的出错信息在系统中安装对应的字体（一般需要装三四个字体，如国标仿宋）。
+1. ~~对于`windows系统`而言：本模板使用的字体是ctex宏集的默认配置，即 `中易字库+微软雅黑`，此非官方word版本中所用的黑体，但如果不仔细看是看不出来的。 如果介意的话，请参考 [自动进行字体配置+pifont](https://github.com/marquistj13/TongjiThesis/commit/8d88c8fce195e78d9d485a6b65eae5867582e243)的修改，将这一行：`\IfFileExists{/dev/null}{}{\PassOptionsToClass{fontset=windowsold}{ctexbook}}` 重新加到`tongjithesis.cls`中。但加了这一行之后一般就需要根据编译的出错信息在系统中安装对应的字体（一般需要装三四个字体，如国标仿宋）。~~update:[这个merge](https://github.com/marquistj13/TongjiThesis/pull/17)又把windows系统的`{fontset=windowsold}`选项打开了，你们得装字体啦！
 
 
 ## 实用技能 以及 注意事项
