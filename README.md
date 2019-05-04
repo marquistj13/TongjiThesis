@@ -22,12 +22,13 @@
 ## 使用说明
 __注意：__ 采用`biber`编译参考文献。
 ### 安装
-使用 Texlive2017 或 Texlive2018 发行版，并更新其自带的`biblatex-gb7714-2015`宏包至最新版本，否则无法使用。
+推荐使用 [Texlive 2019](https://mirrors.tuna.tsinghua.edu.cn/ctan/systems/texlive/Images/)，直接在[tuna](https://mirrors.tuna.tsinghua.edu.cn/ctan/systems/texlive/Images/)下载很快的。
 
->由于本模板参考文献部分依赖`biblatex-gb7714-2015`宏包的2018版本，因此必须在安装好Texlive后更新此宏包，Texlive2018 自带的`biblatex-gb7714-2015`宏包依然较老，无法正常运行本模板。
+>如果你使用 Texlive2017 或 Texlive2018 发行版，请更新其自带的`biblatex-gb7714-2015`宏包至最新版本，否则无法使用。
+>这是因为本模板参考文献部分依赖`biblatex-gb7714-2015`宏包的2018版本，因此必须在安装好Texlive后更新此宏包，Texlive2018 自带的`biblatex-gb7714-2015`宏包依然较老，无法正常运行本模板。
 推荐使用其包管理器更新此宏包，如若更新失败（我更新了好几次都失败了，它还把我的这个宏包给删了，郁闷），那么可按照 [官方页面](https://github.com/hushidong/biblatex-gb7714-2015) 的安装介绍，在你的tex安装目录搜索`biblatex-gb7714-2015`文件夹，将该文件夹中的四个文件替换为[官方页面](https://github.com/hushidong/biblatex-gb7714-2015) 提供的文件即可。
 
-### 使用
+### 使用（一定要仔细看啊）
 主文件为 `thesis.tex`，该文档头部说明了本模板的所有选项（包含 __数字式引用及作者年份引用的切换选项__，默认使用数字上标的引用格式）。
 
 1. 基本的编译步骤是：`tex,biber,tex,tex`(这里的tex替换成你常用的`tex`，如`xelatex`)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
