@@ -33,11 +33,11 @@ __注意：__ 采用`biber`编译参考文献。
 
 1. 基本的编译步骤是：`tex,biber,tex,tex`(这里的tex替换成你常用的`tex`，如`xelatex`)。一般的前端都可以定制成一键运行这些步骤，如emacs的`C-c C-a`，vscode的 LaTeX Workshop 插件，WinEdt自带的编译按键等。
 1. 首选`xelatex`编译，次选`pdflatex`，`lualatex`貌似也能用。
-1. 使用`xelatex`时，如果提示缺少某字体，不要慌，请参考下面的说明。
->字体安装注意事项：
-1. 可在[此处](https://github.com/marquistj13/TongjiThesis/issues/18)下载安装。
-1. 或者自己想办法下载安装（各种系统对应的字库详见： [ctex 宏集文档](https://ctan.org/pkg/ctex)。如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书，Mac系统的字体则是华文字库，且其隶书的设置较为复杂，详见下节的配置。）
-1. 对于`windows系统`而言：如果不想安装字体的话，可参考 [自动进行字体配置+pifont](https://github.com/marquistj13/TongjiThesis/commit/8d88c8fce195e78d9d485a6b65eae5867582e243)的修改，将`tongjithesis.cls`中的这一行：`\IfFileExists{/dev/null}{}{\PassOptionsToClass{fontset=windowsold}{ctexbook}}` 删掉。
+1. 使用`xelatex`时，如果提示缺少某字体，不要慌，请参考下面的字体安装说明。
+### 字体安装注意事项：
+  1. 可在[此处](https://github.com/marquistj13/TongjiThesis/issues/18)下载安装。
+  1. 或者自己想办法下载安装（各种系统对应的字库详见： [ctex 宏集文档](https://ctan.org/pkg/ctex)。如果你用的是windows系统，可以搜索中易的对应字体下载，如中易隶书，Mac系统的字体则是华文字库，且其隶书的设置较为复杂，详见下节的配置。）
+  1. 对于`windows系统`而言，如果不想安装字体的话，可参考 [自动进行字体配置+pifont](https://github.com/marquistj13/TongjiThesis/commit/8d88c8fce195e78d9d485a6b65eae5867582e243)的修改，将`tongjithesis.cls`中的这一行：`\IfFileExists{/dev/null}{}{\PassOptionsToClass{fontset=windowsold}{ctexbook}}` 删掉。
 
 
 ## 实用技能 以及 注意事项
