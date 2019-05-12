@@ -10,6 +10,9 @@
 * [CNchence](https://github.com/CNchence)
 * [Wenda](https://github.com/Williamwenda)
 
+特别致谢：
+* [hushidong/biblatex-gb7714-2015](https://github.com/hushidong/biblatex-gb7714-2015) 提供的参考文献宏包。
+
 贡献者列表:[请点击这里](https://github.com/marquistj13/TongjiThesis/graphs/contributors)。
 
 主要参考资料：
@@ -18,6 +21,9 @@
 * [linxdcn](https://github.com/linxdcn/TongjiThesis)同学汇总的wildwolf、[svandex](https://github.com/svandex/masthesis)、[zhao-chen](https://github.com/zhao-chen/TongjiThesis)的版本。[收藏有本硕博模板的zhouyuan版](https://github.com/zhouyuan/tongjithesis)。主要参考了这几位校友改的封面、摘要等部分，学习其页眉设置技巧，还有[fire-emblem](https://github.com/fire-emblem/)亲手提供的fancyhdr页眉设置代码。
 * 各种LaTex宏包的文档。
 
+## 版本说明
+1. [master branch](https://github.com/marquistj13/TongjiThesis) 目前只需要下载 [Texlive 2019](https://mirrors.tuna.tsinghua.edu.cn/ctan/systems/texlive/Images/) 并安装字体文件即可使用。
+1. [resume branch](https://github.com/marquistj13/TongjiThesis/tree/resume) 按照[关于发表论文和研究成果的另一种解决方案](https://github.com/marquistj13/TongjiThesis/issues/19)更优雅地实现了个人简历一节，截止目前(2019/05/12)还需要手动更新[`biblatex-gb7714-2015`](https://github.com/hushidong/biblatex-gb7714-2015)宏包。
 
 ## 使用说明
 __注意：__ 采用`biber`编译参考文献。
