@@ -106,6 +106,11 @@
 % 为 CMR。其他引擎下没有这个问题，这一行会被无视。
 \PassOptionsToPackage{no-math}{fontspec}
 
+% , 设置 Times New Roman，Helvetic.
+% 这是txfonts的替代品，即txfonts.sty分成了俩独立的package：newtxtext 和 newtxmath
+\RequirePackage[defaultsups]{newtxtext}
+\RequirePackage{newtxmath}
+
 %将伪粗体与伪斜体的选项传递给xeCJK package
 \PassOptionsToPackage{AutoFakeBold=1.2,AutoFakeSlant}{xeCJK}
 % 使用 \CTeX\ 宏宝的默认中文字体配置，支持不同引擎
@@ -126,11 +131,6 @@
 
 % \AmSTeX\ 宏包，用来排出更加漂亮的公式。
 \RequirePackage{amsmath,amssymb}
-
-% , 设置 Times New Roman，Helvetic.
-% 这是txfonts的替代品，即txfonts.sty分成了俩独立的package：newtxtext 和 newtxmath
-\RequirePackage[defaultsups]{newtxtext}
-\RequirePackage{newtxmath}
 
 % 使用 Courier 字体
 \RequirePackage{courier}
